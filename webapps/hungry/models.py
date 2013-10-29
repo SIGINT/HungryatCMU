@@ -38,3 +38,34 @@ class Restaurant(models.Model):
     #cuisine = 
     #operating_hours = 
     
+    
+class FoodItem(models.Model):
+    
+    restaurant_id = models.ForeignKey(Restaurant)
+    item_name = models.CharField(max_length=50)
+    description = models.TextField()
+    is_vegetarian = models.BooleanField(default=False)
+    is_block = models.BooleanField(default=False)
+    prep_time = models.PositiveIntegerField()
+    price = models.DecimalField()
+    
+    def __unicode__(self):
+        return self.item_name
+        
+        
+class Order(models.Model):
+    
+    food_item_id = models.ForeignKey(FoodItem)
+    student_id = models.ForeignKey(Student)
+    time_placed = models.DateTimeField()
+    time_completed = models.DateTimeField()
+    is_delivery = models.BooleanField(default=False)
+    #status = models.CharField( , choices=ORDER_STATUSES)
+    
+    
+class Location(models.Model):
+    
+    #
+    # TODO
+    #
+    
