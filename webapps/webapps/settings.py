@@ -16,7 +16,7 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.mysql',                        # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': PROJECT_ROOT + 'db/webapps.db',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
@@ -124,15 +124,15 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'simple_address_book',
+    'hungry',
 )
 
 # Used by the authentication system for the private-todo-list application.
 # URL to use if the authentication system requires a user to log in.
-LOGIN_URL = '/address-book/login'
+LOGIN_URL = '/hungry/login'
 
 # Default URL to redirect to after a user logs in.
-LOGIN_REDIRECT_URL = '/address-book/'
+LOGIN_REDIRECT_URL = '/hungry/'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
