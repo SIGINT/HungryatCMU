@@ -11,9 +11,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from datetime import datetime
 from mimetypes import guess_type
+from hungry.forms import *
 """
 from hungry.models import *
-from hungry.forms import *
 
 
 
