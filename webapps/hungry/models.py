@@ -2,6 +2,19 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+
+# -----------------------------
+# TODO: ADMINISTRATOR model
+# -----------------------------
+
+class Administrator(models.Model):
+    
+    user = models.OneToOneField(user)
+    
+    def __unicode__(self):
+        return "%s, %s" % (self.user.last_name, self.user.first_name)
+        
+        
 class Student(models.Model):
     
     GENDERS = (('M', 'Male'), ('F', 'Female'), ('N', 'Neither'))
@@ -67,7 +80,7 @@ class Order(models.Model):
     
     ORDER_STATUSES = (('PL', 'Placed'), ('CP', 'Completed'), ('LT', 'Late'), ('CN', 'Cancelled'))
     
-    food_item_id = models.ForeignKey(FoodItem)
+    food_items = models.ManyToManyField(FoodItem)
     student_id = models.ForeignKey(Student)
     time_placed = models.DateTimeField()
     time_completed = models.DateTimeField()
