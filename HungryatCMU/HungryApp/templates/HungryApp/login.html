@@ -1,0 +1,54 @@
+{% extends "HungryApp/base.html" %}
+
+{% block content %}
+
+    <div class="container">
+
+      <div class="jumbotron">
+        <h1 align="center">Welcome to HungryApp!!</h1>
+        <p class="lead"></p>
+        
+      </div>
+
+
+{% if form.errors %}
+<p style="color:red">
+Incorrect user name and password.
+</p>
+{% endif %}
+
+<div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4">
+
+          <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+            <table>
+                 <tr>
+              <td>{{ form.username.label_tag }}</td>
+              <td>{{ form.username }}</td>
+              </tr>
+                <tr>
+               <td>{{ form.password.label_tag }}</td>
+               <td>{{ form.password }}</td>
+                </tr>
+               </table>
+
+            <input type="submit" value="Login" />
+            <a href="{% url 'HungryApp.views.StudentRegistration' %}">Register</a> <br>
+            <a href="{% url 'HungryApp.views.forgotpassword' %}">Forgot Password?</a> <br>
+            <a href="{% url 'HungryApp.views.resetpassword' %}">Change Password</a> <br>
+            <input type="hidden" name="next" value="{{ next }}" />
+            {% csrf_token %}
+            </form>
+
+           
+        </div>
+    </div>
+
+</div><!-- /.container -->
+
+
+    {%endblock%}
+
+
+
