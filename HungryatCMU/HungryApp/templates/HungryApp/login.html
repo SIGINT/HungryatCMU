@@ -1,0 +1,60 @@
+{% extends "HungryApp/base.html" %}
+{% block title %}:: Login{% endblock %}
+{% block content %}
+
+    <div class="container">
+
+      <div class="jumbotron">
+        <h1 align="center">Welcome to HungryApp!!</h1>
+        <p class="lead"></p>
+        
+      </div>
+
+
+{% if form.errors %}
+<p style="color:red">
+Incorrect user name and password.
+</p>
+{% endif %}
+<div class="container">    
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <form role="form" method="post" action="{% url 'django.contrib.auth.views.login' %}">
+            <ul class="list-group">
+              <li class="list-group-item">
+                <h3>Already Registered?</h3></br>
+                <div class="indent">
+                  <div class="form-group">
+                    {{ form.username.label_tag }}:&nbsp;&nbsp;{{ form.username }}
+                  </div>
+                  <div class="form-group">
+                    {{ form.password.label_tag }}:&nbsp;&nbsp;{{ form.password }}</br>
+                  </div>
+                  <div class="form-group">
+                    <a style="font-size:small; text-decoration:underline;" href="{% url 'HungryApp.views.forgotpassword' %}">Forgot Password</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a style="font-size:small; text-decoration:underline;" href="{% url 'HungryApp.views.resetpassword' %}">Change Password</a>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input class="pull-right btn btn-success" type="submit" value="Login" /><br>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="form-group">
+                  <br>
+                  <a class="pull-right btn btn-primary" href="{% url 'HungryApp.views.StudentRegistration' %}">Create an account</a><br>
+                </div>
+              </li>
+            </ul>
+            <input type="hidden" name="next" value="{{ next }}" />
+            {% csrf_token %}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div><!-- /.row -->
+</div><!-- /.container -->
+{%endblock%}

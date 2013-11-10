@@ -1,0 +1,43 @@
+{% extends 'hungry/base.html' %}
+{% load staticfiles %}
+{% block title %}Login{% endblock %}
+{% block navigation %}
+<li class="active"><a href="/">Home</a></li>
+<li><a href="/">Nav1</a></li>
+<li><a href="/">Nav2</a></li>
+<li><a href="/logout">Logout</a></li>
+{% endblock %}
+{% block main_content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <div class="container">
+        <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <div class="form-group">
+                <!-- {{ form.username }} -->
+                <input type="text" name="username" class="form-control" id="inputUsername" placeholder="username">
+              </div>
+              <div class="form-group">
+                <!-- {{ form.password }} -->
+                <input type="password" name="password" class="form-control" id="inputPassword" placeholder="password">
+              </div>
+              <button type="submit" class="btn btn-sm btn-success">Login</button>
+              <input type="hidden" name="next" value="{{ next }}" />
+              <!--a style="font-size:small; text-decoration:underline;" class="pull-right" href="/hungry/forgot-password">Forgot Password</a-->
+              {% csrf_token %}
+            </li>
+            <li class="list-group-item">
+              <h3>get full&nbsp;!</h3>
+              <a href="/hungry/register" class="btn btn-primary">Sign Up&nbsp;!</a>
+            </li>
+          </ul>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>
+{% endblock %}

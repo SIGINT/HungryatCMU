@@ -76,6 +76,11 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
+# Fixtures directory for loading initial JSON/YAML/XML data
+FIXTURE_DIRS = (
+    PROJECT_ROOT + 'fixtures/',
+)
+
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '1fw$u=*8^#8!@m9!ws18$fjl(v7vhth^vk22idz+!afko%$^*='
 
