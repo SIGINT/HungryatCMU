@@ -3,15 +3,24 @@ from django.contrib.auth.models import User
 from models import *
 
 class StudentRegistrationForm(forms.Form):
-    username = forms.CharField(max_length = 20)
-    andrew_id = forms.CharField(max_length = 20)
-    email = forms.EmailField(max_length=200)
+    first_name = forms.CharField(max_length=40,
+                                widget=forms.TextInput(attrs={'class':'form-control'}))
+    last_name = forms.CharField(max_length=40,
+                                widget=forms.TextInput(attrs={'class':'form-control'}))
+    username = forms.CharField(max_length = 20,
+                                widget = forms.TextInput(attrs={'class':'form-control'}))
+    andrew_id = forms.CharField(max_length = 20,
+                                label = "Andrew ID",
+                                widget = forms.TextInput(attrs={'class':'form-control'}))
+    email = forms.EmailField(max_length=200,
+                                widget = forms.TextInput(attrs={'class':'form-control'}))
+    date_of_birth = forms.DateField(widget=forms.DateInput(attrs={'type':'date', 'class':'form-control'}))
     password1 = forms.CharField(max_length = 200, 
                                 label='Password', 
-                                widget = forms.PasswordInput())
+                                widget = forms.PasswordInput(attrs={'class':'form-control'}))
     password2 = forms.CharField(max_length = 200, 
                                 label='Confirm password',  
-                                widget = forms.PasswordInput())
+                                widget = forms.PasswordInput(attrs={'class':'form-control'}))
 
 
     # Customizes form validation for properties that apply to more
@@ -44,13 +53,14 @@ class StudentRegistrationForm(forms.Form):
         return username
 
 class ForgotPasswordForm(forms.Form):
-    username = forms.CharField(max_length = 20)    
+    username = forms.CharField(max_length = 20,
+                                widget = forms.TextInput(attrs={'class':'form-control'}))    
     password1 = forms.CharField(max_length = 200, 
-                                label='New_Password', 
-                                widget = forms.PasswordInput())
+                                label='New Password', 
+                                widget = forms.PasswordInput(attrs={'class':'form-control'}))
     password2 = forms.CharField(max_length = 200, 
-                                label='Confirm New_Password',  
-                                widget = forms.PasswordInput())
+                                label='Confirm New Password',  
+                                widget = forms.PasswordInput(attrs={'class':'form-control'}))
 
 
     # Customizes form validation for properties that apply to more
@@ -84,15 +94,15 @@ class ForgotPasswordForm(forms.Form):
 class ResetPasswordForm(forms.Form):  
     username = forms.CharField(max_length = 20)
     passwordold = forms.CharField(max_length = 200, 
-                                label='Old_Password', 
-                                widget = forms.PasswordInput())
+                                label='Old Password', 
+                                widget = forms.PasswordInput(attrs={'class':'form-control'}))
 
     passwordnew1 = forms.CharField(max_length = 200, 
-                                label='New_Password', 
-                                widget = forms.PasswordInput())
+                                label='New Password', 
+                                widget = forms.PasswordInput(attrs={'class':'form-control'}))
     passwordnew2 = forms.CharField(max_length = 200, 
-                                label='Confirm New_Password',  
-                                widget = forms.PasswordInput())
+                                label='Confirm New Password',  
+                                widget = forms.PasswordInput(attrs={'class':'form-control'}))
 
      
     # Customizes form validation for properties that apply to more
