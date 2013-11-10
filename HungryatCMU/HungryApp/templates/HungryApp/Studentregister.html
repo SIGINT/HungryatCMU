@@ -15,7 +15,12 @@
           <div class="col-md-4"></div>
           <div class="col-md-4">
             <h3>Register to become a Member. Its Free!!</h3></br></br>
-            {% include 'HungryApp/basic_form.html' %}
+            <form role="form" method="post" action="">
+            {% include 'HungryApp/form_loop.html' %}
+            <div class="indent form-group">
+              <input class="btn btn-success btn-lg" type="submit" value="Register" />
+            </div>
+            </form>
           </div>
         </div>
       </div>
@@ -23,5 +28,3 @@
   </div><!-- /.container -->
 </body>
 {% endblock %}
-
-
