@@ -4,11 +4,13 @@
     {{field.errors}}
     {{field.label_tag}}:&nbsp;&nbsp;{{field}}
   </div>
-  <td style="color: red">{{field.errors}}</td>
   {% endfor %}
   {% for field in form.hidden_fields %}
     {{field}}
   {% endfor %}
-  <input type="submit" value="{{submit_text}}" />
+  </br>
+  <div class="indent form-group">
+    <input class="btn btn-success btn-lg" type="submit" value="{{submit_text}}" />
+  </div>
   {% csrf_token %}
 </form>

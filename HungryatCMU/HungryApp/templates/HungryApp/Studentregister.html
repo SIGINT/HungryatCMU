@@ -3,19 +3,25 @@
 {% block content %}
   
 <body>
-{% for error in form.non_field_errors %}
-<p style="color: red">
-{{ error }}
-</p>
-{% endfor %}
-
-<p>
-Register to become a Member. Its Free!!
-</p>
-
-{% include 'HungryApp/basic_form.html' %}
-
+  {% for error in form.non_field_errors %}
+  <p style="color: red">
+  {{ error }}
+  </p>
+  {% endfor %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <h3>Register to become a Member. Its Free!!</h3></br></br>
+            {% include 'HungryApp/basic_form.html' %}
+          </div>
+        </div>
+      </div>
+    </div><!-- /.row -->
+  </div><!-- /.container -->
 </body>
-{%endblock%}
+{% endblock %}
 
 
