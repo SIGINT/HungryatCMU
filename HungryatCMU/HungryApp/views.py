@@ -153,7 +153,6 @@ def forgotpassword(request):
     return render(request, 'HungryApp/NeedsConfirmation.html', context)    
 
 
-
 def resetpassword(request):
     context = {}
 
@@ -179,6 +178,13 @@ def resetpassword(request):
     # Mark the user as active.
     Password_reset_user.is_active = True
 
-    Password_reset_user.save()    
-                
+    Password_reset_user.save()
     return render(request, 'HungryApp/PasswordConfirmed.html')
+    
+    
+@login_required
+def Restaurants(request):
+    
+    restaurants = Restaurant.objects.all()
+    context = {'restaurants' : restaurants }
+    return render(request, "HungryApp/restaurants.html", context)
