@@ -16,6 +16,7 @@
 *.pyc
 local_settings.py
 *.py[cod]
+*.db
 
 # C extensions
 *.so
