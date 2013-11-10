@@ -45,8 +45,6 @@ from HungryApp.forms import *
 def home(request):
     
     # Sets up list of just the logged-in user's (request.user's) items
-    
-    
     return render(request, 'HungryApp/index.html')
 
 def StudentRegistration(request):
@@ -55,6 +53,8 @@ def StudentRegistration(request):
     # Just display the registration form if this is a GET request.
     if request.method == 'GET':
         context['form'] = StudentRegistrationForm()
+        context['action'] = "/register"
+        context['submit_text'] = "Register"
         return render(request, 'HungryApp/Studentregister.html', context)
 
     # Creates a bound form from the request POST parameters and makes the 
@@ -75,8 +75,6 @@ def StudentRegistration(request):
     new_user.is_active = True
 
     new_user.save()
-    
-
     
     # Generate a one-time use token and an email message body
     token = default_token_generator.make_token(new_user)
