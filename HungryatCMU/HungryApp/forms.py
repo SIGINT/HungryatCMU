@@ -92,7 +92,8 @@ class ForgotPasswordForm(forms.Form):
 
 
 class ResetPasswordForm(forms.Form):  
-    username = forms.CharField(max_length = 20)
+    username = forms.CharField(max_length = 20,
+                                widget = forms.TextInput(attrs={'class':'form-control'}))
     passwordold = forms.CharField(max_length = 200, 
                                 label='Old Password', 
                                 widget = forms.PasswordInput(attrs={'class':'form-control'}))

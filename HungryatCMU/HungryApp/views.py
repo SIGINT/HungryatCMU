@@ -67,15 +67,21 @@ def StudentRegistration(request):
         return render(request, 'HungryApp/Studentregister.html', context)
 
     # If we get here the form data was valid.  Register the user.
-    new_user = User.objects.create_user(username=form.cleaned_data['username'], 
+    new_user = User.objects.create_user(first_name=form.cleaned_data['first_name'],
+                                        last_name=form.cleaned_data['last_name'],
+                                        username=form.cleaned_data['username'], 
                                         password=form.cleaned_data['password1'],
                                         email=form.cleaned_data['email'])
-
+                                        
     # Mark the user as inactive to prevent login before email confirmation.
     new_user.is_active = False
 
     new_user.save()
-    
+                                     
+    new_student = Student(date_of_birth=form.cleaned_data['date_of_birth'],
+                                                user=new_user)
+    new_student.save()
+        
     # Generate a one-time use token and an email message body
     token = default_token_generator.make_token(new_user)
 
