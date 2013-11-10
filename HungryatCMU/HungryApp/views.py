@@ -72,7 +72,7 @@ def StudentRegistration(request):
                                         email=form.cleaned_data['email'])
 
     # Mark the user as inactive to prevent login before email confirmation.
-    new_user.is_active = True
+    new_user.is_active = False
 
     new_user.save()
     
