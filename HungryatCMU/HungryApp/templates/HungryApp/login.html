@@ -16,11 +16,12 @@
 Incorrect user name and password.
 </p>
 {% endif %}
-
-<div class="row">
-        <div class="col-md-8"></div>
+<div class="container">    
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-4"></div>
         <div class="col-md-4">
-
           <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
             <table>
                  <tr>
@@ -31,7 +32,7 @@ Incorrect user name and password.
                <td>{{ form.password.label_tag }}</td>
                <td>{{ form.password }}</td>
                 </tr>
-               </table>
+            </table>
 
             <input type="submit" value="Login" />
             <a href="{% url 'HungryApp.views.StudentRegistration' %}">Register</a> <br>
@@ -39,15 +40,10 @@ Incorrect user name and password.
             <a href="{% url 'HungryApp.views.resetpassword' %}">Change Password</a> <br>
             <input type="hidden" name="next" value="{{ next }}" />
             {% csrf_token %}
-            </form>
-
-           
+          </form>
         </div>
+      </div>
     </div>
+  </div>
 </div><!-- /.container -->
-
-
-    {%endblock%}
-
-
-
+{%endblock%}
