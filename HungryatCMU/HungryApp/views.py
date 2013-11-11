@@ -43,6 +43,7 @@ from HungryApp.models import *
 from HungryApp.forms import *
 
 
+@login_required
 def home(request):
     
     # Sets up list of just the logged-in user's (request.user's) items
