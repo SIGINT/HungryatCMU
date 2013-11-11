@@ -14,4 +14,5 @@ urlpatterns = patterns('',
     url(r'^restaurants$','HungryApp.views.restaurants'),
     url(r'^account$','HungryApp.views.view_account'),
     url(r'^add-restaurant$','HungryApp.views.add_restaurant'),
+    url(r'^restaurant-picture/(?P<id>\d+)$', 'HungryApp.views.get_restaurant_picture', name='restaurant-picture'),
 )

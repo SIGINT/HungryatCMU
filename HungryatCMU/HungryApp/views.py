@@ -37,6 +37,8 @@ from django.contrib.auth import login, authenticate
 from django.views.decorators.csrf import csrf_exempt
 from django.core.context_processors import csrf 
 
+from mimetypes import guess_type
+
 from HungryApp.models import *
 from HungryApp.forms import *
 
@@ -215,7 +217,7 @@ def add_restaurant(request):
     context['form'] = RestaurantForm()
     return render(request, 'HungryApp/add_restaurant.html', context)
     
-  form = RestaurantForm(request.POST)
+  form = RestaurantForm(request.POST, request.FILES)
   context['form'] = form
   
   if not form.is_valid():
@@ -223,9 +225,26 @@ def add_restaurant(request):
     
   new_restaurant = Restaurant(location=form.cleaned_data['location'],
                               restaurant_name=form.cleaned_data['restaurant_name'],
+                              restaurant_picture=form.cleaned_data['restaurant_picture'],
                               has_vegetarian=form.cleaned_data['has_vegetarian'],
                               cuisine=form.cleaned_data['cuisine'])
   new_restaurant.save()
   
-  return render(request, "/restaurant", {})
+  # --------------------
+  # TODO: Render restaurants page
+  # --------------------
+  #return render(request, "/restaurant", {})
+  return redirect("/account")
+  
+
+@login_required
+def get_restaurant_picture(request, id):
+  r = get_object_or_404(Restaurant, pk=id)
+  
+  if not r.restaurant_picture:
+      raise Http404
+      
+  content_type = guess_type(r.restaurant_picture.name)
+  return HttpResponse(r.restaurant_picture, mimetype=content_type)
+  
   

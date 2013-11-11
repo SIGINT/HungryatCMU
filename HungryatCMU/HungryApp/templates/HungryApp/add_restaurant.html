@@ -28,8 +28,11 @@
             <h2>New Restaurant&nbsp; <span class="glyphicon glyphicon-cutlery"></span></h2>
           </div>
           </br></br>
-          <form role="form" method="post" action="/add-restaurant" class="indent btm-marg">
+          <form role="form" method="post" action="/HungryApp/add-restaurant" class="indent btm-marg" enctype="multipart/form-data">
             {% include 'HungryApp/form_loop.html' %}
+            <div class="form-group pull-right">
+              <button type="submit" class="btn btn-primary btn-lg">&nbsp;Submit&nbsp;</button>
+            </div>
           </form>
         </div>
         <div class="col-md-4"></div>

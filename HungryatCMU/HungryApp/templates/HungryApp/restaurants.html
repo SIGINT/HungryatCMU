@@ -11,19 +11,24 @@
 </div><!--/.nav-collapse -->
 {% endblock %}
 {% block content %}
+</br></br>
 <div class="container">    
   <div class="row">
     <div class="col-md-12">
       <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
           {% for r in restaurants %}
           <div class="content-well">
-            <strong>{{r.restaurant_name}}</strong>
+              {% if r.restaurant_picture %}
+                <img src="{% url 'restaurant-picture' r.id %}" alt="{{ r.restaurant_name }}" class="img-thumbnail" height="320px" width="320px">
+                </br>
+              {% endif %}
+              <span class="indent"><h3>{{r.restaurant_name}}</h3></span>
           </div>
           {% endfor %}
         </div>
-        <div class="col-md-3"></div>
+        <div class="col-md-1"></div>
       </div>
     </div>
   </div><!-- /.row -->
