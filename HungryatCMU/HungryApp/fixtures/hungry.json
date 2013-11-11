@@ -152,6 +152,16 @@
     }
 },
 {
+    "pk": 5, 
+    "model": "HungryApp.location", 
+    "fields": {
+        "building_name": "Gates Center for Computer Science", 
+        "location_description": "Segmentation fault",
+        "floor": "",
+        "wheelchair_accessible": false
+    }
+},
+{
     "pk": 1, 
     "model": "HungryApp.restaurant", 
     "fields": {
