@@ -18,7 +18,7 @@ class Administrator(models.Model):
         
 class Student(models.Model):
     
-    GENDERS = (('M', 'Male'), ('F', 'Female'), ('N', 'Neither'))
+    GENDERS = (('M', 'Male'), ('F', 'Female'), ('N', 'N/A'))
     STUDENT_YEARS = (('FR', 'Freshman'), ('SO', 'Sophomore'), ('JR', 'Junior'), ('SR', 'Senior'), ('GR', 'Graduate'))
     
     user = models.OneToOneField(User)
@@ -33,8 +33,8 @@ class Student(models.Model):
         
 class Location(models.Model):
 
-    longitude = models.DecimalField(max_digits=7, decimal_places=4, blank=True)
-    latitude = models.DecimalField(max_digits=7, decimal_places=4, blank=True)
+    longitude = models.DecimalField(max_digits=7, decimal_places=4, null=True)
+    latitude = models.DecimalField(max_digits=7, decimal_places=4, null=True)
     building_name = models.CharField(max_length=80)
     location_description = models.TextField()
     floor = models.CharField(max_length=4)
