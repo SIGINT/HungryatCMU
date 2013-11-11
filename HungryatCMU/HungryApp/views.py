@@ -53,8 +53,6 @@ def StudentRegistration(request):
     # Just display the registration form if this is a GET request.
     if request.method == 'GET':
         context['form'] = StudentRegistrationForm()
-        context['action'] = "/register"
-        context['submit_text'] = "Register"
         return render(request, 'HungryApp/Studentregister.html', context)
 
     # Creates a bound form from the request POST parameters and makes the 
@@ -75,11 +73,12 @@ def StudentRegistration(request):
                                         
     # Mark the user as inactive to prevent login before email confirmation.
     new_user.is_active = False
-
     new_user.save()
-                                     
+          
     new_student = Student(date_of_birth=form.cleaned_data['date_of_birth'],
-                                                user=new_user)
+                          gender=form.cleaned_data['gender'],
+                          student_year=form.cleaned_data['student_year'],
+                          user=new_user)
     new_student.save()
         
     # Generate a one-time use token and an email message body
@@ -138,10 +137,10 @@ def forgotpassword(request):
         context['form'] = ForgotPasswordForm()
         return render(request, 'HungryApp/ForgotPassword.html', context, errors)                                     
     
-    Password_forgot_user.set_password(form.cleaned_data['password1']) 
+    Password_forgot_user.set_password(form.cleaned_data['password1'])
+    
     # Mark the user as inactive to prevent login before email confirmation.
     Password_forgot_user.is_active = False
-
     Password_forgot_user.save()
     
     # Generate a one-time use token and an email message body
@@ -176,15 +175,14 @@ def resetpassword(request):
     if not form.is_valid():
         return render(request, 'HungryApp/ResetPassword.html', context)
        
-
     # If we get here the form data was valid.  Register the user.
-    Password_reset_user = User.objects.get(username=form.cleaned_data['username'])                                      
+    Password_reset_user = User.objects.get(username=form.cleaned_data['username'])
+    Password_reset_user.set_password(form.cleaned_data['passwordnew1'])
     
-    Password_reset_user.set_password(form.cleaned_data['passwordnew1']) 
     # Mark the user as active.
     Password_reset_user.is_active = True
-
     Password_reset_user.save()
+    
     return render(request, 'HungryApp/PasswordConfirmed.html')
     
     

@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from models import *
 
+
 class StudentRegistrationForm(forms.Form):
     first_name = forms.CharField(max_length=40,
                                 widget=forms.TextInput(attrs={'class':'form-control'}))
@@ -9,6 +10,10 @@ class StudentRegistrationForm(forms.Form):
                                 widget=forms.TextInput(attrs={'class':'form-control'}))
     username = forms.CharField(max_length = 20,
                                 widget = forms.TextInput(attrs={'class':'form-control'}))
+    gender = forms.ChoiceField(widget = forms.RadioSelect,
+                                choices=Student.GENDERS)
+    student_year = forms.ChoiceField(widget = forms.Select(attrs={'class':'form-control'}),
+                                choices = Student.STUDENT_YEARS)
     andrew_id = forms.CharField(max_length = 20,
                                 label = "Andrew ID",
                                 widget = forms.TextInput(attrs={'class':'form-control'}))
@@ -86,9 +91,6 @@ class ForgotPasswordForm(forms.Form):
 
         # We must return the cleaned data we got from our parent.
         return cleaned_data
-
-    
-
 
 
 class ResetPasswordForm(forms.Form):  

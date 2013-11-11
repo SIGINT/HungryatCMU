@@ -18,7 +18,7 @@ class Administrator(models.Model):
         
 class Student(models.Model):
     
-    GENDERS = (('M', 'Male'), ('F', 'Female'), ('N', 'Neither'))
+    GENDERS = (('M', 'Male'), ('F', 'Female'), ('N', 'N/A'))
     STUDENT_YEARS = (('FR', 'Freshman'), ('SO', 'Sophomore'), ('JR', 'Junior'), ('SR', 'Senior'), ('GR', 'Graduate'))
     
     user = models.OneToOneField(User)
