@@ -1,0 +1,198 @@
+[
+{
+    "pk": 1, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "dmoney101", 
+        "first_name": "Dwight", 
+        "last_name": "Schrute", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2013-09-27T11:13:45.507Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$10000$j6qKlRABYrby$mLosetSvxoEE4XLb1oem8JqR3SM/Ex/BBEoNljqx4ec=", 
+        "email": "ohdee@theoffice.net", 
+        "date_joined": "2013-09-27T11:13:45.268Z"
+    }
+},
+{
+    "pk": 2, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "greatscott", 
+        "first_name": "Michael", 
+        "last_name": "Scott", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2013-09-30T21:22:27.024Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$10000$3neZRSNHm103$3EMXMStJdsgYa6XRvZGpqBH3rl+79QjKSqaYDc1Hh1Q=", 
+        "email": "mscott@theoffice.net", 
+        "date_joined": "2013-09-27T11:14:46.384Z"
+    }
+},
+{
+    "pk": 3, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "angiecat99", 
+        "first_name": "Angela", 
+        "last_name": "Martin", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2013-09-27T11:16:38.173Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$10000$Ux6UkjYbbBOo$e3L3GzFU5yZUJsOh4FUww8ryqhMkonNZ92w/5blTyfo=", 
+        "email": "amartin@theoffice.net", 
+        "date_joined": "2013-09-27T11:16:37.941Z"
+    }
+},
+{
+    "pk": 4, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "ljasko", 
+        "first_name": "Luke", 
+        "last_name": "Jasko", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2013-09-30T12:55:14.944Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$10000$NEDHP81jaqjk$wuvL1BdtFz3r4JIKdYuo1TJ2dHyVS0Epb2P+ex7FBAQ=", 
+        "email": "ltj@luke.com", 
+        "date_joined": "2013-09-30T12:55:14.715Z"
+    }
+},
+{
+    "pk": 1, 
+    "model": "HungryApp.student", 
+    "fields": {
+        "date_of_birth": "1974-09-05",
+        "gender": "M",
+        "student_year": "FR", 
+        "user": 1
+    }
+},
+{
+    "pk": 2, 
+    "model": "HungryApp.student", 
+    "fields": {
+        "date_of_birth": "1970-07-16",
+        "gender": "M",
+        "student_year": "SR",
+        "user": 2
+    }
+},
+{
+    "pk": 3, 
+    "model": "HungryApp.student",  
+    "fields": {
+        "date_of_birth": "1977-05-08",
+        "gender": "F",
+        "student_year": "JR",
+        "user": 3
+    }
+},
+{
+    "pk": 4, 
+    "model": "HungryApp.student",  
+    "fields": {
+        "date_of_birth": "1992-09-02",
+        "gender": "M",
+        "student_year": "SR",
+        "user": 4
+    }
+},
+{
+    "pk": 1, 
+    "model": "HungryApp.location", 
+    "fields": {
+        "building_name": "University Center", 
+        "location_description": "The UC is the heart of CMU's fine dining.  Conveniently located between Gesling Stadium and the cut, the UC is a great spot to grab some grub with your favorite people",
+        "floor": 1,
+        "wheelchair_accessible": true
+    }
+},
+{
+    "pk": 2, 
+    "model": "HungryApp.location", 
+    "fields": {
+        "building_name": "University Center", 
+        "location_description": "The UC is the heart of CMU's fine dining.  Conveniently located between Gesling Stadium and the cut, the UC is a great spot to grab some grub with your favorite people",
+        "floor": 2,
+        "wheelchair_accessible": true
+    }
+},
+{
+    "pk": 3, 
+    "model": "HungryApp.location", 
+    "fields": {
+        "building_name": "Wean Hall", 
+        "location_description": "So.. you're no fan of windows, eh? Wean is a great place to grab some coffee while your brain digests that Math",
+        "floor": 5,
+        "wheelchair_accessible": true
+    }
+},
+{
+    "pk": 4, 
+    "model": "HungryApp.location", 
+    "fields": {
+        "building_name": "Resnik", 
+        "location_description": "The life of the party, oh yes",
+        "floor": 1,
+        "wheelchair_accessible": true
+    }
+},
+{
+    "pk": 1, 
+    "model": "HungryApp.restaurant", 
+    "fields": {
+        "location": 4,
+        "restaurant_name": "Carnegie Mellon Cafe", 
+        "has_vegetarian": true,
+        "phone": "",
+        "cuisine": "AM"
+    }
+},
+{
+    "pk": 2, 
+    "model": "HungryApp.restaurant", 
+    "fields": {
+        "location": 4,
+        "restaurant_name": "Taste of India", 
+        "has_vegetarian": true,
+        "phone": "",
+        "cuisine": "IN"
+    }
+},
+{
+    "pk": 3, 
+    "model": "HungryApp.restaurant", 
+    "fields": {
+        "location": 3,
+        "restaurant_name": "La Prima Espresso", 
+        "has_vegetarian": true,
+        "phone": "",
+        "cuisine": "BR"
+    }
+},
+{
+    "pk": 4, 
+    "model": "HungryApp.restaurant", 
+    "fields": {
+        "location": 2,
+        "restaurant_name": "City Grill", 
+        "has_vegetarian": false,
+        "phone": "",
+        "cuisine": "AM"
+    }
+}
+]

@@ -26,6 +26,8 @@ class StudentRegistrationForm(forms.Form):
     password2 = forms.CharField(max_length = 200, 
                                 label='Confirm password',  
                                 widget = forms.PasswordInput(attrs={'class':'form-control'}))
+    # -- TODO: cell_phone --> 3rd party lib or RegexField?
+    # cell_phone = forms.
 
 
     # Customizes form validation for properties that apply to more
