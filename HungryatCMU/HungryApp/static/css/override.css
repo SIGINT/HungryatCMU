@@ -1,9 +1,23 @@
 html, body {
 	height: 100%;
+	background: #eee url(../pics/bg.png);
+  background-image: url(http://www.cssmatic.com/img/noisebg.png);
+  background-position-x: initial;
+  background-position-y: initial;
+  background-size: initial;
+  background-repeat-x: initial;
+  background-repeat-y: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: rgb(238, 238, 238);
 }
 
-body {
-	background-image: url('../pics/bg.png');
+.embossed > h2 {
+  color: #57595b;
+  text-transform: none;
+  text-shadow: 0 1px 0px rgba(255,255,255,1);
+  display: block;
 }
 
 .jumbotron {
@@ -23,8 +37,8 @@ body {
 }
 
 .form-section {
-  -webkit-box-shadow: inset -70px 0px 170px -30px #e3e3e3;
-  box-shadow: inset -70px 0px 170px -30px #e3e3e3;
+  /*-webkit-box-shadow: inset -70px 0px 170px -30px #e7e7e7;
+  box-shadow: inset -70px 0px 170px -30px #e7e7e7;*/
   background-color: #f9f9f9;
 	border-bottom: 1px solid #e3e3e3;
 	border-top: 1px solid #e3e3e3;
