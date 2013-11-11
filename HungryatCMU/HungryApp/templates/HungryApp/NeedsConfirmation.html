@@ -1,12 +1,32 @@
 {% extends "HungryApp/base.html" %}
-
+{% block title %}:: Confirm Account{% endblock %}
+{% block navigation %}
+<div class="collapse navbar-collapse">
+  <ul class="nav navbar-nav">
+    <li><a href="/">Home</a></li>
+    <li class="active"><a href="{% url 'django.contrib.auth.views.login' %}">Login</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</div><!--/.nav-collapse -->
+{% endblock %}
 {% block content %}
-<body>
-<p>
-A confirmation email has been sent to {{email}}.  Please click the link
-in that email to confirm your request!
-</p>
-</body>
-
-
+</br></br>
+<div class="container">    
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <div class="content-well">
+            <p>
+            A confirmation email has been sent to <strong>{{email}}</strong>.  Please click the link
+            in that email to confirm your request!
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+    </div>
+  </div><!-- /.row -->
+</div><!-- /.container -->
 {% endblock %}

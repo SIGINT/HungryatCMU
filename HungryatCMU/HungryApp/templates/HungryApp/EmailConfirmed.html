@@ -1,20 +1,27 @@
-<!--<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="utf-8"> 
-  <title>Address Book Confirmation needed</title>
-</head>   -->  -->
-
 {% extends "HungryApp/base.html" %}
-
 {% block content %}
-
-<body>
-<p>
-Thank you for confirming your email address.
-Please <a href="{% url 'django.contrib.auth.views.login' %}">login</a> to get started with your order!!</p>
-</body>
-</html>
-
+</br></br>
+<div class="container">    
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          </br>
+          <div class="embossed">
+            <h2>Congrats!</h2>
+          </div>
+          <div class="content-well">
+            <p>
+            Thank you for confirming your email address.
+            Please <a href="{% url 'django.contrib.auth.views.login' %}">login</a> to get started ordering food!!
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+    </div>
+  </div><!-- /.row -->
+</div><!-- /.container -->
 {% endblock %}
 
