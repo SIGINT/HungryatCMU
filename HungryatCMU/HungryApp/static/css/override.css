@@ -20,6 +20,13 @@ html, body {
   display: block;
 }
 
+.cmu-red {
+  color: #990000;
+  font-size: 27pt;
+  font-weight: 600;
+  text-shadow: none;
+}
+
 .jumbotron {
   -webkit-box-shadow: inset 0px -1px 6px 0px #888;
   box-shadow: inset 0px -1px 6px 0px #888;
@@ -34,6 +41,14 @@ html, body {
 
 .btm-marg {
 	margin-bottom: 100px;
+}
+
+.navbar .navbar-brand {
+  color: #f3f3f3;
+  letter-spacing: 2px;
+  text-shadow: 0px 1px 0px #d3d3d3;
+  font-size: 23pt;
+  font-family: Verdana Arial;
 }
 
 .form-section {
@@ -63,11 +78,6 @@ html, body {
 
 #plate-pic {
   margin-right: 30px;
-}
-
-.navbar-brand {
-  text-shadow: 0px 2px 3px #3f3f3f;
-  font-size: 22pt;
 }
 
 .navbar-header {
