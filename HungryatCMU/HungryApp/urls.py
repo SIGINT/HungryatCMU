@@ -12,4 +12,5 @@ urlpatterns = patterns('',
     url(r'^resetpassword$','HungryApp.views.resetpassword'),
     url(r'^confirm-registration/(?P<username>[a-zA-Z0-9_@\+\-]+)/(?P<token>[a-z0-9\-]+)$', 'HungryApp.views.confirm_registration', name='confirm'),
     url(r'^restaurants$','HungryApp.views.Restaurants'),
+    url(r'^account$','HungryApp.views.ViewAccount'),
 )

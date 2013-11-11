@@ -192,3 +192,12 @@ def Restaurants(request):
     restaurants = Restaurant.objects.all()
     context = {'restaurants' : restaurants }
     return render(request, "HungryApp/restaurants.html", context)
+    
+    
+@login_required
+def ViewAccount(request):
+  
+  current_user = request.user
+  context = {'user' : current_user}
+  return render(request, "HungryApp/account.html", context)
+  
