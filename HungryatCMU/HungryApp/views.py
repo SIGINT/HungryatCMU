@@ -41,12 +41,12 @@ from HungryApp.models import *
 from HungryApp.forms import *
 
 
-
 def home(request):
     
     # Sets up list of just the logged-in user's (request.user's) items
     return render(request, 'HungryApp/index.html')
-
+    
+    
 def StudentRegistration(request):
     context = {}
 
@@ -95,8 +95,8 @@ def StudentRegistration(request):
               recipient_list=[new_user.email])
 
     context['email'] = form.cleaned_data['email']
-    return render(request, 'HungryApp/NeedsConfirmation.html', context) 
-
+    return render(request, 'HungryApp/NeedsConfirmation.html', context)
+    
 
 def confirm_registration(request, username, token):
     user = get_object_or_404(User, username=username)
@@ -187,7 +187,7 @@ def resetpassword(request):
     
     
 @login_required
-def Restaurants(request):
+def restaurants(request):
     
     restaurants = Restaurant.objects.all()
     context = {'restaurants' : restaurants }
@@ -195,9 +195,37 @@ def Restaurants(request):
     
     
 @login_required
-def ViewAccount(request):
+def view_account(request):
   
   current_user = request.user
   context = {'user' : current_user}
   return render(request, "HungryApp/account.html", context)
+  
+  
+# ---------------------------
+# TODO: THIS IS TEMPORARY
+#   --> Remember to ensure that normal/unprivileged users 
+#       (students) are not able to add restaurants to system
+# ------------------------------------------
+@login_required
+def add_restaurant(request):
+  context = {}
+  
+  if request.method == 'GET':
+    context['form'] = RestaurantForm()
+    return render(request, 'HungryApp/add_restaurant.html', context)
+    
+  form = RestaurantForm(request.POST)
+  context['form'] = form
+  
+  if not form.is_valid():
+    return render(request, 'HungryApp/add_restaurant.html', context)
+    
+  new_restaurant = Restaurant(location=form.cleaned_data['location'],
+                              restaurant_name=form.cleaned_data['restaurant_name'],
+                              has_vegetarian=form.cleaned_data['has_vegetarian'],
+                              cuisine=form.cleaned_data['cuisine'])
+  new_restaurant.save()
+  
+  return render(request, "/restaurant", {})
   

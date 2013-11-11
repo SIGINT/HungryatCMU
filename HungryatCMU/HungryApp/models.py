@@ -42,6 +42,9 @@ class Location(models.Model):
     wheelchair_accessible = models.BooleanField(default=False)
 
     def __unicode__(self):
+      if self.floor:
+        return "%s, Floor %s" % (self.building_name, self.floor)
+      else:
         return self.building_name
         
         

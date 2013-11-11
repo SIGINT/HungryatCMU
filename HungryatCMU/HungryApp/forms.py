@@ -123,13 +123,46 @@ class ResetPasswordForm(forms.Form):
         
         if not user.check_password(passwordold):
             raise forms.ValidationError('Your old password does not match the records')
-                
-         
+            
         # Confirms that the two password fields match
         passwordnew1 = cleaned_data.get('passwordnew1')
         passwordnew2 = cleaned_data.get('passwordnew2')
+        
         if passwordnew1 and passwordnew2 and passwordnew1 != passwordnew2:
             raise forms.ValidationError("Your New Passwords did not match.")
 
         # We must return the cleaned data we got from our parent.
-        return cleaned_data 
+        return cleaned_data
+        
+        
+class RestaurantForm(forms.Form):
+  location = forms.ModelChoiceField(queryset = Location.objects.all(),
+                                    empty_label = None,
+                                    widget =  forms.Select(attrs={'class':'form-control'}))
+  restaurant_name = forms.CharField(max_length = 80,
+                                    widget = forms.TextInput(attrs={'class':'form-control'}))
+  has_vegetarian = forms.BooleanField()
+  #phone = forms.RegexField()
+  cuisine = forms.ChoiceField(widget = forms.RadioSelect,
+                              choices = Restaurant.CUISINES)
+  
+  def clean(self):
+      # Calls our parent (forms.Form) .clean function, gets a dictionary
+      # of cleaned data as a result
+      cleaned_data = super(RestaurantForm, self).clean()
+      loc = cleaned_data.get('location')
+      restaurant_name = cleaned_data.get('restaurant_name')
+      has_vegetarian = cleaned_data.get('has_vegetarian')
+      cuisine = cleaned_data.get('cuisine')
+      # ----------------------
+      # TODO: Ensure location exists in system
+      # ----------------------
+      try:
+        location = Location.objects.get(id=loc.id)
+      except Location.DoesNotExist:
+        raise forms.ValidationError("The location specified does not exist in the system")
+        
+      return cleaned_data
+      
+  
+  
