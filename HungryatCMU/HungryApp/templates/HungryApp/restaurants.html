@@ -22,8 +22,22 @@
   </div>
 </div>
 {% endblock %}
-{% for r in restaurants %}
-<div class="section">
-  <strong>{{r.restaurant_name}}</strong>
-</div>
-{% endfor %}
+{% block content %}
+<div class="container">    
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          {% for r in restaurants %}
+          <div class="content-well">
+            <strong>{{r.restaurant_name}}</strong>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+    </div>
+  </div><!-- /.row -->
+</div><!-- /.container -->
+{% endblock %}
