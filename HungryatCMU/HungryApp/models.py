@@ -57,6 +57,7 @@ class Restaurant(models.Model):
 
     location = models.ForeignKey(Location)
     restaurant_name = models.CharField(max_length=80)
+    restaurant_picture = models.ImageField(upload_to='restaurant-pictures', blank=True)
     has_vegetarian = models.BooleanField(default=False)
     phone = models.CharField(max_length=15)
     cuisine = models.CharField(max_length=2, choices=CUISINES)

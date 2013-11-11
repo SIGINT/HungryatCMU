@@ -141,6 +141,7 @@ class RestaurantForm(forms.Form):
                                     widget =  forms.Select(attrs={'class':'form-control'}))
   restaurant_name = forms.CharField(max_length = 80,
                                     widget = forms.TextInput(attrs={'class':'form-control'}))
+  restaurant_picture = forms.ImageField(widget=forms.FileInput())
   has_vegetarian = forms.BooleanField()
   #phone = forms.RegexField()
   cuisine = forms.ChoiceField(widget = forms.RadioSelect,
@@ -152,6 +153,7 @@ class RestaurantForm(forms.Form):
       cleaned_data = super(RestaurantForm, self).clean()
       loc = cleaned_data.get('location')
       restaurant_name = cleaned_data.get('restaurant_name')
+      restaurant_picture = cleaned_data.get('restaurant_picture')
       has_vegetarian = cleaned_data.get('has_vegetarian')
       cuisine = cleaned_data.get('cuisine')
       # ----------------------

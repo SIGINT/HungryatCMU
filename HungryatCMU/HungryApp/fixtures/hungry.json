@@ -166,7 +166,8 @@
     "model": "HungryApp.restaurant", 
     "fields": {
         "location": 4,
-        "restaurant_name": "Carnegie Mellon Cafe", 
+        "restaurant_name": "Carnegie Mellon Cafe",
+        "restaurant_picture": "",
         "has_vegetarian": true,
         "phone": "",
         "cuisine": "AM"
@@ -177,7 +178,8 @@
     "model": "HungryApp.restaurant", 
     "fields": {
         "location": 4,
-        "restaurant_name": "Taste of India", 
+        "restaurant_name": "Taste of India",
+        "restaurant_picture": "",
         "has_vegetarian": true,
         "phone": "",
         "cuisine": "IN"
@@ -188,7 +190,8 @@
     "model": "HungryApp.restaurant", 
     "fields": {
         "location": 3,
-        "restaurant_name": "La Prima Espresso", 
+        "restaurant_name": "La Prima Espresso",
+        "restaurant_picture": "", 
         "has_vegetarian": true,
         "phone": "",
         "cuisine": "BR"
@@ -199,7 +202,8 @@
     "model": "HungryApp.restaurant", 
     "fields": {
         "location": 2,
-        "restaurant_name": "City Grill", 
+        "restaurant_name": "City Grill",
+        "restaurant_picture": "",
         "has_vegetarian": false,
         "phone": "",
         "cuisine": "AM"
