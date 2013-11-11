@@ -1,25 +1,13 @@
 {% extends "HungryApp/base.html" %}
 {% block title %}:: Registration{% endblock %}
 {% block navigation %}
-<div class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span id="plate-pic" class="pull-left"><img src="{% static 'pics/plate.png' %}" width="120"></span><a class="navbar-brand" href="/">Hungry@CMU</a>
-    </div>
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li><a href="/">Home</a></li>
-        <li><a href="{% url 'django.contrib.auth.views.login' %}">Login</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div>
-</div>
+<div class="collapse navbar-collapse">
+  <ul class="nav navbar-nav">
+    <li><a href="/">Home</a></li>
+    <li><a href="{% url 'django.contrib.auth.views.login' %}">Login</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</div><!--/.nav-collapse -->
 {% endblock %}
 {% block content %}
 <body>
@@ -34,10 +22,10 @@
     <div class="row">
       <div class="col-md-12">
         </br></br>
-        <h3>Register to satisfy your hunger.&nbsp;&nbsp;&nbsp;<em>Its Free!!</em></h3></br></br>
+        <h2>Register to satisfy your hunger.&nbsp;&nbsp;&nbsp;<em>Its Free!!</em></h2></br></br>
         <form role="form" method="post" action="/register" class="indent btm-marg">
           <div class="row">
-            <div class="col-md-2"></div>
+            <div class="col-md-1"></div>
             <div class="col-md-9 form-section">
               <div class="row">
                 <div class="col-md-4">
@@ -72,11 +60,11 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-1"></div>
-          </div>
-          </br></br>
-          <div class="row">
             <div class="col-md-2"></div>
+          </div>
+          </br>
+          <div class="row">
+            <div class="col-md-1"></div>
             <div class="col-md-9 form-section">
               <div class="row">
                 <div class="col-md-4">
@@ -106,14 +94,14 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-1"></div>
+            <div class="col-md-2"></div>
           </div>
           </br>
           <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
               <div class="form-group pull-right">
-                <button type="submit" class="btn btn-success btn-lg">&nbsp;Register&nbsp;</button>
+                <button type="submit" class="btn btn-primary btn-lg">&nbsp;Register&nbsp;</button>
               </div>
             </div>
             <div class="col-md-3"></div>
