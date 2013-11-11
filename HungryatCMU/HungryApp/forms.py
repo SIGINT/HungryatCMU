@@ -14,9 +14,7 @@ class StudentRegistrationForm(forms.Form):
                                 choices=Student.GENDERS)
     student_year = forms.ChoiceField(widget = forms.Select(attrs={'class':'form-control'}),
                                 choices = Student.STUDENT_YEARS)
-    andrew_id = forms.CharField(max_length = 20,
-                                label = "Andrew ID",
-                                widget = forms.TextInput(attrs={'class':'form-control'}))
+    #andrew_id = forms.CharField(max_length = 20, label = "Andrew ID", widget = forms.TextInput(attrs={'class':'form-control'}))
     email = forms.EmailField(max_length=200,
                                 widget = forms.TextInput(attrs={'class':'form-control'}))
     date_of_birth = forms.DateField(widget=forms.DateInput(attrs={'type':'date', 'class':'form-control'}))

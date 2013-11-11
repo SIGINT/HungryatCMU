@@ -2,6 +2,10 @@
 	margin-left: 32px;
 }
 
+.btm-marg {
+	margin-bottom: 100px;
+}
+
 .form-section {
 	border-bottom: 1px solid #e3e3e3;
 	border-left: 1px solid #e3e3e3;
