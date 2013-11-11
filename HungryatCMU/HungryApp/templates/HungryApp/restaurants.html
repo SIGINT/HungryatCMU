@@ -1,26 +1,14 @@
 {% extends "HungryApp/base.html" %}
 {% block navigation %}
-<div class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span id="plate-pic" class="pull-left"><img src="{% static 'pics/plate.png' %}" width="120"></span><a class="navbar-brand" href="/">Hungry@CMU</a>
-    </div>
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li><a href="/">Home</a></li>
-        <li class="active"><a href="/restaurants">Restaurants</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="/account">My Account</a></li>
-        <li><a href="/logout">Logout</a></li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div>
-</div>
+<div class="collapse navbar-collapse">
+  <ul class="nav navbar-nav">
+    <li><a href="/">Home</a></li>
+    <li class="active"><a href="/restaurants">Restaurants</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="/account">My Account</a></li>
+    <li><a href="/logout">Logout</a></li>
+  </ul>
+</div><!--/.nav-collapse -->
 {% endblock %}
 {% block content %}
 <div class="container">    
