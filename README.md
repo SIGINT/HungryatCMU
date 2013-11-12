@@ -5,6 +5,10 @@
 #### Luke Jasko
 #### Karthik Murugan
 
+
+Heroku deployment may or may not be working: http://secret-beach-4490.herokuapp.com/HungryApp/register
+
+
                         
                         
                   _      .                   //===========================\
