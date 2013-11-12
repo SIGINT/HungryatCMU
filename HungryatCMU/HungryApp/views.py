@@ -192,6 +192,7 @@ def resetpassword(request):
 @login_required
 def restaurants(request):
     
+    # Simple index --> list all entities in system
     restaurants = Restaurant.objects.all()
     context = {'restaurants' : restaurants }
     return render(request, "HungryApp/restaurants.html", context)
@@ -237,7 +238,39 @@ def add_restaurant(request):
   #return render(request, "/restaurant", {})
   return redirect("/account")
   
-
+  
+@login_required
+def edit_restaurant(request, id):
+  context = {}
+  
+  # -------------------
+  # TODO: use of 404-friendly errors vs objects.select_for_update() ??
+  # -------------------
+  #r = Restaurant.objects.select_for_update().filter(restaurant=
+  r = get_object_or_404(Restaurant, pk=id)
+  
+  if request.method == 'GET':
+    context['form'] = RestaurantForm()
+    return render(request, 'HungryApp/edit_restaurant.html', context)
+    
+  form = RestaurantForm(request.POST, request.FILES)
+  context['form'] = form
+  
+  if not form.is_valid():
+    return render(request, 'HungryApp/edit_restaurant.html', context)
+    
+  # POST request's form is valid --> update database
+  r.update(location=form.cleaned_data['location'],
+            restaurant_name=form.cleaned_data['restaurant_name'],
+            restaurant_picture=form.cleaned_data['restaurant_picture'],
+            has_vegetarian=form.cleaned_data['has_vegetarian'],
+            cuisine=form.cleaned_data['cuisine'])
+  
+  # TODO !!!!!!!!!!!
+  return redirect('/restaurants')
+    
+  
+  
 @login_required
 def get_restaurant_picture(request, id):
   r = get_object_or_404(Restaurant, pk=id)
