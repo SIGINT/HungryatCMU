@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Restaurant Menu</title>
+</head>
+
+<body>
+<p>
+<a href="{% url 'add_fooditem' %}">Add a food-item</a>
+</p>
+
+<p>
+Your Restaurant Menu:
+<ul>
+{% for food_item in food_items %}
+  <li> <a href="{% url 'edit_fooditem' entry.id %}">{{food_item}}</a>
+{% endfor %}
+</ul>
+</p>
+
+</body>
+</html>

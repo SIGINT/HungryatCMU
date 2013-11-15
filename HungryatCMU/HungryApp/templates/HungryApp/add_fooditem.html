@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Restaurant Menu- Add Food Item </title>
+</head>
+
+<body>
+<p>
+<form enctype="multipart/form-data" action="{% url 'add_fooditem'%}" method="post">
+<table>
+{{form}}
+</table>
+<input type="submit" value="Add food-item">
+{% csrf_token %}
+</form>
+<a href="{% url 'display_fooditems' %}"><button>Cancel</button></a>
+</p>
+
+</body>
+</html>
+

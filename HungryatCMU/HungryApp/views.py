@@ -47,7 +47,10 @@ from HungryApp.forms import *
 def home(request):
     
     # Sets up list of just the logged-in user's (request.user's) items
-    return render(request, 'HungryApp/index.html')
+    #return render(request, 'HungryApp/index.html')
+    restaurants = Restaurant.objects.all()
+    context = {'restaurants' : restaurants }
+    return render(request, "HungryApp/restaurants.html", context)
     
     
 def StudentRegistration(request):
@@ -75,7 +78,7 @@ def StudentRegistration(request):
                                         email=form.cleaned_data['email'])
                                         
     # Mark the user as inactive to prevent login before email confirmation.
-    new_user.is_active = False
+    new_user.is_active = True
     new_user.save()
           
     new_student = Student(date_of_birth=form.cleaned_data['date_of_birth'],
@@ -276,9 +279,91 @@ def get_restaurant_picture(request, id):
   r = get_object_or_404(Restaurant, pk=id)
   
   if not r.restaurant_picture:
-      raise Http404
+    raise Http404
       
   content_type = guess_type(r.restaurant_picture.name)
   return HttpResponse(r.restaurant_picture, mimetype=content_type)
   
+
+@login_required
+@transaction.commit_on_success
+def add_fooditem(request):
+    
+    if request.method == "GET":
+        context = {'form':FoodItemForm()}
+        return render(request, 'HungryApp/add_fooditem.html', context)
+        
+    new_food_item = FoodItem(restaurant_id= Restaurant.objects.get(id=id))
+    form = FoodItemForm(request.POST, request.FILES, instance=new_food_item)
+    if not form.is_valid():
+        context = {'form':form}
+        return render(request, 'HungryApp/add_fooditem.html', context)
+   
+    form.save()
+    return redirect(reverse('display_fooditems'))
+
+@login_required
+@transaction.commit_on_success
+def edit_fooditem(request, id):
+    fooditem_to_edit = get_object_or_404(FoodItem, restaurant_id=request.restaurant, id=id)
+
+    if request.method == 'GET':
+        form = FoodItemForm(instance=fooditem_to_edit)  # Creates form from the 
+        context = {'form':form, 'id':id}          # existing entry.
+        return render(request, 'HungryApp/edit_fooditem.html', context)
+
+    # if method is POST, get form data to update the model
+    form = FoodItemForm(request.POST, request.FILES, instance=entry_to_edit)
+
+    if not form.is_valid():
+        context = {'form':form, 'id':id} 
+        return render(request, 'HungryApp/edit_fooditem.html', context)
+
+    form.save()
+    return redirect(reverse('display_fooditems'))
+
+@login_required
+def display_fooditems(request):
+    
+    context = {'food_items':FoodItem.objects.all()}
+    return render(request, 'HungryApp/display_fooditems.html', context)        
+
+@login_required
+def get_fooditem_photo(request, id):
+  food_item = get_object_or_404(FoodItem, pk=id)
   
+  if not food_item.picture:
+    raise Http404
+      
+  content_type = guess_type(food_item.picture.name)
+  return HttpResponse(food_item.picture, mimetype=content_type)
+
+
+
+
+"""@login_required
+def add_food_item(request):
+  context = {}
+  
+  if request.method == 'GET':
+    context['form'] = RestaurantForm()
+    return render(request, 'HungryApp/add_restaurant.html', context)
+    
+  form = RestaurantForm(request.POST, request.FILES)
+  context['form'] = form
+  
+  if not form.is_valid():
+    return render(request, 'HungryApp/add_restaurant.html', context)
+    
+  new_restaurant = Restaurant(location=form.cleaned_data['location'],
+                              restaurant_name=form.cleaned_data['restaurant_name'],
+                              restaurant_picture=form.cleaned_data['restaurant_picture'],
+                              has_vegetarian=form.cleaned_data['has_vegetarian'],
+                              cuisine=form.cleaned_data['cuisine'])
+  new_restaurant.save() """
+  
+  # --------------------
+  # TODO: Render restaurants page
+  # --------------------
+  #return render(request, "/restaurant", {})
+  #"""return redirect("/account")  """

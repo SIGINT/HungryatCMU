@@ -167,4 +167,9 @@ class RestaurantForm(forms.Form):
       return cleaned_data
       
   
-  
+
+class FoodItemForm(forms.ModelForm):
+    class Meta:
+        model = FoodItem
+        exclude = ('restaurant_id',)
+        widgets = {'food_item_pic' : forms.FileInput() }  
