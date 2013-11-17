@@ -22,6 +22,11 @@ class Administrator(models.Model):
     def __unicode__(self):
         return "%s, %s" % (self.user.last_name, self.user.first_name)
         
+    class Meta:
+        permissions = (
+            ("is_admin", "Admin User"),
+        )
+        
         
 class Student(models.Model):
     
@@ -36,6 +41,11 @@ class Student(models.Model):
     
     def __unicode__(self):
         return "%s, %s" % (self.user.last_name, self.user.first_name)
+        
+    class Meta:
+        permissions = (
+            ("is_student", "Student User"),
+        )
         
         
 class Location(models.Model):
@@ -91,6 +101,11 @@ class RestaurantEmployee(models.Model):
     def __unicode__(self):
         return "%s, %s" % (self.user.last_name, self.user.first_name)
         
+    class Meta:
+        permissions = (
+            ("is_employee", "Employee User"),
+        )
+            
         
 class FoodItem(models.Model):
     

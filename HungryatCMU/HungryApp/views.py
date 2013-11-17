@@ -15,7 +15,7 @@ from django.http import HttpResponse, Http404
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 # Decorator to use built-in authentication system
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.admin.views.decorators import staff_member_required
 
 # Used to create and manually log in a user
@@ -61,8 +61,9 @@ def home(request):
         restaurants = Restaurant.objects.all()
         context['restaurants'] = restaurants
         return render(request, "HungryApp/restaurants.html", context)
-            
-@staff_member_required
+        
+        
+@permission_required('HungryApp.is_admin', login_url='/HungryApp/')
 def invite_employee(request):
     context = {}
 
@@ -103,7 +104,7 @@ def invite_employee(request):
 
     context['email'] = form.cleaned_data['email']
     return render(request, 'HungryApp/invitation_sent.html', context)
-  
+    
   
 def register_employee(request, username, token):
     logout(request)
@@ -123,7 +124,9 @@ def register_employee(request, username, token):
     
     if not form.is_valid():
         return render(request, 'HungryApp/employee_register.html', context)
-        
+    
+    employee_perm = Permission.objects.get(codename='is_employee')
+    user.user_permissions.add(employee_perm)    
     user.is_active = True
     user.first_name = form.cleaned_data['first_name']
     user.last_name=form.cleaned_data['last_name']
@@ -131,28 +134,26 @@ def register_employee(request, username, token):
     user.save()
     employee = RestaurantEmployee.objects.select_for_update(user=user)
     employee.update(date_of_birth=form.cleaned_data['date_of_birth'])
-                
-    return redirect('/')
+    return redirect('/HungryApp/')
     
-@staff_member_required
+    
+@permission_required('HungryApp.is_admin', login_url='/HungryApp/')
 def employees(request):
     context = {}
-    
     employees = RestaurantEmployee.objects.all()
     context['employees'] = employees
-    
     return render(request, 'HungryApp/employees.html', context)
     
-@staff_member_required
+    
+@permission_required('HungryApp.is_admin', login_url='/HungryApp/')
 def students(request):
     context = {}
-    
     students = Student.objects.all()
     context['students'] = students
-    
     return render(request, 'HungryApp/students.html', context)
     
-@staff_member_required
+    
+@permission_required('HungryApp.is_admin', login_url='/HungryApp/')
 def deactivate_user(request, id):
     user = get_object_or_404(User, pk=id)
     
@@ -162,7 +163,8 @@ def deactivate_user(request, id):
     
     return redirect('/HungryApp')
     
-@staff_member_required
+    
+@permission_required('HungryApp.is_admin', login_url='/HungryApp/')
 def activate_user(request):
     user = get_object_or_404(User, pk=id)
     
@@ -171,6 +173,7 @@ def activate_user(request):
         user.save()
         
     return redirect('/HungryApp')
+    
     
 def StudentRegistration(request):
     context = {}
@@ -305,13 +308,11 @@ def resetpassword(request):
     # Mark the user as active.
     Password_reset_user.is_active = True
     Password_reset_user.save()
-    
     return render(request, 'HungryApp/PasswordConfirmed.html')
     
     
 @login_required
 def restaurants(request):
-    
     # Simple index --> list all entities in system
     restaurants = Restaurant.objects.all()
     context = {'restaurants' : restaurants }
@@ -320,18 +321,11 @@ def restaurants(request):
     
 @login_required
 def view_account(request):
-  
   current_user = request.user
   context = {'user' : current_user}
   return render(request, "HungryApp/account.html", context)
   
-  
-# ---------------------------
-# TODO: THIS IS TEMPORARY
-#   --> Remember to ensure that normal/unprivileged users 
-#       (students) are not able to add restaurants to system
-# ------------------------------------------
-@login_required
+@permission_required('HungryApp.is_admin', login_url='/HungryApp/')
 def add_restaurant(request):
   context = {}
   
@@ -364,14 +358,13 @@ def view_restaurant(request, id):
   context = {}
   r = get_object_or_404(Restaurant, pk=id)
   context['r'] = r
-  
   return render(request, 'HungryApp/view_restaurant.html', context)
   
   
 @login_required
 def edit_restaurant(request, id):
   context = {}
-  
+      
   # -------------------
   # TODO: use of 404-friendly errors vs objects.select_for_update() ??
   # -------------------
