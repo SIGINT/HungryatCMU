@@ -1,5 +1,5 @@
 {% extends "HungryApp/base.html" %}
-{% block title %}:: Account{% endblock %}
+{% block title %}:: Administrator{% endblock %}
 {% block navigation %}
 {% include 'HungryApp/admin_nav.html' %}
 {% endblock %}
@@ -7,15 +7,63 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
+      </br></br></br>
+      <div class="indent embossed">
+        <h2><u>Administration Panel</u></h2>
+      </div>
       <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-          </br>
-          <h2>Admin Page!</h2>
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          </br></br></br>
+          <ul style="list-style:none;">
+            <li>
+              <a href="{% url 'invite-employee' %}" class="btn btn-default btn-lg">&nbsp;New Employee&nbsp; <span class="glyphicon glyphicon-plus"></span></a>
+            </li>
+            <li>
+              <a href="" class="btn btn-default btn-lg">&nbsp;New Admin&nbsp; <span class="glyphicon glyphicon-user"></span></a>
+            </li>
+          </ul>
+          </br></br></br>
+          <h3>Users</h3>
           </br></br>
-          <a href="/invite-employee">New Restaurant Employee</a>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Admin</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for u in users %}
+              <tr>
+                <td>{{u.last_name}}</td>
+                <td>{{u.first_name}}</td>
+                <td>
+                  {% if u.is_staff %}
+                  <span class="glyphicon glyphicon-ok"></span>
+                  {% else %}
+                  <span class="glyphicon glyphicon-minus">
+                  {% endif %}
+                </td>
+                <td>{{u.username}}</td>
+                <td><a href="mailto:{{u.email}}">{{u.email}}</a></td>
+                <td>
+                  {% if u.is_active %}
+                  <a href="{% url 'deactivate-user' u.id %}" class="btn btn-danger btn-sm" alt="deactivate">Deactivate&nbsp; <span class="glyphicon glyphicon-ban-circle"></span></a>
+                  {% else %}
+                  <a href="{% url 'activate-user' u.id %}" class="btn btn-success btn-sm" alt="activate">Activate&nbsp; <span class="glyphicon glyphicon-flash"></span></a>
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
-        <div class="col-md-4"></div>
+        <div class="col-md-2"></div>
       </div>
     </div>
   </div><!-- /.row -->

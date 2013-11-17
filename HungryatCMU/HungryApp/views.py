@@ -54,11 +54,13 @@ def home(request):
     
     # user.is_staff --> user is administrator
     if user.is_staff:
-      return render(request, "HungryApp/admin.html", context)
+        users = User.objects.all()
+        context['users'] = users
+        return render(request, "HungryApp/admin.html", context)
     else:
-      restaurants = Restaurant.objects.all()
-      context['restaurants'] = restaurants 
-      return render(request, "HungryApp/restaurants.html", context)
+        restaurants = Restaurant.objects.all()
+        context['restaurants'] = restaurants
+        return render(request, "HungryApp/restaurants.html", context)
             
 @staff_member_required
 def invite_employee(request):
