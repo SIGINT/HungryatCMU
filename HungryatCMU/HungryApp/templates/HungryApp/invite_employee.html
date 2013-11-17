@@ -1,5 +1,5 @@
 {% extends "HungryApp/base.html" %}
-{% block title %}:: New Restaurant{% endblock %}
+{% block title %}:: New Employee{% endblock %}
 {% block navigation %}
 {% include "HungryApp/admin_nav.html" %}
 {% endblock %}
@@ -19,10 +19,10 @@
         <div class="col-md-4">
           </br></br>
           <div class="embossed">
-            <h2>New Restaurant&nbsp; <span class="glyphicon glyphicon-cutlery"></span></h2>
+            <h2>New Restaurant Employee</h2>
           </div>
           </br></br>
-          <form role="form" method="post" action="/HungryApp/add-restaurant" class="indent btm-marg" enctype="multipart/form-data">
+          <form role="form" method="post" action="/HungryApp/invite-employee" class="indent btm-marg">
             {% include 'HungryApp/form_loop.html' %}
             <div class="form-group pull-right">
               <button type="submit" class="btn btn-primary btn-lg">&nbsp;Submit&nbsp;</button>

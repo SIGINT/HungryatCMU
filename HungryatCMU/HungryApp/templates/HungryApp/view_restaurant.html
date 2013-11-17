@@ -1,25 +1,33 @@
 {% extends "HungryApp/base.html" %}
-{% block title %}:: Success{% endblock %}
+{% block title %}:: {{ r.restaurant_name }}{% endblock %}
 {% block navigation %}
-<li class="active"><a href="{% url 'django.contrib.auth.views.login' %}">Login</a></li>
+<li class="active"><a href="/restaurants">Restaurants</a></li>
 <li><a href="#contact">Contact</a></li>
+<li><a href="/account">My Account</a></li>
+<li><a href="/logout">Logout</a></li>
 {% endblock %}
 {% block content %}
-</br></br>
-<div class="container">    
+<br>
+{% for error in form.non_field_errors %}
+<p style="color: red">
+{{ error }}
+</p>
+{% endfor %}
+</br>
+<div class="container">
   <div class="row">
     <div class="col-md-12">
       <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4">
+          </br></br>
           <div class="embossed">
-            <h2>Success! <small>[now let's get back to food]</small></h2>
+            <h2>{{ r.restaurant_name }}</h2>
           </div>
+          </br></br>
           <div class="content-well">
-            <p>
-            Your password has been changed successfully!
-            Please <a href="{% url 'django.contrib.auth.views.login' %}">login</a> using your new password.
-            </p>
+            <!-- TODO -->
+            <p>PUT RESTAURANT INFO HERE</p>
           </div>
         </div>
         <div class="col-md-4"></div>

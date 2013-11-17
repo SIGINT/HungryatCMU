@@ -1,0 +1,55 @@
+{% extends "HungryApp/base.html" %}
+{% block title %}:: Employees{% endblock %}
+{% block navigation %}
+{% include "HungryApp/admin_nav.html" %}
+{% endblock %}
+{% block content %}
+</br></br>
+<div class="container">    
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+          </br></br>
+          <div class="embossed">
+            <h2>Restaurant Employees</h2>
+          </div>
+          </br></br>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Restaurant</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for e in employees %}
+              <tr>
+                <td>{{e.user.last_name}}</td>
+                <td>{{e.user.first_name}}</td>
+                <td>{{e.restaurant.restaurant_name}}</td>
+                <td>{{e.user.username}}</td>
+                <td><a href="mailto:{{e.user.email}}">{{e.user.email}}</a></td>
+                <td>
+                  {% if e.user.is_active %}
+                  <a href="{% url 'deactivate-user' e.user.id %}" class="btn btn-danger btn-sm" alt="deactivate">Deactivate&nbsp; <span class="glyphicon glyphicon-ban-circle"></span></a>
+                  {% else %}
+                  <a href="{% url 'activate-user' e.user.id %}" class="btn btn-success btn-sm" alt="activate">Activate&nbsp; <span class="glyphicon glyphicon-flash"></span></a>
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-1"></div>
+      </div>
+    </div>
+  </div><!-- /.row -->
+</div><!-- /.container -->
+{% endblock %}

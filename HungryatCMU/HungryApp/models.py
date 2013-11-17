@@ -9,11 +9,23 @@ from models import *
 # -----------------------------
 
 class Administrator(models.Model):
+  
+    GENDERS = (('M', 'Male'), ('F', 'Female'), ('N', 'N/A'))
     
+    # user.is_staff --> user is administrator
     user = models.OneToOneField(User)
+    date_of_birth = models.DateField()
+    gender = models.CharField(max_length=1, choices=GENDERS)
+    cell_phone = models.CharField(max_length=15)
+    home_phone = models.CharField(max_length=15)
     
     def __unicode__(self):
         return "%s, %s" % (self.user.last_name, self.user.first_name)
+        
+    class Meta:
+        permissions = (
+            ("is_admin", "Admin User"),
+        )
         
         
 class Student(models.Model):
@@ -30,9 +42,13 @@ class Student(models.Model):
     def __unicode__(self):
         return "%s, %s" % (self.user.last_name, self.user.first_name)
         
+    class Meta:
+        permissions = (
+            ("is_student", "Student User"),
+        )
+        
         
 class Location(models.Model):
-    #BUILDING_NAMES = ('GATES CENTER', 'HAMERSCHLAG HALL', 'WEAN HALL') 
     
     longitude = models.DecimalField(max_digits=7, decimal_places=4, null=True)
     latitude = models.DecimalField(max_digits=7, decimal_places=4, null=True)
@@ -56,7 +72,7 @@ class Restaurant(models.Model):
     # --------------------
     CUISINES = (('BR', 'Breakfast'), ('AM', 'American'), ('IN', 'Indian'), ('AS', 'Asian'))
 
-    #location = models.ForeignKey(Location,blank=True,unique=True, null=True, default=None)
+    location = models.ForeignKey(Location,blank=True, null=True, default=None)
     restaurant_name = models.CharField(max_length=80)
     restaurant_picture = models.ImageField(upload_to='restaurant-pictures', blank=True)
     has_vegetarian = models.BooleanField(default=False)
@@ -77,12 +93,19 @@ class RestaurantEmployee(models.Model):
     
     user = models.OneToOneField(User)
     restaurant = models.ForeignKey(Restaurant)
+    date_of_birth = models.DateField(null=True)
     cell_phone = models.CharField(max_length=15)
-    #is_manager = models.BooleanField(default=False)
+    home_phone = models.CharField(max_length=15)
+    is_manager = models.BooleanField(default=False)
     
     def __unicode__(self):
         return "%s, %s" % (self.user.last_name, self.user.first_name)
         
+    class Meta:
+        permissions = (
+            ("is_employee", "Employee User"),
+        )
+            
         
 class FoodItem(models.Model):
     

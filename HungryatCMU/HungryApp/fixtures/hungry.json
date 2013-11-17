@@ -11,7 +11,7 @@
         "is_staff": false, 
         "last_login": "2013-09-27T11:13:45.507Z", 
         "groups": [], 
-        "user_permissions": [], 
+        "user_permissions": [26], 
         "password": "pbkdf2_sha256$10000$j6qKlRABYrby$mLosetSvxoEE4XLb1oem8JqR3SM/Ex/BBEoNljqx4ec=", 
         "email": "ohdee@theoffice.net", 
         "date_joined": "2013-09-27T11:13:45.268Z"
@@ -29,7 +29,7 @@
         "is_staff": false, 
         "last_login": "2013-09-30T21:22:27.024Z", 
         "groups": [], 
-        "user_permissions": [], 
+        "user_permissions": [26], 
         "password": "pbkdf2_sha256$10000$3neZRSNHm103$3EMXMStJdsgYa6XRvZGpqBH3rl+79QjKSqaYDc1Hh1Q=", 
         "email": "mscott@theoffice.net", 
         "date_joined": "2013-09-27T11:14:46.384Z"
@@ -47,7 +47,7 @@
         "is_staff": false, 
         "last_login": "2013-09-27T11:16:38.173Z", 
         "groups": [], 
-        "user_permissions": [], 
+        "user_permissions": [26], 
         "password": "pbkdf2_sha256$10000$Ux6UkjYbbBOo$e3L3GzFU5yZUJsOh4FUww8ryqhMkonNZ92w/5blTyfo=", 
         "email": "amartin@theoffice.net", 
         "date_joined": "2013-09-27T11:16:37.941Z"
@@ -65,10 +65,37 @@
         "is_staff": false, 
         "last_login": "2013-09-30T12:55:14.944Z", 
         "groups": [], 
-        "user_permissions": [], 
+        "user_permissions": [26], 
         "password": "pbkdf2_sha256$10000$NEDHP81jaqjk$wuvL1BdtFz3r4JIKdYuo1TJ2dHyVS0Epb2P+ex7FBAQ=", 
         "email": "ltj@luke.com", 
         "date_joined": "2013-09-30T12:55:14.715Z"
+    }
+},
+{
+  "pk": 6, 
+  "model": "auth.user", 
+  "fields": {
+    "username": "admin", 
+    "first_name": "Hungry", 
+    "last_name": "Administrator", 
+    "is_active": true, 
+    "is_superuser": false, 
+    "is_staff": true, 
+    "last_login": "2013-11-15T07:30:02.215Z", 
+    "groups": [], 
+    "user_permissions": [22], 
+    "password": "pbkdf2_sha256$10000$HSyCvM8jyBuu$TbFI7IXl9HqxhDU4Tt4Lz8JV+blBnSwj0mxGAz31DuM=", 
+    "email": "admin@hungry.com", 
+    "date_joined": "2013-11-15T07:29:41.244Z"
+  }
+},
+{
+    "pk": 1, 
+    "model": "HungryApp.administrator", 
+    "fields": {
+        "date_of_birth": "1980-01-01",
+        "gender": "N",
+        "user": 6
     }
 },
 {

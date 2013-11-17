@@ -1,25 +1,29 @@
 {% extends "HungryApp/base.html" %}
+{% block title %}:: Invitation Sent{% endblock %}
 {% block navigation %}
-<li><a href="{% url 'django.contrib.auth.views.login' %}">Login</a></li>
-<li><a href="#contact">Contact</a></li>
+{% include "HungryApp/admin_nav.html" %}
 {% endblock %}
 {% block content %}
-</br></br>
-<div class="container">    
+<br>
+{% for error in form.non_field_errors %}
+<p style="color: red">
+{{ error }}
+</p>
+{% endfor %}
+</br>
+<div class="container">
   <div class="row">
     <div class="col-md-12">
       <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4">
-          </br>
+          </br></br>
           <div class="embossed">
-            <h2>Congrats!</h2>
+            <h2>Invitation Sent</h2></br></br>
           </div>
+          </br></br>
           <div class="content-well">
-            <p>
-            Thank you for confirming your email address.
-            Please <a href="{% url 'django.contrib.auth.views.login' %}">login</a> to get started ordering food!!
-            </p>
+            <p>An email invitation has been generated and sent to <strong>{{email}}</strong>.</p>
           </div>
         </div>
         <div class="col-md-4"></div>
@@ -28,4 +32,3 @@
   </div><!-- /.row -->
 </div><!-- /.container -->
 {% endblock %}
-

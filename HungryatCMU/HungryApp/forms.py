@@ -44,7 +44,6 @@ class StudentRegistrationForm(forms.Form):
         # We must return the cleaned data we got from our parent.
         return cleaned_data
 
-
     # Customizes form validation for the username field.
     def clean_username(self):
         # Confirms that the username is not already present in the
@@ -136,9 +135,9 @@ class ResetPasswordForm(forms.Form):
         
         
 class RestaurantForm(forms.Form):
-  #location = forms.ModelChoiceField(queryset = Location.objects.all(),required=False,
-                                    #empty_label = None,
-                                    #widget =  forms.Select(attrs={'class':'form-control'}))
+  location = forms.ModelChoiceField(queryset = Location.objects.all(),
+                                    empty_label = None,
+                                    widget =  forms.Select(attrs={'class':'form-control'}))
                                     
   restaurant_name = forms.CharField(max_length = 80,
                                     widget = forms.TextInput(attrs={'class':'form-control'}))
@@ -152,7 +151,7 @@ class RestaurantForm(forms.Form):
       # Calls our parent (forms.Form) .clean function, gets a dictionary
       # of cleaned data as a result
       cleaned_data = super(RestaurantForm, self).clean()
-      #loc = cleaned_data.get('location')
+      loc = cleaned_data.get('location')
       restaurant_name = cleaned_data.get('restaurant_name')
       restaurant_picture = cleaned_data.get('restaurant_picture')
       has_vegetarian = cleaned_data.get('has_vegetarian')
@@ -160,15 +159,74 @@ class RestaurantForm(forms.Form):
       # ----------------------
       # TODO: Ensure location exists in system
       # ----------------------
-      #try:
-       # location = Location.objects.get(id=loc.id)
-      #except Location.DoesNotExist:
-       # raise forms.ValidationError("The location specified does not exist in the system")
+      try:
+        location = Location.objects.get(id=loc.id)
+      except Location.DoesNotExist:
+        raise forms.ValidationError("The location specified does not exist in the system")
         
       return cleaned_data
       
-  
+      
+class InviteEmployeeForm(forms.Form):
+    restaurant = forms.ModelChoiceField(queryset = Restaurant.objects.all(),
+                                      empty_label = None,
+                                      widget = forms.Select(attrs={'class':'form-control'}))
+    is_manager = forms.BooleanField()
+    username = forms.CharField(max_length = 20,
+                              widget = forms.TextInput(attrs={'class':'form-control'}))
+    email = forms.EmailField(max_length=200,
+                            widget = forms.TextInput(attrs={'class':'form-control'}))
+                      
+    def clean(self):
+        cleaned_data = super(InviteEmployeeForm, self).clean()
+        res = cleaned_data.get('restaurant')
+        username = cleaned_data.get('username')
+        email = cleaned_data.get('email')
+        is_manager = cleaned_data.get('is_manager')
 
+        try:
+            restaurant = Restaurant.objects.get(id=res.id)
+        except Restaurant.DoesNotExist:
+            raise forms.ValidationError("The restaurant specified does not exist in the system")
+        
+        return cleaned_data
+    
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if User.objects.filter(username__exact=username):
+            raise forms.ValidationError("Username is already taken.")
+            
+        return username
+        
+        
+class EmployeeRegistrationForm(forms.Form):
+    first_name = forms.CharField(max_length=40,
+                                widget=forms.TextInput(attrs={'class':'form-control'}))
+    last_name = forms.CharField(max_length=40,
+                                widget=forms.TextInput(attrs={'class':'form-control'}))
+    date_of_birth = forms.DateField(widget=forms.DateInput(attrs={'type':'date', 'class':'form-control'}))
+    
+    # -- TODO: cell_phone --> 3rd party lib or RegexField?
+    # cell_phone = forms.
+    # home_phone = forms.
+    
+    password1 = forms.CharField(max_length = 200, 
+                                    label='Password', 
+                                    widget = forms.PasswordInput(attrs={'class':'form-control'}))
+    password2 = forms.CharField(max_length = 200, 
+                                    label='Confirm Password',  
+                                    widget = forms.PasswordInput(attrs={'class':'form-control'}))
+    def clean(self):
+        cleaned_data = super(EmployeeRegistrationForm, self).clean()
+        password1 = cleaned_data.get('password1')
+        password2 = cleaned_data.get('password2')
+        
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError("Your passwords did not match.")
+            
+        return cleaned_data
+        
+        
 class FoodItemForm(forms.ModelForm):
     class Meta:
         model = FoodItem
