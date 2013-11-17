@@ -132,6 +132,24 @@ def register_employee(request, username, token):
                 
     return redirect('/')
     
+@staff_member_required
+def employees(request):
+    context = {}
+    
+    employees = RestaurantEmployee.objects.all()
+    context['employees'] = employees
+    
+    return render(request, 'HungryApp/employees.html', context)
+    
+@staff_member_required
+def students(request):
+    context = {}
+    
+    students = Student.objects.all()
+    context['students'] = students
+    
+    return render(request, 'HungryApp/students.html', context)
+    
 def StudentRegistration(request):
     context = {}
 
