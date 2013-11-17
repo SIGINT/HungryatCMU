@@ -165,7 +165,7 @@ def deactivate_user(request, id):
     
     
 @permission_required('HungryApp.is_admin', login_url='/HungryApp/')
-def activate_user(request):
+def activate_user(request, id):
     user = get_object_or_404(User, pk=id)
     
     if not user.is_active:
