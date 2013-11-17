@@ -11,6 +11,8 @@ urlpatterns = patterns('',
     url(r'^forgotpassword$','HungryApp.views.forgotpassword'),
     url(r'^resetpassword$','HungryApp.views.resetpassword'),
     url(r'^confirm-registration/(?P<username>[a-zA-Z0-9_@\+\-]+)/(?P<token>[a-z0-9\-]+)$', 'HungryApp.views.confirm_registration', name='confirm'),
+    url(r'^invite-employee$','HungryApp.views.invite_employee'),
+    url(r'^register-employee/(?P<username>[a-zA-Z0-9_@\+\-]+)/(?P<token>[a-z0-9\-]+)$', 'HungryApp.views.register_employee', name='register-employee'),
     url(r'^restaurants$','HungryApp.views.restaurants'),
     url(r'^account$','HungryApp.views.view_account'),
     url(r'^restaurant/(?P<id>\d+)$', 'HungryApp.views.view_restaurant'),
@@ -21,6 +23,5 @@ urlpatterns = patterns('',
     url(r'^edit_fooditem/(?P<id>\d+)$', 'HungryApp.views.edit_fooditem', name='edit_fooditem'),
     url(r'^food-item_photo/(?P<id>\d+)$', 'HungryApp.views.get_fooditem_photo', name='fooditem_photo'),
     url(r'^display_fooditems/(?P<id>\d+)$', 'HungryApp.views.display_fooditems', name='display_fooditems'),
-    url(r'^search$', 'HungryApp.views.search')
-
+    url(r'^search$', 'HungryApp.views.search'),
 )

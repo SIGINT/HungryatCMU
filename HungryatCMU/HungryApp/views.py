@@ -16,6 +16,7 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect
 # Decorator to use built-in authentication system
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 
 # Used to create and manually log in a user
 from django.contrib.auth.models import User
@@ -33,7 +34,7 @@ from django.db import transaction
 from django.contrib.auth.tokens import default_token_generator
 # Used to create and manually log in a user
 from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, logout, authenticate
 from django.views.decorators.csrf import csrf_exempt
 from django.core.context_processors import csrf 
 
@@ -57,8 +58,79 @@ def home(request):
       restaurants = Restaurant.objects.all()
       context['restaurants'] = restaurants 
       return render(request, "HungryApp/restaurants.html", context)
-      
+            
+@staff_member_required
+def invite_employee(request):
+    context = {}
+
+    if request.method == 'GET':
+        context['form'] = InviteEmployeeForm()
+        return render(request, 'HungryApp/invite_employee.html', context)
+
+    form = InviteEmployeeForm(request.POST)
+    context['form'] = form
+
+    if not form.is_valid():
+        return render(request, 'HungryApp/invite_employee.html', context)
+
+    new_user = User.objects.create_user(username=form.cleaned_data['username'],
+                                        email=form.cleaned_data['email'])
+                                      
+    # Not that secure --> come up with alternative for required password field
+    #
+    # Need way to ensure password is reset/updated when employee registers
+    new_user.set_password('temp')
+    new_user.is_active = False
+    new_user.save()
+
+    new_employee = RestaurantEmployee(user=new_user,
+                                    restaurant=form.cleaned_data['restaurant'])
+    new_employee.save()
+
+    token = default_token_generator.make_token(new_user)
+    email_body = """
+    Your're invited to join Hungry@CMU!  Please click the link below to access
+    our employee registration page:
+
+    http://%s%s """%(request.get_host(),reverse('register-employee', args=(new_user.username, token)))
+    send_mail(subject="Hungry@CMU :: Employee Invitation",
+            message= email_body,
+            from_email="cmurugan@andrew.cmu.edu",
+            recipient_list=[new_user.email])
+
+    context['email'] = form.cleaned_data['email']
+    return render(request, 'HungryApp/invitation_sent.html', context)
   
+  
+def register_employee(request, username, token):
+    logout(request)
+    user = get_object_or_404(User, username=username)
+    
+    if not default_token_generator.check_token(user, token):
+        raise Http404    
+    
+    context = {'username':username, 'token':token}
+    
+    if request.method == 'GET':
+        context['form'] = EmployeeRegistrationForm()
+        return render(request, 'HungryApp/employee_register.html', context)
+    
+    form = EmployeeRegistrationForm(request.POST)
+    context['form'] = form
+    
+    if not form.is_valid():
+        return render(request, 'HungryApp/employee_register.html', context)
+        
+    user.is_active = True
+    user.first_name = form.cleaned_data['first_name']
+    user.last_name=form.cleaned_data['last_name']
+    user.set_password(form.cleaned_data['password1'])
+    user.save()
+    employee = RestaurantEmployee.objects.select_for_update(user=user)
+    employee.update(date_of_birth=form.cleaned_data['date_of_birth'])
+                
+    return redirect('/')
+    
 def StudentRegistration(request):
     context = {}
 
@@ -112,17 +184,16 @@ def StudentRegistration(request):
 
 def confirm_registration(request, username, token):
     user = get_object_or_404(User, username=username)
-
+    
     # Send 404 error if token is invalid
     if not default_token_generator.check_token(user, token):
         raise Http404
-
+        
     # Otherwise token was valid, activate the user.
     user.is_active = True
     user.save()
     return render(request, 'HungryApp/EmailConfirmed.html', {})
-
-
+    
 def forgotpassword(request):
     context = {}
     
@@ -167,8 +238,7 @@ def forgotpassword(request):
               recipient_list=[Password_forgot_user.email])
 
     context['email'] = Password_forgot_user.email 
-    return render(request, 'HungryApp/NeedsConfirmation.html', context)    
-
+    return render(request, 'HungryApp/NeedsConfirmation.html', context)
 
 def resetpassword(request):
     context = {}
@@ -234,7 +304,7 @@ def add_restaurant(request):
   if not form.is_valid():
     return render(request, 'HungryApp/add_restaurant.html', context)
     
-  new_restaurant = Restaurant(#location=form.cleaned_data['location'],
+  new_restaurant = Restaurant(location=form.cleaned_data['location'],
                               restaurant_name=form.cleaned_data['restaurant_name'],
                               restaurant_picture=form.cleaned_data['restaurant_picture'],
                               has_vegetarian=form.cleaned_data['has_vegetarian'],
@@ -278,7 +348,7 @@ def edit_restaurant(request, id):
     return render(request, 'HungryApp/edit_restaurant.html', context)
     
   # POST request's form is valid --> update database
-  r.update(#location=form.cleaned_data['location'],
+  r.update(location=form.cleaned_data['location'],
             restaurant_name=form.cleaned_data['restaurant_name'],
             restaurant_picture=form.cleaned_data['restaurant_picture'],
             has_vegetarian=form.cleaned_data['has_vegetarian'],

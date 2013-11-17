@@ -1,0 +1,37 @@
+{% extends "HungryApp/base.html" %}
+{% block title %}:: New Employee{% endblock %}
+{% block navigation %}
+{% include "HungryApp/admin_nav.html" %}
+{% endblock %}
+{% block content %}
+<br>
+{% for error in form.non_field_errors %}
+<p style="color: red">
+{{ error }}
+</p>
+{% endfor %}
+</br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          </br></br>
+          <div class="embossed">
+            <h2>New Restaurant Employee</h2>
+          </div>
+          </br></br>
+          <form role="form" method="post" action="/HungryApp/invite-employee" class="indent btm-marg">
+            {% include 'HungryApp/form_loop.html' %}
+            <div class="form-group pull-right">
+              <button type="submit" class="btn btn-primary btn-lg">&nbsp;Submit&nbsp;</button>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+    </div>
+  </div><!-- /.row -->
+</div><!-- /.container -->
+{% endblock %}

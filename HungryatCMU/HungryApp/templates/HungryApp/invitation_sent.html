@@ -1,0 +1,34 @@
+{% extends "HungryApp/base.html" %}
+{% block title %}:: Invitation Sent{% endblock %}
+{% block navigation %}
+{% include "HungryApp/admin_nav.html" %}
+{% endblock %}
+{% block content %}
+<br>
+{% for error in form.non_field_errors %}
+<p style="color: red">
+{{ error }}
+</p>
+{% endfor %}
+</br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          </br></br>
+          <div class="embossed">
+            <h2>Invitation Sent</h2></br></br>
+          </div>
+          </br></br>
+          <div class="content-well">
+            <p>An email invitation has been generated and sent to <strong>{{email}}</strong>.</p>
+          </div>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+    </div>
+  </div><!-- /.row -->
+</div><!-- /.container -->
+{% endblock %}
