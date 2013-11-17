@@ -39,6 +39,11 @@ html, body {
 	margin-left: 32px;
 }
 
+h3.panel-title {
+  font-size: 16pt;
+  font-weight: 600;  
+}
+
 .btm-marg {
 	margin-bottom: 100px;
 }
