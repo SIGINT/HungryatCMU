@@ -9,8 +9,14 @@ from models import *
 # -----------------------------
 
 class Administrator(models.Model):
+  
+    GENDERS = (('M', 'Male'), ('F', 'Female'), ('N', 'N/A'))
     
     user = models.OneToOneField(User)
+    date_of_birth = models.DateField()
+    gender = models.CharField(max_length=1, choices=GENDERS)
+    cell_phone = models.CharField(max_length=15)
+    home_phone = models.CharField(max_length=15)
     
     def __unicode__(self):
         return "%s, %s" % (self.user.last_name, self.user.first_name)
