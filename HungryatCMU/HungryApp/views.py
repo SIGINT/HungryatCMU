@@ -49,18 +49,16 @@ def home(request):
     
     # Sets up list of just the logged-in user's (request.user's) items
     #return render(request, 'HungryApp/index.html')
+    user = request.user
     
-    # 3 Possible Users --> Admin, Student & Employee
-    if request.user.is_staff
-      admin = get_object_or_404(Administrator, user=request.user)
-      context['admin'] = admin
+    if user.is_staff:
       return render(request, "HungryApp/admin.html", context)
-    else
+    else:
       restaurants = Restaurant.objects.all()
       context['restaurants'] = restaurants 
       return render(request, "HungryApp/restaurants.html", context)
-    
-    
+      
+  
 def StudentRegistration(request):
     context = {}
 
