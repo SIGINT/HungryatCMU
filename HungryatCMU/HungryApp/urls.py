@@ -16,9 +16,10 @@ urlpatterns = patterns('',
     url(r'^add-restaurant$','HungryApp.views.add_restaurant'),
     url(r'^edit-restaurant/(?P<id>\d+)$', 'HungryApp.views.edit_restaurant'),
     url(r'^restaurant-picture/(?P<id>\d+)$', 'HungryApp.views.get_restaurant_picture', name='restaurant-picture'),
-    url(r'^add_fooditem', 'HungryApp.views.add_fooditem', name='add_fooditem'),
+    url(r'^add_fooditem/(?P<id>\d+)$', 'HungryApp.views.add_fooditem', name='add_fooditem'),
     url(r'^edit_fooditem/(?P<id>\d+)$', 'HungryApp.views.edit_fooditem', name='edit_fooditem'),
     url(r'^food-item_photo/(?P<id>\d+)$', 'HungryApp.views.get_fooditem_photo', name='fooditem_photo'),
-    url(r'^display_fooditems$', 'HungryApp.views.display_fooditems', name='display_fooditems'),
+    url(r'^display_fooditems/(?P<id>\d+)$', 'HungryApp.views.display_fooditems', name='display_fooditems'),
+    url(r'^search$', 'HungryApp.views.search')
 
 )

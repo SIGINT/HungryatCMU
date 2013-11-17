@@ -228,7 +228,7 @@ def add_restaurant(request):
   if not form.is_valid():
     return render(request, 'HungryApp/add_restaurant.html', context)
     
-  new_restaurant = Restaurant(location=form.cleaned_data['location'],
+  new_restaurant = Restaurant(#location=form.cleaned_data['location'],
                               restaurant_name=form.cleaned_data['restaurant_name'],
                               restaurant_picture=form.cleaned_data['restaurant_picture'],
                               has_vegetarian=form.cleaned_data['has_vegetarian'],
@@ -263,7 +263,7 @@ def edit_restaurant(request, id):
     return render(request, 'HungryApp/edit_restaurant.html', context)
     
   # POST request's form is valid --> update database
-  r.update(location=form.cleaned_data['location'],
+  r.update(#location=form.cleaned_data['location'],
             restaurant_name=form.cleaned_data['restaurant_name'],
             restaurant_picture=form.cleaned_data['restaurant_picture'],
             has_vegetarian=form.cleaned_data['has_vegetarian'],
@@ -287,45 +287,48 @@ def get_restaurant_picture(request, id):
 
 @login_required
 @transaction.commit_on_success
-def add_fooditem(request):
+def add_fooditem(request,id):
     
     if request.method == "GET":
-        context = {'form':FoodItemForm()}
+        context = {'form':FoodItemForm(), 'id':id}
         return render(request, 'HungryApp/add_fooditem.html', context)
         
     new_food_item = FoodItem(restaurant_id= Restaurant.objects.get(id=id))
     form = FoodItemForm(request.POST, request.FILES, instance=new_food_item)
     if not form.is_valid():
-        context = {'form':form}
+        context = {'form':form, 'id':id}
         return render(request, 'HungryApp/add_fooditem.html', context)
    
     form.save()
-    return redirect(reverse('display_fooditems'))
+    return redirect(reverse('display_fooditems', args=[id]))
 
 @login_required
 @transaction.commit_on_success
 def edit_fooditem(request, id):
-    fooditem_to_edit = get_object_or_404(FoodItem, restaurant_id=request.restaurant, id=id)
+    fooditem_to_edit = get_object_or_404(FoodItem, id=id)
 
     if request.method == 'GET':
         form = FoodItemForm(instance=fooditem_to_edit)  # Creates form from the 
         context = {'form':form, 'id':id}          # existing entry.
         return render(request, 'HungryApp/edit_fooditem.html', context)
-
+    
     # if method is POST, get form data to update the model
-    form = FoodItemForm(request.POST, request.FILES, instance=entry_to_edit)
-
+    form = FoodItemForm(request.POST, request.FILES, instance=fooditem_to_edit)
+    context = {'form':form, 'id':id} 
     if not form.is_valid():
-        context = {'form':form, 'id':id} 
+        context = {'form':form} 
         return render(request, 'HungryApp/edit_fooditem.html', context)
 
     form.save()
-    return redirect(reverse('display_fooditems'))
+    return render(request, 'HungryApp/edit_fooditem.html', context)
+    #return redirect(reverse('display_fooditems'))
 
 @login_required
-def display_fooditems(request):
-    
-    context = {'food_items':FoodItem.objects.all()}
+def display_fooditems(request,id):
+
+    restaurant = Restaurant.objects.get(id=id)  
+    context = {'food_items':FoodItem.objects.filter(restaurant_id = id), 'pk':id }
+    #return redirect(reverse('display_fooditems',context))
     return render(request, 'HungryApp/display_fooditems.html', context)        
 
 @login_required
@@ -340,27 +343,63 @@ def get_fooditem_photo(request, id):
 
 
 
+  # --------------------
+  #  Implement Search Functionality 
+  # --------------------
+  
 
-"""@login_required
-def add_food_item(request):
-  context = {}
-  
-  if request.method == 'GET':
-    context['form'] = RestaurantForm()
-    return render(request, 'HungryApp/add_restaurant.html', context)
+
+def normalize_query(query_string,
+                    findterms=re.compile(r'"([^"]+)"|(\S+)').findall,
+                    normspace=re.compile(r'\s{2,}').sub):
+    ''' Splits the query string in invidual keywords, getting rid of unecessary spaces
+        and grouping quoted words together.
+        Example:
+        
+        >>> normalize_query('  some random  words "with   quotes  " and   spaces')
+        ['some', 'random', 'words', 'with quotes', 'and', 'spaces']
     
-  form = RestaurantForm(request.POST, request.FILES)
-  context['form'] = form
-  
-  if not form.is_valid():
-    return render(request, 'HungryApp/add_restaurant.html', context)
+    '''
+    return [normspace(' ', (t[0] or t[1]).strip()) for t in findterms(query_string)] 
+
+def get_query(query_string, search_fields):
+    ''' Returns a query, that is a combination of Q objects. That combination
+        aims to search keywords within a model by testing the given search fields.
     
-  new_restaurant = Restaurant(location=form.cleaned_data['location'],
-                              restaurant_name=form.cleaned_data['restaurant_name'],
-                              restaurant_picture=form.cleaned_data['restaurant_picture'],
-                              has_vegetarian=form.cleaned_data['has_vegetarian'],
-                              cuisine=form.cleaned_data['cuisine'])
-  new_restaurant.save() """
+    '''
+    query = None # Query to search for every search term        
+    terms = normalize_query(query_string)
+    for term in terms:
+        or_query = None # Query to search for a given term in each field
+        for field_name in search_fields:
+            q = Q(**{"%s__icontains" % field_name: term})
+            if or_query is None:
+                or_query = q
+            else:
+                or_query = or_query | q
+        if query is None:
+            query = or_query
+        else:
+            query = query & or_query
+    return query
+
+def search(request):
+    query_string = ''
+    found_entries = None
+    if ('q' in request.GET) and request.GET['q'].strip():
+        query_string = request.GET['q']
+        
+        entry_query = get_query(query_string, ['restaurant_name'])
+        
+    #return render(request, "HungryApp/restaurants.html", context)
+        found_entries = Restaurant.objects.filter(entry_query)
+        context = {'restaurants' : found_entries } 
+     
+    return render_to_response('HungryApp/restaurants.html',context)
+                          #{ 'query_string': query_string, 'found_entries': found_entries },
+                          #context_instance=RequestContext(request)) 
+
+
   
   # --------------------
   # TODO: Render restaurants page

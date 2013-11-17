@@ -32,7 +32,8 @@ class Student(models.Model):
         
         
 class Location(models.Model):
-
+    #BUILDING_NAMES = ('GATES CENTER', 'HAMERSCHLAG HALL', 'WEAN HALL') 
+    
     longitude = models.DecimalField(max_digits=7, decimal_places=4, null=True)
     latitude = models.DecimalField(max_digits=7, decimal_places=4, null=True)
     building_name = models.CharField(max_length=80)
@@ -55,7 +56,7 @@ class Restaurant(models.Model):
     # --------------------
     CUISINES = (('BR', 'Breakfast'), ('AM', 'American'), ('IN', 'Indian'), ('AS', 'Asian'))
 
-    location = models.ForeignKey(Location)
+    #location = models.ForeignKey(Location,blank=True,unique=True, null=True, default=None)
     restaurant_name = models.CharField(max_length=80)
     restaurant_picture = models.ImageField(upload_to='restaurant-pictures', blank=True)
     has_vegetarian = models.BooleanField(default=False)

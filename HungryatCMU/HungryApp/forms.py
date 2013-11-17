@@ -136,9 +136,10 @@ class ResetPasswordForm(forms.Form):
         
         
 class RestaurantForm(forms.Form):
-  location = forms.ModelChoiceField(queryset = Location.objects.all(),
-                                    empty_label = None,
-                                    widget =  forms.Select(attrs={'class':'form-control'}))
+  #location = forms.ModelChoiceField(queryset = Location.objects.all(),required=False,
+                                    #empty_label = None,
+                                    #widget =  forms.Select(attrs={'class':'form-control'}))
+                                    
   restaurant_name = forms.CharField(max_length = 80,
                                     widget = forms.TextInput(attrs={'class':'form-control'}))
   restaurant_picture = forms.ImageField(widget=forms.FileInput())
@@ -151,7 +152,7 @@ class RestaurantForm(forms.Form):
       # Calls our parent (forms.Form) .clean function, gets a dictionary
       # of cleaned data as a result
       cleaned_data = super(RestaurantForm, self).clean()
-      loc = cleaned_data.get('location')
+      #loc = cleaned_data.get('location')
       restaurant_name = cleaned_data.get('restaurant_name')
       restaurant_picture = cleaned_data.get('restaurant_picture')
       has_vegetarian = cleaned_data.get('has_vegetarian')
@@ -159,10 +160,10 @@ class RestaurantForm(forms.Form):
       # ----------------------
       # TODO: Ensure location exists in system
       # ----------------------
-      try:
-        location = Location.objects.get(id=loc.id)
-      except Location.DoesNotExist:
-        raise forms.ValidationError("The location specified does not exist in the system")
+      #try:
+       # location = Location.objects.get(id=loc.id)
+      #except Location.DoesNotExist:
+       # raise forms.ValidationError("The location specified does not exist in the system")
         
       return cleaned_data
       

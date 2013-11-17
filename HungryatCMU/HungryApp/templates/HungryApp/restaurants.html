@@ -18,13 +18,25 @@
       <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10">
+
+        <form action="/HungryApp/search" method="get">
+          
+
+        <label for="id_q">Search:</label>
+        <input id="id_q" name="q" type="text">
+        <input type="submit" value="Submit">
+             
+        </form>
+
+        
+
           {% for r in restaurants %}
           <div class="content-well">
               {% if r.restaurant_picture %}
                 <img src="{% url 'restaurant-picture' r.id %}" alt="{{ r.restaurant_name }}" class="img-thumbnail" height="320px" width="320px">
                 </br>
               {% endif %}
-              <span class="indent"><h3>{{r.restaurant_name}}</h3></span>
+              <span class="indent"><h3><a href="{% url 'display_fooditems' r.id %}">{{r.restaurant_name}} {{r.id}}</h3></span>
           </div>
           {% endfor %}
         </div>

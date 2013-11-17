@@ -7,14 +7,14 @@
 
 <body>
 <p>
-<form enctype="multipart/form-data" action="{% url 'add_fooditem'%}" method="post">
+<form enctype="multipart/form-data" action="{% url 'add_fooditem' id %}" method="post">
 <table>
 {{form}}
 </table>
 <input type="submit" value="Add food-item">
 {% csrf_token %}
 </form>
-<a href="{% url 'display_fooditems' %}"><button>Cancel</button></a>
+<a href="{% url 'display_fooditems' id %}"><button>Cancel</button></a>
 </p>
 
 </body>
