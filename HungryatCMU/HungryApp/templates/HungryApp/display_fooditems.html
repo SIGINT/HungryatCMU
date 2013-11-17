@@ -28,7 +28,9 @@
 
 </p>  -->
 
+
 {% if not r.isEmployee %}
+
 <li> <a href="{% url 'add_fooditem' pk %}">ADD A FOOD ITEM</a>
 {% endif %}          
 <p> 
@@ -51,10 +53,7 @@ Restaurant Menu:
   <li> <a href="{% url 'edit_fooditem' food_item.id %}">{{food_item}}</a>  
   {% endif %}
 
-  {% if not user.isEmployee %}
-  <a href="{% url 'view_fooditem' food_item.id %}">{{food_item}} {{food_item.id}}</a>
-  {% endif %}
-   
+     
   <form action="{% url 'add_order_to_cart' food_item.id %}" method="post">
   
   <div class="form-group"> 

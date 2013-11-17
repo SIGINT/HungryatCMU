@@ -51,11 +51,13 @@
   </script>
 {% endblock %}
 {% block navigation %}
+
 {% if is_admin %}
 {% include 'HungryApp/admin_nav.html' %}
 {% else %}
 {% include 'HungryApp/student_nav.html' %}
 {% endif %}
+
 {% endblock %}
 {% block content %}
 {% load staticfiles %}
