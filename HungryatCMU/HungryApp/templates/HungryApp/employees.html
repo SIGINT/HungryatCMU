@@ -24,7 +24,7 @@
                 <th>Restaurant</th>
                 <th>Username</th>
                 <th>Email</th>
-                <th>TODO: operations</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -35,7 +35,13 @@
                 <td>{{e.restaurant.restaurant_name}}</td>
                 <td>{{e.user.username}}</td>
                 <td><a href="mailto:{{e.user.email}}">{{e.user.email}}</a></td>
-                <td>...</td>
+                <td>
+                  {% if e.user.is_active %}
+                  <a href="{% url 'deactivate-user' e.user.id %}" class="btn btn-danger btn-sm" alt="deactivate">Deactivate&nbsp; <span class="glyphicon glyphicon-ban-circle"></span></a>
+                  {% else %}
+                  <a href="{% url 'activate-user' e.user.id %}" class="btn btn-success btn-sm" alt="activate">Activate&nbsp; <span class="glyphicon glyphicon-flash"></span></a>
+                  {% endif %}
+                </td>
               </tr>
               {% endfor %}
             </tbody>

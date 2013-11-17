@@ -150,6 +150,26 @@ def students(request):
     
     return render(request, 'HungryApp/students.html', context)
     
+@staff_member_required
+def deactivate_user(request, id):
+    user = get_object_or_404(User, pk=id)
+    
+    if user.is_active:
+        user.is_active = False
+        user.save()
+    
+    return redirect('/HungryApp')
+    
+@staff_member_required
+def activate_user(request):
+    user = get_object_or_404(User, pk=id)
+    
+    if not user.is_active:
+        user.is_active = True
+        user.save()
+        
+    return redirect('/HungryApp')
+    
 def StudentRegistration(request):
     context = {}
 

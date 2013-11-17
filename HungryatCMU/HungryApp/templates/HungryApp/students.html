@@ -33,7 +33,13 @@
                 <td>{{s.user.first_name}}</td>
                 <td>{{s.user.username}}</td>
                 <td><a href="mailto:{{ s.user.email }}">{{s.user.email}}</a></td>
-                <td>...</td>
+                <td>
+                  {% if s.user.is_active %}
+                  <a href="{% url 'deactivate-user' s.user.id %}" class="btn btn-danger btn-sm" alt="deactivate">Deactivate&nbsp; <span class="glyphicon glyphicon-ban-circle"></span></a>
+                  {% else %}
+                  <a href="{% url 'activate-user' s.user.id %}" class="btn btn-success btn-sm" alt="activate">Activate&nbsp; <span class="glyphicon glyphicon-flash"></span></a>
+                  {% endif %}
+                </td>
               </tr>
               {% endfor %}
             </tbody>
