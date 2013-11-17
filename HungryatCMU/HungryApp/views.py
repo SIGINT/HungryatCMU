@@ -52,6 +52,7 @@ def home(request):
     #return render(request, 'HungryApp/index.html')
     user = request.user
     
+    # user.is_staff --> user is administrator
     if user.is_staff:
       return render(request, "HungryApp/admin.html", context)
     else:

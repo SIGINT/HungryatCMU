@@ -12,6 +12,7 @@ class Administrator(models.Model):
   
     GENDERS = (('M', 'Male'), ('F', 'Female'), ('N', 'N/A'))
     
+    # user.is_staff --> user is administrator
     user = models.OneToOneField(User)
     date_of_birth = models.DateField()
     gender = models.CharField(max_length=1, choices=GENDERS)
