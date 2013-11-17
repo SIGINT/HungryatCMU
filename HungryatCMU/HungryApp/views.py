@@ -45,12 +45,20 @@ from HungryApp.forms import *
 
 @login_required
 def home(request):
+    context = {}
     
     # Sets up list of just the logged-in user's (request.user's) items
     #return render(request, 'HungryApp/index.html')
-    restaurants = Restaurant.objects.all()
-    context = {'restaurants' : restaurants }
-    return render(request, "HungryApp/restaurants.html", context)
+    
+    # 3 Possible Users --> Admin, Student & Employee
+    if request.user.is_staff
+      admin = get_object_or_404(Administrator, user=request.user)
+      context['admin'] = admin
+      return render(request, "HungryApp/admin.html", context)
+    else
+      restaurants = Restaurant.objects.all()
+      context['restaurants'] = restaurants 
+      return render(request, "HungryApp/restaurants.html", context)
     
     
 def StudentRegistration(request):
@@ -240,6 +248,15 @@ def add_restaurant(request):
   # --------------------
   #return render(request, "/restaurant", {})
   return redirect("/account")
+  
+  
+@login_required
+def view_restaurant(request, id):
+  context = {}
+  r = get_object_or_404(Restaurant, pk=id)
+  context['r'] = r
+  
+  return render(request, 'HungryApp/view_restaurant.html', context)
   
   
 @login_required
