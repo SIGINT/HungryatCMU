@@ -72,6 +72,33 @@
     }
 },
 {
+  "pk": 6, 
+  "model": "auth.user", 
+  "fields": {
+    "username": "admin", 
+    "first_name": "Hungry", 
+    "last_name": "Administrator", 
+    "is_active": true, 
+    "is_superuser": false, 
+    "is_staff": true, 
+    "last_login": "2013-11-15T07:30:02.215Z", 
+    "groups": [], 
+    "user_permissions": [], 
+    "password": "pbkdf2_sha256$10000$HSyCvM8jyBuu$TbFI7IXl9HqxhDU4Tt4Lz8JV+blBnSwj0mxGAz31DuM=", 
+    "email": "admin@hungry.com", 
+    "date_joined": "2013-11-15T07:29:41.244Z"
+  }
+},
+{
+    "pk": 1, 
+    "model": "HungryApp.administrator", 
+    "fields": {
+        "date_of_birth": "1980-01-01",
+        "gender": "N",
+        "user": 6
+    }
+},
+{
     "pk": 1, 
     "model": "HungryApp.student", 
     "fields": {
