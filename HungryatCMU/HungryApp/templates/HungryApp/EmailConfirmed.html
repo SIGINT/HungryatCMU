@@ -1,4 +1,8 @@
 {% extends "HungryApp/base.html" %}
+{% block navigation %}
+<li><a href="{% url 'django.contrib.auth.views.login' %}">Login</a></li>
+<li><a href="#contact">Contact</a></li>
+{% endblock %}
 {% block content %}
 </br></br>
 <div class="container">    

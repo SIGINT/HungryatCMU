@@ -1,14 +1,10 @@
 {% extends "HungryApp/base.html" %}
+{% block title %}:: Restaurants{% endblock %}
 {% block navigation %}
-<div class="collapse navbar-collapse">
-  <ul class="nav navbar-nav">
-    <li><a href="/">Home</a></li>
-    <li class="active"><a href="/restaurants">Restaurants</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="/account">My Account</a></li>
-    <li><a href="/logout">Logout</a></li>
-  </ul>
-</div><!--/.nav-collapse -->
+<li class="active"><a href="/restaurants">Restaurants</a></li>
+<li><a href="#contact">Contact</a></li>
+<li><a href="/account">My Account</a></li>
+<li><a href="/logout">Logout</a></li>
 {% endblock %}
 {% block content %}
 </br></br>
@@ -18,18 +14,11 @@
       <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10">
-
         <form action="/HungryApp/search" method="get">
-          
-
-        <label for="id_q">Search:</label>
-        <input id="id_q" name="q" type="text">
-        <input type="submit" value="Submit">
-             
+          <label for="id_q">Search:</label>
+          <input id="id_q" name="q" type="text">
+          <input type="submit" value="Submit">
         </form>
-
-        
-
           {% for r in restaurants %}
           <div class="content-well">
               {% if r.restaurant_picture %}

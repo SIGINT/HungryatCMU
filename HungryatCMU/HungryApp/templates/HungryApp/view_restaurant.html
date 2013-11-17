@@ -1,15 +1,10 @@
 {% extends "HungryApp/base.html" %}
 {% block title %}:: {{ r.restaurant_name }}{% endblock %}
 {% block navigation %}
-<div class="collapse navbar-collapse">
-  <ul class="nav navbar-nav">
-    <li><a href="/">Home</a></li>
-    <li class="active"><a href="/restaurants">Restaurants</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="/account">My Account</a></li>
-    <li><a href="/logout">Logout</a></li>
-  </ul>
-</div><!--/.nav-collapse -->
+<li class="active"><a href="/restaurants">Restaurants</a></li>
+<li><a href="#contact">Contact</a></li>
+<li><a href="/account">My Account</a></li>
+<li><a href="/logout">Logout</a></li>
 {% endblock %}
 {% block content %}
 <br>

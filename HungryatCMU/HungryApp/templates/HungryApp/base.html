@@ -32,15 +32,13 @@
           </button>
           <span id="plate-pic" class="pull-left"><img src="{% static 'pics/plate.png' %}" width="135"></span><a class="navbar-brand" href="/">Hungry@<span class="cmu-red">CMU</span></a>
         </div>
-        {% block navigation %}
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Home</a></li>
-            <li><a href="{% url 'django.contrib.auth.views.login' %}">Login</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="/HungryApp/">Home</a></li>
+            {% block navigation %}
+            {% endblock %}
           </ul>
         </div><!--/.nav-collapse -->
-        {% endblock %}
       </div>
     </div>
     </br></br>
