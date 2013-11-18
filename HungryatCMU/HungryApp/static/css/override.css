@@ -1,3 +1,8 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
 html, body {
 	height: 100%;
 	background: #eee url(../pics/bg.png);
@@ -13,7 +18,16 @@ html, body {
   background-color: rgb(238, 238, 238);
 }
 
-.embossed > h2 {
+#map-canvas {
+  border: 1px solid #000;
+  height: 430px;
+  width: 760px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.embossed > h2, .embossed > h3 {
   color: #57595b;
   text-transform: none;
   text-shadow: 0 1px 0px rgba(255,255,255,1);
@@ -37,6 +51,11 @@ html, body {
 
 .indent {
 	margin-left: 32px;
+}
+
+.divider2 {
+  padding-bottom: 9px;
+  border-bottom: 1px solid #cecece;
 }
 
 h3.panel-title {

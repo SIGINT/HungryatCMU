@@ -138,6 +138,31 @@ def register_employee(request, username, token):
     
     
 @permission_required('HungryApp.is_admin', login_url='/HungryApp/')
+def add_location(request):
+    context = {}
+    
+    if request.method == 'GET':
+        context['form'] = LocationForm()
+        return render(request, 'HungryApp/add_location.html', context)
+        
+    form = LocationForm(request.POST)
+    context['form'] = form
+    
+    if not form.is_valid():
+        return render(request, 'HungryApp/add_location.html', context)
+        
+    new_location = Location(latitude=form.cleaned_data['latitude'],
+                            longitude=form.cleaned_data['longitude'],
+                            building_name=form.cleaned_data['building_name'],
+                            floor=form.cleaned_data['floor'],
+                            room=form.cleaned_data['room'],
+                            location_description=form.cleaned_data['location_description'],
+                            wheelchair_accessible=form.cleaned_data['wheelchair_accessible'])
+    new_location.save()
+    return redirect('/HungryApp/')
+    
+    
+@permission_required('HungryApp.is_admin', login_url='/HungryApp/')
 def employees(request):
     context = {}
     employees = RestaurantEmployee.objects.all()
@@ -313,9 +338,11 @@ def resetpassword(request):
     
 @login_required
 def restaurants(request):
+    context = {}
+    
     # Simple index --> list all entities in system
     restaurants = Restaurant.objects.all()
-    context = {'restaurants' : restaurants }
+    context['restaurants'] = restaurants
     return render(request, "HungryApp/restaurants.html", context)
     
     
@@ -324,6 +351,7 @@ def view_account(request):
   current_user = request.user
   context = {'user' : current_user}
   return render(request, "HungryApp/account.html", context)
+  
   
 @permission_required('HungryApp.is_admin', login_url='/HungryApp/')
 def add_restaurant(request):

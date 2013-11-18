@@ -142,6 +142,8 @@
     "pk": 1, 
     "model": "HungryApp.location", 
     "fields": {
+        "latitude": 40.443206,
+        "longitude": -79.942238,
         "building_name": "University Center", 
         "location_description": "The UC is the heart of CMU's fine dining.  Conveniently located between Gesling Stadium and the cut, the UC is a great spot to grab some grub with your favorite people",
         "floor": 1,
@@ -152,6 +154,8 @@
     "pk": 2, 
     "model": "HungryApp.location", 
     "fields": {
+        "latitude": 40.443206,
+        "longitude": -79.942238,
         "building_name": "University Center", 
         "location_description": "The UC is the heart of CMU's fine dining.  Conveniently located between Gesling Stadium and the cut, the UC is a great spot to grab some grub with your favorite people",
         "floor": 2,
@@ -162,6 +166,8 @@
     "pk": 3, 
     "model": "HungryApp.location", 
     "fields": {
+        "latitude": 40.442631,
+        "longitude": -79.945929,
         "building_name": "Wean Hall", 
         "location_description": "So.. you're no fan of windows, eh? Wean is a great place to grab some coffee while your brain digests that Math",
         "floor": 5,
@@ -172,6 +178,8 @@
     "pk": 4, 
     "model": "HungryApp.location", 
     "fields": {
+        "latitude": 40.442443,
+        "longitude": -79.939714,
         "building_name": "Resnik", 
         "location_description": "The life of the party, oh yes",
         "floor": 1,
@@ -182,6 +190,8 @@
     "pk": 5, 
     "model": "HungryApp.location", 
     "fields": {
+        "latitude": 40.443582,
+        "longitude": -79.944786,
         "building_name": "Gates Center for Computer Science", 
         "location_description": "Segmentation fault",
         "floor": "",

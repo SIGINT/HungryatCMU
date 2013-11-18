@@ -50,8 +50,8 @@ class Student(models.Model):
         
 class Location(models.Model):
     
-    longitude = models.DecimalField(max_digits=7, decimal_places=4, null=True)
-    latitude = models.DecimalField(max_digits=7, decimal_places=4, null=True)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True)
     building_name = models.CharField(max_length=80)
     location_description = models.TextField()
     floor = models.CharField(max_length=4)
