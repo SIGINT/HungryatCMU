@@ -1,0 +1,114 @@
+{% extends "HungryApp/base.html" %}
+{% block title %}:: New Location{% endblock %}
+{% block head %}
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDP5sX9n0VBg49243_ntCnlj6vJDXchNzA&amp;sensor=true">
+</script>
+<script type="text/javascript">
+  var cmu = new google.maps.LatLng(40.442832, -79.942585);
+  var ctr = new google.maps.LatLng(40.442832, -79.942585);
+  var marker;
+  var map;
+
+  function initialize() {
+    var mapOptions = {
+      zoom: 17,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      center: ctr
+    };
+    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    marker = new google.maps.Marker({map:map, draggable:true, animation: google.maps.Animation.DROP, position: cmu});
+    getCoords()
+    google.maps.event.addListener(marker, 'position_changed', getCoords)
+    google.maps.event.addListener(marker, 'click', toggleBounce);
+  }
+  
+  function getCoords() {
+    var position = marker.getPosition();
+    var latDiv = document.getElementById('id_latitude');
+    var lngDiv = document.getElementById('id_longitude');
+    latDiv.value = Math.round(position.lat()*Math.pow(10,6))/Math.pow(10,6);
+    lngDiv.value = Math.round(position.lng()*Math.pow(10,6))/Math.pow(10,6);
+  }
+
+  function toggleBounce() {
+    if (marker.getAnimation() != null) {
+      marker.setAnimation(null);
+    } else {
+      marker.setAnimation(google.maps.Animation.BOUNCE);
+    }
+  }
+  google.maps.event.addDomListener(window, 'load', initialize);
+  google.maps.event.addListener(marker, "position_changed", function() {
+    var position = marker.getPosition();
+  });
+  </script>
+{% endblock %}
+{% block navigation %}
+{% include "HungryApp/admin_nav.html" %}
+{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          </br></br></br></br>
+          <div class="embossed">
+            <h2>New Location&nbsp; <span class="glyphicon glyphicon-map-marker"></span></h2>
+          </div>
+          </br></br>
+          <div id="map-canvas"></div>
+          <div class="row">
+            <form class="form-horizontal" method="post" action="/HungryApp/add-location">{% csrf_token %}
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="inputLat">Latitude</label>
+                <div class="col-sm-4">
+                  {{form.latitude}}
+                </div>
+                <label class="col-sm-2 control-label" for="inputLng">Longitude</label>
+                <div class="col-sm-4">
+                  {{form.longitude}}
+                </div>
+              </div>
+              </br>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="inputBuilding">Building Name</label>
+                <div class="col-sm-6">
+                  {{form.building_name}}
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="inputFloor">Floor</label>
+                <div class="col-sm-2">
+                  {{form.floor}}
+                </div>
+                <label class="col-sm-1 control-label" for="inputRoom">Room</label>
+                <div class="col-sm-2">
+                  {{form.room}}
+                </div>
+                <label class="col-sm-3 control-label" for="inputAccessible">Wheelchair Accessible</label>
+                <div class="col-sm-1">
+                  {{form.wheelchair_accessible}}
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="inputLocDesc">Location Description</label>
+                <div class="col-sm-6">
+                  {{form.location_description}}
+                </div>
+              </div>
+              <div class="indent divider2"></div>
+              </br>
+              <button type="submit" class="btn btn-primary btn-lg pull-right">Submit</button>
+            </form>
+            </br></br>
+          </div>
+          </br></br>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

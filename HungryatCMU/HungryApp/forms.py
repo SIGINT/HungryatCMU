@@ -167,6 +167,22 @@ class RestaurantForm(forms.Form):
       return cleaned_data
       
       
+class LocationForm(forms.Form):
+    latitude = forms.DecimalField(widget = forms.TextInput(attrs={'class':'form-control', 'readonly':'true'}))
+    longitude = forms.DecimalField(widget = forms.TextInput(attrs={'class':'form-control', 'readonly':'true'}))
+    building_name = forms.CharField(widget = forms.TextInput(attrs={'class':'form-control'}))
+    location_description = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control'}))
+    floor = forms.CharField(max_length=4,
+                            widget=forms.TextInput(attrs={'class':'form-control'}))
+    room = forms.CharField(max_length=8,
+                            widget=forms.TextInput(attrs={'class':'form-control'}))
+    wheelchair_accessible = forms.BooleanField()
+    
+    def clean(self):
+        cleaned_data = super(LocationForm, self).clean()
+        return cleaned_data
+      
+      
 class InviteEmployeeForm(forms.Form):
     restaurant = forms.ModelChoiceField(queryset = Restaurant.objects.all(),
                                       empty_label = None,
@@ -233,4 +249,8 @@ class FoodItemForm(forms.ModelForm):
         exclude = ('restaurant_id',)
         widgets = {'food_item_pic' : forms.FileInput() }  
 
+<<<<<<< HEAD
         
+=======
+#class SearchForm(forms.Form):
+>>>>>>> 9d7959d4db1a67947c88b0a4fda264737d23de1f
