@@ -18,13 +18,19 @@ html, body {
   background-color: rgb(238, 238, 238);
 }
 
-#map-canvas {
+#map-wrapper {
   border: 1px solid #000;
   height: 430px;
   width: 760px;
   margin: auto;
   margin-top: 20px;
   margin-bottom: 40px;
+}
+
+
+#map-canvas {
+  height: 100%;
+  width: 100%;
 }
 
 .embossed > h2, .embossed > h3 {

@@ -11,7 +11,7 @@
 
   function initialize() {
     var mapOptions = {
-      zoom: 17,
+      zoom: 16,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       center: ctr
     };
@@ -58,7 +58,9 @@
             <h2>New Location&nbsp; <span class="glyphicon glyphicon-map-marker"></span></h2>
           </div>
           </br></br>
-          <div id="map-canvas"></div>
+          <div id="map-wrapper">
+            <div id="map-canvas"></div>
+          </div>
           <div class="row">
             <form class="form-horizontal" method="post" action="/HungryApp/add-location">{% csrf_token %}
               <div class="form-group">
