@@ -26,10 +26,14 @@
 
 
 </p>  -->
-
-<span class="indent"><h3><a href="{% url 'add_fooditem' pk %}">Add a food-item</a></h3></span>
-          
+<!--
+{% if user.isemployee  %}
+<li> <a href="{% url 'add_fooditem' pk %}">ADD A FOOD ITEM</a>
+{% endif %}          
 <p>
+-->
+<br></br>
+<br></br>
 Restaurant Menu: 
 <ul>
 {% for food_item in food_items %}
@@ -39,25 +43,33 @@ Restaurant Menu:
               {% endif %} -->
   <li> <a href="{% url 'edit_fooditem' food_item.id %}">{{food_item}}</a>
   
+  <form action="{% url 'add_order_to_cart' food_item.id %}" method="post">
+        
   <div class="form-group"> 
                   <input class="btn-success" type="submit" value="Add to Order Cart" /><br>
                   </li>
 
-               <!-- </div>-->
+                </div>
 {% endfor %}
 </ul>
 </p>
 
+<!--
+</form>
 {% for ordered_food_item in ordered_food_items %}
         <div class="">
-            <span class = "Remove_from_order"> <a href="{% url 'remove_food_item_from_order' ordered_food_item.id}}"> Delete </a>
-            <span class = "Ordered_Food_Item"> {{ ordered_food_item }}
-            <span class = "Ordered_Food_Item_Price"> {{ ordered_food_item.price }}     
+            <span class = "Remove_from_order"> <a href="{% url 'remove_food_item_from_order' ordered_food_item.id}}"> Delete </a></span>
+            <span class = "Ordered_Food_Item"> {{ ordered_food_item }}</span>
+            <span class = "Ordered_Food_Item_Price"> {{ ordered_food_item.price }}  </span>   
         </div>
-{% endfor %}
+{% endfor %}  -->
 
 {% if ordered_food_item %}
-<a class="pull-left btn btn-primary" href='#'>Confirm Order</a><br>
+<ul>
+<li>{{ ordered_food_item }} &nbsp;&nbsp;&nbsp;Price:${{ ordered_food_item.price }}</li>
+</ul>
+
+<a class="pull-left btn btn-primary" href="{% url 'place_order' %} "> Confirm Order </a><br>
 {% endif %}
 
 

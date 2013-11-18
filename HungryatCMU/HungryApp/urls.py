@@ -30,4 +30,6 @@ urlpatterns = patterns('',
     url(r'^display_fooditems/(?P<id>\d+)$', 'HungryApp.views.display_fooditems', name='display_fooditems'),
     url(r'^search$', 'HungryApp.views.search'),
     url(r'^filterbypreptime$', 'HungryApp.views.filterbypreptime', name = 'filterbypreptime'),
+    url(r'^add_order_to_cart/(?P<id>\d+)$', 'HungryApp.views.add_fooditem_to_order', name = 'add_order_to_cart'),
+    url(r'^place_order$', 'HungryApp.views.place_order', name = 'place_order'),
 )

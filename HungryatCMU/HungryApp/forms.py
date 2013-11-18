@@ -249,8 +249,3 @@ class FoodItemForm(forms.ModelForm):
         exclude = ('restaurant_id',)
         widgets = {'food_item_pic' : forms.FileInput() }  
 
-<<<<<<< HEAD
-        
-=======
-#class SearchForm(forms.Form):
->>>>>>> 9d7959d4db1a67947c88b0a4fda264737d23de1f

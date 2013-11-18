@@ -434,6 +434,7 @@ def get_restaurant_picture(request, id):
 
 @login_required
 @transaction.commit_on_success
+@permission_required('HungryApp.is_employee', login_url='/HungryApp/')
 def add_fooditem(request,id):
     
     if request.method == "GET":
@@ -451,6 +452,7 @@ def add_fooditem(request,id):
 
 @login_required
 @transaction.commit_on_success
+@permission_required('HungryApp.is_employee', login_url='/HungryApp/')
 def edit_fooditem(request, id):
     fooditem_to_edit = get_object_or_404(FoodItem, id=id)
 
@@ -570,39 +572,48 @@ def create_order(request):
   current_order = Order(student_id=request.user)
   current_order.save()
     
- 
+@csrf_exempt 
 @login_required
 @transaction.commit_on_success
-def add_fooditem_to_order(request,fooditem_id):
+def add_fooditem_to_order(request,id):
   errors = []
-    
-  food_item = FoodItem.objects.get(id=fooditem_id)          
-  current_order = current_order.food_items_inorder.add(food_item);
-  current_order.save()
-  context = {'order': current_order }
-
+  #student = Student(user=request.user)
+  #current_order = Order(student_id=student)
+  #current_order.save()
+  #restaurant = Restaurant.objects.get(id=id)  
+  #context = {'food_items':FoodItem.objects.filter(restaurant_id = id), 'pk':id }
+  #return redirect(reverse('display_fooditems',context))
+  #return render(request, 'HungryApp/display_fooditems.html', context) 
+  food_item = FoodItem.objects.get(id=id)          
+  #current_order = current_order.food_items_inorder.add(food_item);
+  #current_order.save()
+  #return current_order
+  pk=food_item.restaurant_id
+  context = {'ordered_food_item': food_item, 'pk':pk }
+  return render(request, 'HungryApp/display_fooditems.html', context)
   
-"""
+
 @login_required
 @transaction.commit_on_success
 def place_order(request):
     errors = []
 
     # Creates a new item if it is present as a parameter in the request
-    if not 'item' in request.POST or not request.POST['item']:
-      errors.append('You must enter an item to add.')
-    else:
+    #if not 'item' in request.POST or not request.POST['item']:
+     # errors.append('You must enter an item to add.')
+    #else:
         
-    new_item = Item(text=request.POST['item'], user=request.user)
-    new_item.save()
-    items = Item.objects.filter(user=request.user)
-    context = {'items' : items, 'errors' : errors , 'users' : request.user }
+    #new_item = Item(text=request.POST['item'], user=request.user)
+    #new_item.save()
+    #items = Item.objects.filter(user=request.user)
+    #context = {'items' : items, 'errors' : errors , 'users' : request.user }
     send_mail(subject="Hungry App Order Details ",
-              message= email_body,
+              message= "You have successfully placed your order. You will receive another email notification when your order is ready!",
               from_email="cmurugan@andrew.cmu.edu",
-              recipient_list=[Password_forgot_user.email])
-    return render(request, 'HungryApp/CompletedOrder.html', context)
+              recipient_list=[request.user.email])
+    return render(request, 'HungryApp/CompletedOrder.html')
 
+"""
 @login_required
 def quick_order(request):
     user=request.user
