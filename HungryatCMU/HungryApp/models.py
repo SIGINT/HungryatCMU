@@ -126,7 +126,7 @@ class Order(models.Model):
     
     ORDER_STATUSES = (('PL', 'Placed'), ('CP', 'Completed'), ('LT', 'Late'), ('CN', 'Cancelled'))
     
-    food_items = models.ManyToManyField(FoodItem)
+    food_items_inorder = models.ManyToManyField(FoodItem)
     student_id = models.ForeignKey(Student)
     time_placed = models.DateTimeField()
     time_completed = models.DateTimeField()

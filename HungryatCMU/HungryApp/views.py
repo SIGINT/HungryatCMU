@@ -509,19 +509,91 @@ def search(request):
         query_string = request.GET['q']
         
         entry_query = get_query(query_string, ['restaurant_name'])
-        
+        #entry_query = get_query(query_string, ['restaurant_name'])
     #return render(request, "HungryApp/restaurants.html", context)
         found_entries = Restaurant.objects.filter(entry_query)
+        #found_entries = found_entries.objects.extra(select={'has_vegetarian':True})
         context = {'restaurants' : found_entries } 
      
     return render_to_response('HungryApp/restaurants.html',context)
                           #{ 'query_string': query_string, 'found_entries': found_entries },
                           #context_instance=RequestContext(request)) 
 
+  
+def filterbypreptime(request):
+  query_string = ''
+  found_entries = None
+  if ('prep_time_query' in request.GET):
+        query_string = request.GET['prep_time_query'] 
+  found_entries = FoodItem.objects.extra(where = ['prep_time' <= 'query_string'])
+   
+  context = {'food_items':found_entries}
+    #return redirect(reverse('display_fooditems',context))
+  return render(request, 'HungryApp/display_fooditems.html', context)    
+            
+  #--------------------
+  # Add-Food-Item to order cart
+  #--------------------
+
+@login_required
+@transaction.commit_on_success
+def create_order(request):
+                
+  current_order = Order(student_id=request.user)
+  current_order.save()
+    
+ 
+@login_required
+@transaction.commit_on_success
+def add_fooditem_to_order(request,fooditem_id):
+  errors = []
+    
+  food_item = FoodItem.objects.get(id=fooditem_id)          
+  current_order = current_order.food_items_inorder.add(food_item);
+  current_order.save()
+  context = {'order': current_order }
 
   
-  # --------------------
-  # TODO: Render restaurants page
-  # --------------------
-  #return render(request, "/restaurant", {})
-  #"""return redirect("/account")  """
+"""
+@login_required
+@transaction.commit_on_success
+def place_order(request):
+    errors = []
+
+    # Creates a new item if it is present as a parameter in the request
+    if not 'item' in request.POST or not request.POST['item']:
+      errors.append('You must enter an item to add.')
+    else:
+        
+    new_item = Item(text=request.POST['item'], user=request.user)
+    new_item.save()
+    items = Item.objects.filter(user=request.user)
+    context = {'items' : items, 'errors' : errors , 'users' : request.user }
+    send_mail(subject="Hungry App Order Details ",
+              message= email_body,
+              from_email="cmurugan@andrew.cmu.edu",
+              recipient_list=[Password_forgot_user.email])
+    return render(request, 'HungryApp/CompletedOrder.html', context)
+
+@login_required
+def quick_order(request):
+    user=request.user
+    context = { 'orders': Order.objects.filter(user=user) } 
+    return render(request, 'HungryApp/QuickOrder.html', context) """
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  

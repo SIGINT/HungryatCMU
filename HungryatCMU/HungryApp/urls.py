@@ -28,4 +28,5 @@ urlpatterns = patterns('',
     url(r'^food-item_photo/(?P<id>\d+)$', 'HungryApp.views.get_fooditem_photo', name='fooditem_photo'),
     url(r'^display_fooditems/(?P<id>\d+)$', 'HungryApp.views.display_fooditems', name='display_fooditems'),
     url(r'^search$', 'HungryApp.views.search'),
+    url(r'^filterbypreptime$', 'HungryApp.views.filterbypreptime', name = 'filterbypreptime'),
 )

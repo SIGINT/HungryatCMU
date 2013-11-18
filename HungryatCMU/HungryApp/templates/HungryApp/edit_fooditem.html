@@ -1,11 +1,21 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Restaurant Menu -- Edit Food Item </title>
-</head>
 
-<body>
+{% extends "HungryApp/base.html" %}
+{% block title %}:: Add a Food Item {% endblock %}
+
+
+{% block navigation %}
+<li class="active"><a href="/restaurants">Restaurants</a></li>
+<li><a href="#contact">Contact</a></li>
+<li><a href="/account">My Account</a></li>
+<li><a href="/logout">Logout</a></li>
+{% endblock %}
+
+
+{% block content %}
+
+</br></br>
+</br></br>
+</br></br>
 <p>
 {% if form.picture.value %}
 <img src="{% url 'fooditem_photo' id %}" alt="{{form.item_name.value}} " width="200px">
@@ -15,12 +25,17 @@
 <table>
 {{form}}
 </table>
-<input type="submit" value="Save entry">
+<div class="form-group">
+                  <input class="pull-left btn btn-success" type="submit" value="Save Entry" /><br>
+                </div>
+<!--<input type="submit" value="Save entry"> -->
 {% csrf_token %}
 </form>
 
 </p>
-
+{%endblock%}
 </body>
 </html>
+
+
 
