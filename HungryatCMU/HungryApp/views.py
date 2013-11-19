@@ -84,7 +84,7 @@ def invite_employee(request):
     #
     # Need way to ensure password is reset/updated when employee registers
     new_user.set_password('temp')
-    new_user.is_active = False
+    new_user.is_active = True
     new_user.save()
 
     new_employee = RestaurantEmployee(user=new_user,
@@ -434,7 +434,7 @@ def get_restaurant_picture(request, id):
 
 @login_required
 @transaction.commit_on_success
-@permission_required('HungryApp.is_employee', login_url='/HungryApp/')
+#@permission_required('HungryApp.is_employee', login_url='/HungryApp/')
 def add_fooditem(request,id):
     
     if request.method == "GET":
@@ -452,7 +452,7 @@ def add_fooditem(request,id):
 
 @login_required
 @transaction.commit_on_success
-@permission_required('HungryApp.is_employee', login_url='/HungryApp/')
+#@permission_required('HungryApp.is_employee', login_url='/HungryApp/')
 def edit_fooditem(request, id):
     fooditem_to_edit = get_object_or_404(FoodItem, id=id)
 
