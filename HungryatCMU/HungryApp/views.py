@@ -9,6 +9,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.db import transaction
 import re
+import json
 from django.db.models import Q
 # Needed to manually create HttpResponses or raise an Http404 exception
 from django.http import HttpResponse, Http404
@@ -17,6 +18,9 @@ from django.http import HttpResponseRedirect
 # Decorator to use built-in authentication system
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.admin.views.decorators import staff_member_required
+
+# Referenced examples at https://github.com/julian-amaya/django-decorators
+from django_decorators.decorators import json_response
 
 # Used to create and manually log in a user
 from django.contrib.auth.models import User
@@ -334,6 +338,22 @@ def resetpassword(request):
     Password_reset_user.is_active = True
     Password_reset_user.save()
     return render(request, 'HungryApp/PasswordConfirmed.html')
+    
+
+@json_response    
+def get_location_marker_json(request, id):
+    marker = {}
+    loc = Location.objects.get(id=id)
+    marker['markerTitle'] = loc.__str__()
+    marker['latitude'] = loc.latitude
+    marker['longitude'] = loc.longitude
+    return marker
+    
+    
+@json_response    
+def get_restaurants_json(request):
+    restaurants = Restaurant.objects.all()
+    return restaurants
     
     
 @login_required

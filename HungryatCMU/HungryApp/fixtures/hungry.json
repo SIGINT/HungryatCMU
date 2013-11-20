@@ -154,8 +154,8 @@
     "pk": 2, 
     "model": "HungryApp.location", 
     "fields": {
-        "latitude": 40.443206,
-        "longitude": -79.942238,
+        "latitude": 40.442015,
+        "longitude": -79.946061,
         "building_name": "University Center", 
         "location_description": "The UC is the heart of CMU's fine dining.  Conveniently located between Gesling Stadium and the cut, the UC is a great spot to grab some grub with your favorite people",
         "floor": 2,
@@ -190,8 +190,8 @@
     "pk": 5, 
     "model": "HungryApp.location", 
     "fields": {
-        "latitude": 40.443582,
-        "longitude": -79.944786,
+        "latitude": 40.443567,
+        "longitude": -79.945267,
         "building_name": "Gates Center for Computer Science", 
         "location_description": "Segmentation fault",
         "floor": "",
