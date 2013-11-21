@@ -398,7 +398,7 @@ def add_restaurant(request):
   # TODO: Render restaurants page
   # --------------------
   #return render(request, "/restaurant", {})
-  return redirect("/account")
+  return redirect("/HungryApp")
   
   
 @login_required

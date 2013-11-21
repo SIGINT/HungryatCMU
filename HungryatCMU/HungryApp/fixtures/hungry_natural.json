@@ -65,6 +65,45 @@
     }
 },
 {
+    "pk": 6, 
+    "model": "HungryApp.location", 
+    "fields": {
+        "room": "Atrium", 
+        "floor": "1", 
+        "wheelchair_accessible": true, 
+        "longitude": "-79.942585", 
+        "location_description": "Main atrium of Newell-Simon Hall, home of the Robotics Institute", 
+        "latitude": "40.442832", 
+        "building_name": "Newell-Simon Hall"
+    }
+},
+{
+    "pk": 7, 
+    "model": "HungryApp.location", 
+    "fields": {
+        "room": "Dining", 
+        "floor": "1", 
+        "wheelchair_accessible": true, 
+        "longitude": "-79.942585", 
+        "location_description": "Tepper School of Business, Posner Hall", 
+        "latitude": "40.442832", 
+        "building_name": "Posner Hall"
+    }
+},
+{
+    "pk": 8, 
+    "model": "HungryApp.location", 
+    "fields": {
+        "room": "Lounge", 
+        "floor": "B", 
+        "wheelchair_accessible": true, 
+        "longitude": "-79.944699", 
+        "location_description": "Basement of Baker Hall, near Giant Eagle Auditorium", 
+        "latitude": "40.441305", 
+        "building_name": "Baker Hall"
+    }
+},
+{
     "pk": 1, 
     "model": "HungryApp.restaurant", 
     "fields": {
@@ -110,6 +149,54 @@
         "phone": "", 
         "location": 2, 
         "restaurant_name": "City Grill"
+    }
+},
+{
+    "pk": 5, 
+    "model": "HungryApp.restaurant", 
+    "fields": {
+        "cuisine": "AS", 
+        "restaurant_picture": "restaurant-pictures/asiana.jpg", 
+        "has_vegetarian": true, 
+        "phone": "", 
+        "location": 6, 
+        "restaurant_name": "Asiana"
+    }
+},
+{
+    "pk": 6, 
+    "model": "HungryApp.restaurant", 
+    "fields": {
+        "cuisine": "ME", 
+        "restaurant_picture": "restaurant-pictures/el-gallo-de-oro.jpg", 
+        "has_vegetarian": true, 
+        "phone": "", 
+        "location": 4, 
+        "restaurant_name": "El Gallo de Oro"
+    }
+},
+{
+    "pk": 7, 
+    "model": "HungryApp.restaurant", 
+    "fields": {
+        "cuisine": "AM", 
+        "restaurant_picture": "restaurant-pictures/excahnge.jpg", 
+        "has_vegetarian": true, 
+        "phone": "", 
+        "location": 1, 
+        "restaurant_name": "The Exchange"
+    }
+},
+{
+    "pk": 8, 
+    "model": "HungryApp.restaurant", 
+    "fields": {
+        "cuisine": "BR", 
+        "restaurant_picture": "restaurant-pictures/gingers-express.jpg", 
+        "has_vegetarian": true, 
+        "phone": "", 
+        "location": 8, 
+        "restaurant_name": "Ginger's Express"
     }
 },
 {
@@ -218,7 +305,7 @@
         "is_active": true, 
         "is_superuser": false, 
         "is_staff": true, 
-        "last_login": "2013-11-15T07:30:02.215Z", 
+        "last_login": "2013-11-21T09:40:13.231Z", 
         "groups": [], 
         "user_permissions": [
             [
