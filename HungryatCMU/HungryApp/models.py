@@ -54,8 +54,8 @@ class Location(models.Model):
     latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True)
     building_name = models.CharField(max_length=80)
     location_description = models.TextField()
-    floor = models.CharField(max_length=4)
-    room = models.CharField(max_length=8)
+    floor = models.CharField(max_length=4, blank=True)
+    room = models.CharField(max_length=8, blank=True)
     wheelchair_accessible = models.BooleanField(default=False)
 
     def __unicode__(self):
@@ -70,11 +70,11 @@ class Restaurant(models.Model):
     # --------------------
     # TODO: Add add'l cuisine categories if necessary
     # --------------------
-    CUISINES = (('BR', 'Breakfast'), ('AM', 'American'), ('IN', 'Indian'), ('AS', 'Asian'))
+    CUISINES = (('BR', 'Breakfast'), ('AM', 'American'), ('IN', 'Indian'), ('AS', 'Asian'), ('ME', 'Mexican'))
 
-    location = models.ForeignKey(Location,blank=True, null=True, default=None)
+    location = models.ForeignKey(Location)
     restaurant_name = models.CharField(max_length=80)
-    restaurant_picture = models.ImageField(upload_to='restaurant-pictures', blank=True)
+    restaurant_picture = models.ImageField(upload_to='restaurant-pictures', null=True, blank=True)
     has_vegetarian = models.BooleanField(default=False)
     phone = models.CharField(max_length=15)
     cuisine = models.CharField(max_length=2, choices=CUISINES)
