@@ -1,0 +1,300 @@
+[
+{
+    "pk": 1, 
+    "model": "HungryApp.location", 
+    "fields": {
+        "room": "", 
+        "floor": "1", 
+        "wheelchair_accessible": true, 
+        "longitude": "-79.942238", 
+        "location_description": "The UC is the heart of CMU's fine dining.  Conveniently located between Gesling Stadium and the cut, the UC is a great spot to grab some grub with your favorite people", 
+        "latitude": "40.443206", 
+        "building_name": "University Center"
+    }
+},
+{
+    "pk": 2, 
+    "model": "HungryApp.location", 
+    "fields": {
+        "room": "", 
+        "floor": "2", 
+        "wheelchair_accessible": true, 
+        "longitude": "-79.946061", 
+        "location_description": "The UC is the heart of CMU's fine dining.  Conveniently located between Gesling Stadium and the cut, the UC is a great spot to grab some grub with your favorite people", 
+        "latitude": "40.442015", 
+        "building_name": "University Center"
+    }
+},
+{
+    "pk": 3, 
+    "model": "HungryApp.location", 
+    "fields": {
+        "room": "", 
+        "floor": "5", 
+        "wheelchair_accessible": true, 
+        "longitude": "-79.945929", 
+        "location_description": "So.. you're no fan of windows, eh? Wean is a great place to grab some coffee while your brain digests that Math", 
+        "latitude": "40.442631", 
+        "building_name": "Wean Hall"
+    }
+},
+{
+    "pk": 4, 
+    "model": "HungryApp.location", 
+    "fields": {
+        "room": "", 
+        "floor": "1", 
+        "wheelchair_accessible": true, 
+        "longitude": "-79.939714", 
+        "location_description": "The life of the party, oh yes", 
+        "latitude": "40.442443", 
+        "building_name": "Resnik"
+    }
+},
+{
+    "pk": 5, 
+    "model": "HungryApp.location", 
+    "fields": {
+        "room": "", 
+        "floor": "", 
+        "wheelchair_accessible": false, 
+        "longitude": "-79.945267", 
+        "location_description": "Segmentation fault", 
+        "latitude": "40.443567", 
+        "building_name": "Gates Center for Computer Science"
+    }
+},
+{
+    "pk": 1, 
+    "model": "HungryApp.restaurant", 
+    "fields": {
+        "cuisine": "AM", 
+        "restaurant_picture": "", 
+        "has_vegetarian": true, 
+        "phone": "", 
+        "location": 4, 
+        "restaurant_name": "Carnegie Mellon Cafe"
+    }
+},
+{
+    "pk": 2, 
+    "model": "HungryApp.restaurant", 
+    "fields": {
+        "cuisine": "IN", 
+        "restaurant_picture": "", 
+        "has_vegetarian": true, 
+        "phone": "", 
+        "location": 4, 
+        "restaurant_name": "Taste of India"
+    }
+},
+{
+    "pk": 3, 
+    "model": "HungryApp.restaurant", 
+    "fields": {
+        "cuisine": "BR", 
+        "restaurant_picture": "", 
+        "has_vegetarian": true, 
+        "phone": "", 
+        "location": 3, 
+        "restaurant_name": "La Prima Espresso"
+    }
+},
+{
+    "pk": 4, 
+    "model": "HungryApp.restaurant", 
+    "fields": {
+        "cuisine": "AM", 
+        "restaurant_picture": "", 
+        "has_vegetarian": false, 
+        "phone": "", 
+        "location": 2, 
+        "restaurant_name": "City Grill"
+    }
+},
+{
+    "pk": 1, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "dmoney101", 
+        "first_name": "Dwight", 
+        "last_name": "Schrute", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2013-09-27T11:13:45.507Z", 
+        "groups": [], 
+        "user_permissions": [
+            [
+                "is_student", 
+                "HungryApp", 
+                "student"
+            ]
+        ], 
+        "password": "pbkdf2_sha256$10000$j6qKlRABYrby$mLosetSvxoEE4XLb1oem8JqR3SM/Ex/BBEoNljqx4ec=", 
+        "email": "ohdee@theoffice.net", 
+        "date_joined": "2013-09-27T11:13:45.268Z"
+    }
+},
+{
+    "pk": 2, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "greatscott", 
+        "first_name": "Michael", 
+        "last_name": "Scott", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2013-09-30T21:22:27.024Z", 
+        "groups": [], 
+        "user_permissions": [
+            [
+                "is_student", 
+                "HungryApp", 
+                "student"
+            ]
+        ], 
+        "password": "pbkdf2_sha256$10000$3neZRSNHm103$3EMXMStJdsgYa6XRvZGpqBH3rl+79QjKSqaYDc1Hh1Q=", 
+        "email": "mscott@theoffice.net", 
+        "date_joined": "2013-09-27T11:14:46.384Z"
+    }
+},
+{
+    "pk": 3, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "angiecat99", 
+        "first_name": "Angela", 
+        "last_name": "Martin", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2013-09-27T11:16:38.173Z", 
+        "groups": [], 
+        "user_permissions": [
+            [
+                "is_student", 
+                "HungryApp", 
+                "student"
+            ]
+        ], 
+        "password": "pbkdf2_sha256$10000$Ux6UkjYbbBOo$e3L3GzFU5yZUJsOh4FUww8ryqhMkonNZ92w/5blTyfo=", 
+        "email": "amartin@theoffice.net", 
+        "date_joined": "2013-09-27T11:16:37.941Z"
+    }
+},
+{
+    "pk": 4, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "ljasko", 
+        "first_name": "Luke", 
+        "last_name": "Jasko", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2013-09-30T12:55:14.944Z", 
+        "groups": [], 
+        "user_permissions": [
+            [
+                "is_student", 
+                "HungryApp", 
+                "student"
+            ]
+        ], 
+        "password": "pbkdf2_sha256$10000$NEDHP81jaqjk$wuvL1BdtFz3r4JIKdYuo1TJ2dHyVS0Epb2P+ex7FBAQ=", 
+        "email": "ltj@luke.com", 
+        "date_joined": "2013-09-30T12:55:14.715Z"
+    }
+},
+{
+    "pk": 6, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "admin", 
+        "first_name": "Hungry", 
+        "last_name": "Administrator", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": true, 
+        "last_login": "2013-11-15T07:30:02.215Z", 
+        "groups": [], 
+        "user_permissions": [
+            [
+                "is_admin", 
+                "HungryApp", 
+                "administrator"
+            ]
+        ], 
+        "password": "pbkdf2_sha256$10000$HSyCvM8jyBuu$TbFI7IXl9HqxhDU4Tt4Lz8JV+blBnSwj0mxGAz31DuM=", 
+        "email": "admin@hungry.com", 
+        "date_joined": "2013-11-15T07:29:41.244Z"
+    }
+},
+{
+    "pk": 1, 
+    "model": "HungryApp.student", 
+    "fields": {
+        "gender": "M", 
+        "student_year": "FR", 
+        "date_of_birth": "1974-09-05", 
+        "user": [
+            "dmoney101"
+        ], 
+        "cell_phone": ""
+    }
+},
+{
+    "pk": 2, 
+    "model": "HungryApp.student", 
+    "fields": {
+        "gender": "M", 
+        "student_year": "SR", 
+        "date_of_birth": "1970-07-16", 
+        "user": [
+            "greatscott"
+        ], 
+        "cell_phone": ""
+    }
+},
+{
+    "pk": 3, 
+    "model": "HungryApp.student", 
+    "fields": {
+        "gender": "F", 
+        "student_year": "JR", 
+        "date_of_birth": "1977-05-08", 
+        "user": [
+            "angiecat99"
+        ], 
+        "cell_phone": ""
+    }
+},
+{
+    "pk": 4, 
+    "model": "HungryApp.student", 
+    "fields": {
+        "gender": "M", 
+        "student_year": "SR", 
+        "date_of_birth": "1992-09-02", 
+        "user": [
+            "ljasko"
+        ], 
+        "cell_phone": ""
+    }
+},
+{
+    "pk": 1, 
+    "model": "HungryApp.administrator", 
+    "fields": {
+        "gender": "N", 
+        "home_phone": "", 
+        "date_of_birth": "1980-01-01", 
+        "user": [
+            "admin"
+        ], 
+        "cell_phone": ""
+    }
+}
+]
