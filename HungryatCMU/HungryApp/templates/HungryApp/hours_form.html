@@ -1,0 +1,20 @@
+{% for field in hours_form.visible_fields %}
+  {{field.errors}}
+  {% if forloop.counter0|divisibleby:2 or forloop.first %}
+    <div class="form-group">
+      <label class="col-sm-1 control-label">
+        {{field.label}}
+      </label>
+      <div class="col-sm-4">
+        {{field}}
+      </div>
+  {% else %}
+      <div class="col-sm-4">
+        {{field}}
+      </div>
+    </div>
+  {% endif %}
+{% endfor %}
+{% for field in hours_form.hidden_fields %}
+  {{field}}
+{% endfor %}

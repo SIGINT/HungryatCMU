@@ -33,7 +33,11 @@ html, body {
   width: 100%;
 }
 
-.embossed > h2, .embossed > h3 {
+h2 {
+  font-size: 23pt;
+}
+
+.embossed > h2, .embossed > h3 {  
   color: #57595b;
   text-transform: none;
   text-shadow: 0 1px 0px rgba(255,255,255,1);
@@ -56,10 +60,15 @@ html, body {
 }
 
 .indent {
-	margin-left: 32px;
+	margin-left: 36px;
+}
+
+.outdent {
+  margin-left: -44px;
 }
 
 .divider2 {
+  margin-left: -100px;
   padding-bottom: 9px;
   border-bottom: 1px solid #cecece;
 }

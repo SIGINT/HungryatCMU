@@ -14,23 +14,33 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
+      <form class="form-horizontal" role="form" method="post" action="/HungryApp/add-restaurant" class="indent btm-marg" enctype="multipart/form-data">
       <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-          </br></br>
-          <div class="embossed">
+        <div class="col-md-2"></div>
+        <div class="col-md-10">
+          </br></br></br>
+          <div class="outdent embossed">
             <h2>New Restaurant&nbsp; <span class="glyphicon glyphicon-cutlery"></span></h2>
           </div>
           </br></br>
-          <form role="form" method="post" action="/HungryApp/add-restaurant" class="indent btm-marg" enctype="multipart/form-data">
-            {% include 'HungryApp/form_loop.html' %}
-            <div class="form-group pull-right">
-              <button type="submit" class="btn btn-primary btn-lg">&nbsp;Submit&nbsp;</button>
+          <div class="row">        
+            <div class="col-md-3">
+              {% include 'HungryApp/form_loop.html' %}
             </div>
-          </form>
+            <div class="col-md-1"></div>
+            <div class="col-md-6">       
+              {% include 'HungryApp/hours_form.html' %}
+            </div>
+          </div>
+          <div class="divider2"></div>
+          </br></br>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-lg">&nbsp;Submit&nbsp;</button>
+          </div>
         </div>
-        <div class="col-md-4"></div>
       </div>
+      </form>
+      </br></br></br>
     </div>
   </div><!-- /.row -->
 </div><!-- /.container -->

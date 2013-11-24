@@ -146,7 +146,7 @@ class RestaurantForm(forms.Form):
   #phone = forms.RegexField()
   cuisine = forms.ChoiceField(widget = forms.RadioSelect,
                               choices = Restaurant.CUISINES)
-  
+                              
   def clean(self):
       # Calls our parent (forms.Form) .clean function, gets a dictionary
       # of cleaned data as a result
@@ -156,15 +156,38 @@ class RestaurantForm(forms.Form):
       restaurant_picture = cleaned_data.get('restaurant_picture')
       has_vegetarian = cleaned_data.get('has_vegetarian')
       cuisine = cleaned_data.get('cuisine')
-      # ----------------------
-      # TODO: Ensure location exists in system
-      # ----------------------
+      
       try:
         location = Location.objects.get(id=loc.id)
       except Location.DoesNotExist:
         raise forms.ValidationError("The location specified does not exist in the system")
         
       return cleaned_data
+      
+      
+class OperatingHoursForm(forms.Form):
+      
+    sun_open = forms.TimeField(label="Sun", widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'}))
+    sun_close = forms.TimeField(label="", widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'}))
+    mon_open = forms.TimeField(label="Mon", widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'}))
+    mon_close = forms.TimeField(label="", widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'}))
+    tue_open = forms.TimeField(label="Tue", widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'}))
+    tue_close = forms.TimeField(label="", widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'}))
+    wed_open = forms.TimeField(label="Wed", widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'}))
+    wed_close = forms.TimeField(label="", widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'}))
+    thur_open = forms.TimeField(label="Thur", widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'}))
+    thur_close = forms.TimeField(label="", widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'}))
+    fri_open = forms.TimeField(label="Fri", widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'}))
+    fri_close = forms.TimeField(label="", widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'}))
+    sat_open = forms.TimeField(label="Sat", widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'}))
+    sat_close = forms.TimeField(label="", widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'}))
+    
+    def clean(self):
+        cleaned_data = super(OperatingHoursForm, self).clean()
+        # -------------------
+        # TODO: Ensure valid times (make sense)
+        # -------------------
+        return cleaned_data
       
       
 class LocationForm(forms.Form):
