@@ -46,12 +46,27 @@ h2 {
   display: block;
 }
 
+.navbar-header {
+  padding: 24px 30px 14px 8px;
+  margin-right: 36px;
+}
+
+ul.nav {
+  margin-top: 40px;
+  margin-bottom: 6px;
+  display: inline-block;
+}
+
 .navbar .navbar-brand {
   color: #f3f3f3;
   letter-spacing: 1.5px;
   text-shadow: 0px 1px 0px #d3d3d3;
   font-size: 28pt;
   font-family: Verdana Arial;
+}
+
+.nav > li > a {
+  font-size: 12.5pt;
 }
 
 .cmu-red {
@@ -121,15 +136,4 @@ h3.panel-title {
 
 #plate-pic {
   margin-right: 30px;
-}
-
-.navbar-header {
-  padding: 20px 60px 20px 6px;
-  margin-right: 80px;
-}
-
-ul.nav {
-  margin-top: 36px;
-  margin-bottom: 36px;
-  display: inline-block;
 }

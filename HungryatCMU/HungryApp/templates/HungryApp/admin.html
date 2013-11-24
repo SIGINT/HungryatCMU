@@ -7,7 +7,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      </br></br></br>
+      </br></br></br></br>
       <div class="indent embossed">
         <h2><u>Administration Panel</u>&nbsp; <span class="glyphicon glyphicon-wrench"></span></h2>
       </div>
@@ -15,18 +15,20 @@
         <div class="col-md-2"></div>
         <div class="col-md-8">
           </br></br></br>
-          <ul style="list-style:none;">
-            <li>
-              <a href="{% url 'invite-employee' %}" class="btn btn-default btn-lg">&nbsp;New Employee&nbsp; <span class="glyphicon glyphicon-plus"></span></a>
-            </li>
-            <li>
-              <a href="" class="btn btn-default btn-lg">&nbsp;New Admin&nbsp; <span class="glyphicon glyphicon-user"></span></a>
-            </li>
-            <li>
-              <a href="{% url 'add-location' %}" class="btn btn-default btn-lg">&nbsp;New Location&nbsp; <span class="glyphicon glyphicon-map-marker"></span></a>
-            </li>
-          </ul>
-          </br></br></br>
+          <div class="well well-lg collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li>
+                <a href="{% url 'invite-employee' %}" class="btn btn-default btn-lg">&nbsp;New Employee&nbsp; <span class="glyphicon glyphicon-plus"></span></a>
+              </li>
+              <li>
+                <a href="" class="btn btn-default btn-lg">&nbsp;New Admin&nbsp; <span class="glyphicon glyphicon-user"></span></a>
+              </li>
+              <li>
+                <a href="{% url 'add-location' %}" class="btn btn-default btn-lg">&nbsp;New Location&nbsp; <span class="glyphicon glyphicon-map-marker"></span></a>
+              </li>
+            </ul>
+          </div>
+          </br></br>
           <h3>Users</h3>
           </br></br>
           <table class="table table-striped">
@@ -68,6 +70,7 @@
         </div>
         <div class="col-md-2"></div>
       </div>
+      </br></br></br>
     </div>
   </div><!-- /.row -->
 </div><!-- /.container -->
