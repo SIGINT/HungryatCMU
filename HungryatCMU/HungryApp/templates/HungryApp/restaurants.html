@@ -7,8 +7,7 @@
   var cmu = new google.maps.LatLng(40.442832, -79.942585);
   var ctr = new google.maps.LatLng(40.442832, -79.942585);
   var map;
-  var locs = [];
-
+  
   function initialize() {
     var mapOptions = {
       zoom: 16,
@@ -27,11 +26,11 @@
                 '/get-location-marker-json/' + data[i].fields.location,
                 
                 function(coords) {
-                  contentString = "<div><strong>" + restName + "</strong></br>" + coords.markerTitle + "</div>";
+                  var contentString = "<div><a href='#" + restName + "'><strong>" + restName + "</strong></a></br>" + coords.markerTitle + "</div>";
                   var infowindow = new google.maps.InfoWindow({
                       content: contentString
                   });
-                  pos = new google.maps.LatLng(coords.latitude, coords.longitude);
+                  var pos = new google.maps.LatLng(coords.latitude, coords.longitude);
                   var marker = new google.maps.Marker({
                     map:map,
                     draggable:false,
@@ -75,9 +74,9 @@
             <div id="map-canvas"></div>
           </div>
           {% for r in restaurants %}
-          <div id="{% }" class="panel panel-default">
+          <div id="{{r.restaurant_name}}" class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title"><a href="{% url 'display_fooditems' r.id %}">{{r.restaurant_name}} {{r.id}}</a></h3>
+              <h3 class="panel-title"><a href="{% url 'display_fooditems' r.id %}">{{r.restaurant_name}}</a></h3>
             </div>
             <div class="panel-body">
               </br>
