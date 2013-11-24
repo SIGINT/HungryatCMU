@@ -1,12 +1,8 @@
 from django.db import models
+from django.core.validators import *
 from django.contrib.auth.models import User
 from models import *
 
-
-
-# -----------------------------
-# TODO: ADMINISTRATOR model
-# -----------------------------
 
 class Administrator(models.Model):
   
@@ -78,17 +74,31 @@ class Restaurant(models.Model):
     has_vegetarian = models.BooleanField(default=False)
     phone = models.CharField(max_length=15)
     cuisine = models.CharField(max_length=2, choices=CUISINES)
-
-    # ---------------------
-    # TODO: Discuss possible data type(s) for
-    #       storing operating_hours - comma separated integers ?
-    # ---------------------
-    #operating_hours =
     
     def __unicode__(self):
         return self.restaurant_name
         
         
+class OperatingHours(models.Model):
+
+    DAYS_OF_WEEK = ((1, "Sunday"), (2, "Monday"), (3, "Tuesday"), (4, "Wednesday"), (5, "Thursday"), (6, "Friday"), (7, "Saturday"))
+
+    restaurant = models.ForeignKey(Restaurant)
+    from_day = models.PositiveSmallIntegerField(choices=DAYS_OF_WEEK)
+    to_day = models.PositiveSmallIntegerField(choices=DAYS_OF_WEEK)
+    open_hour = models.PositiveSmallIntegerField(validators=[MaxValueValidator(48)])
+    close_hour = models.PositiveSmallIntegerField(validators=[MaxValueValidator(48)])
+    
+    # -------------------------
+    # TODO: Helper methods for outputting friendly strings
+    # -------------------------
+    
+    # -------------------------
+    # TODO: Helper methods for converting between open/close_hour
+    #       and 48 possible half-hour times (12:30pm, 12:30am)
+    # -------------------------
+    
+    
 class RestaurantEmployee(models.Model):
     
     user = models.OneToOneField(User)
