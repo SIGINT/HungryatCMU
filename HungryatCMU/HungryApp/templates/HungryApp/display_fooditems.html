@@ -27,10 +27,19 @@
 
 </p>  -->
 
-
-<li> <a href="{% url 'add_fooditem' pk %}">ADD A FOOD ITEM</a>          
+{% if user.isEmployee %}
+<li> <a href="{% url 'add_fooditem' pk %}">ADD A FOOD ITEM</a>
+{% endif %}          
 <p>
--->
+
+
+<br></br>
+<br></br>
+
+{% if user %}
+  <li>{{user.id}}</a>  
+  {% endif %}
+
 <br></br>
 <br></br>
 Restaurant Menu: 
@@ -40,8 +49,19 @@ Restaurant Menu:
            <!--   {% if food_item.picture %}
                 <img src="{% url 'fooditem_photo' food_item.id %}" class="img-thumbnail" height="160px" width="160px">
               {% endif %} -->
-  <li> <a href="{% url 'edit_fooditem' food_item.id %}">{{food_item}}</a>
   
+  {% if user.isEmployee %}
+  <li> <a href="{% url 'edit_fooditem' food_item.id %}">{{food_item}}</a>  
+  {% endif %}
+
+
+
+
+
+  {% if not user.isEmployee %}
+  <a href="{% url 'view_fooditem' food_item.id %}">{{food_item}} </a>
+  {% endif %}
+
   <form action="{% url 'add_order_to_cart' food_item.id %}" method="post">
         
   <div class="form-group"> 
@@ -53,15 +73,18 @@ Restaurant Menu:
 </ul>
 </p>
 
-<!--
+
 </form>
+
+
 {% for ordered_food_item in ordered_food_items %}
         <div class="">
             <span class = "Remove_from_order"> <a href="{% url 'remove_food_item_from_order' ordered_food_item.id}}"> Delete </a></span>
             <span class = "Ordered_Food_Item"> {{ ordered_food_item }}</span>
             <span class = "Ordered_Food_Item_Price"> {{ ordered_food_item.price }}  </span>   
         </div>
-{% endfor %}  -->
+{% endfor %}  
+
 
 {% if ordered_food_item %}
 <ul>

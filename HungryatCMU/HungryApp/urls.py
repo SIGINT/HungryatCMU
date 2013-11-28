@@ -28,10 +28,12 @@ urlpatterns = patterns('',
     url(r'^restaurant-picture/(?P<id>\d+)$', 'HungryApp.views.get_restaurant_picture', name='restaurant-picture'),
     url(r'^add_fooditem/(?P<id>\d+)$', 'HungryApp.views.add_fooditem', name='add_fooditem'),
     url(r'^edit_fooditem/(?P<id>\d+)$', 'HungryApp.views.edit_fooditem', name='edit_fooditem'),
+    url(r'^view_fooditem/(?P<id>\d+)$', 'HungryApp.views.view_fooditem', name='view_fooditem'),
     url(r'^food-item_photo/(?P<id>\d+)$', 'HungryApp.views.get_fooditem_photo', name='fooditem_photo'),
     url(r'^display_fooditems/(?P<id>\d+)$', 'HungryApp.views.display_fooditems', name='display_fooditems'),
     url(r'^search$', 'HungryApp.views.search'),
     url(r'^filterbypreptime$', 'HungryApp.views.filterbypreptime', name = 'filterbypreptime'),
     url(r'^add_order_to_cart/(?P<id>\d+)$', 'HungryApp.views.add_fooditem_to_order', name = 'add_order_to_cart'),
     url(r'^place_order$', 'HungryApp.views.place_order', name = 'place_order'),
+    
 )

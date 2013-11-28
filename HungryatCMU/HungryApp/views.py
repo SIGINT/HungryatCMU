@@ -8,6 +8,7 @@ from django.core.mail import send_mail
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.db import transaction
+
 import re
 import json
 from django.db.models import Q
@@ -379,24 +380,20 @@ def add_restaurant(request):
   
   if request.method == 'GET':
     context['form'] = RestaurantForm()
-    context['hours_form'] = OperatingHoursForm()
     return render(request, 'HungryApp/add_restaurant.html', context)
     
-  restaurant_form = RestaurantForm(request.POST, request.FILES)
-  hours_form = OperatingHoursForm(request.POST)
-  context['form'] = restaurant_form
-  context['hours_form'] = hours_form
+  form = RestaurantForm(request.POST, request.FILES)
+  context['form'] = form
   
-  if not restaurant_form.is_valid() or not hours_form.is_valid():
+  if not form.is_valid():
     return render(request, 'HungryApp/add_restaurant.html', context)
     
-  new_restaurant = Restaurant(location=restaurant_form.cleaned_data['location'],
-                              restaurant_name=restaurant_form.cleaned_data['restaurant_name'],
-                              restaurant_picture=restaurant_form.cleaned_data['restaurant_picture'],
-                              has_vegetarian=forrestaurant_formm.cleaned_data['has_vegetarian'],
-                              cuisine=restaurant_form.cleaned_data['cuisine'])
+  new_restaurant = Restaurant(location=form.cleaned_data['location'],
+                              restaurant_name=form.cleaned_data['restaurant_name'],
+                              restaurant_picture=form.cleaned_data['restaurant_picture'],
+                              has_vegetarian=form.cleaned_data['has_vegetarian'],
+                              cuisine=form.cleaned_data['cuisine'])
   new_restaurant.save()
-  #operating_hours = OperatingHours(restaurant=new_restaurant)
   
   # --------------------
   # TODO: Render restaurants page
@@ -495,6 +492,13 @@ def edit_fooditem(request, id):
     form.save()
     return render(request, 'HungryApp/edit_fooditem.html', context)
     #return redirect(reverse('display_fooditems'))
+
+@login_required
+def view_fooditem(request, id):
+  fooditem_to_view = get_object_or_404(FoodItem, id=id)
+  form = FoodItemForm(instance=fooditem_to_view)
+  context = {'food_item': fooditem_to_view, 'id':id , 'form':form} 
+  return render(request, 'HungryApp/view_food_item.html',context)    
 
 @login_required
 def display_fooditems(request,id):
@@ -601,19 +605,23 @@ def create_order(request):
 @transaction.commit_on_success
 def add_fooditem_to_order(request,id):
   errors = []
-  #student = Student(user=request.user)
-  #current_order = Order(student_id=student)
-  #current_order.save()
+  user = request.user
+  student = Student(user=request.user)
+  student.save()
+  current_order = Order(student_id=student)
+  current_order.save()
   #restaurant = Restaurant.objects.get(id=id)  
   #context = {'food_items':FoodItem.objects.filter(restaurant_id = id), 'pk':id }
   #return redirect(reverse('display_fooditems',context))
-  #return render(request, 'HungryApp/display_fooditems.html', context) 
-  food_item = FoodItem.objects.get(id=id)          
-  #current_order = current_order.food_items_inorder.add(food_item);
-  #current_order.save()
+  #return render(request, 'HungryApp/display_fooditems.html', context)
+  fooditem = get_object_or_404(FoodItem, id=id) 
+  #food_item = FoodItem.objects.get(id=id)          
+  current_order = current_order.food_items_inorder.add(fooditem);
+  current_order.save()
   #return current_order
-  pk=food_item.restaurant_id
-  context = {'ordered_food_item': food_item, 'pk':pk }
+  pk=fooditem.restaurant_id
+  ordered_food_items = current_order.food_items_inorder
+  context = {'ordered_food_items': ordered_food_items,'pk':pk }
   return render(request, 'HungryApp/display_fooditems.html', context)
   
 
@@ -636,6 +644,10 @@ def place_order(request):
               from_email="cmurugan@andrew.cmu.edu",
               recipient_list=[request.user.email])
     return render(request, 'HungryApp/CompletedOrder.html')
+
+
+
+
 
 """
 @login_required
