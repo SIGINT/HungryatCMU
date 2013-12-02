@@ -417,7 +417,9 @@ def add_restaurant(request):
 def view_restaurant(request, id):
   context = {}
   r = get_object_or_404(Restaurant, pk=id)
+  food_items = r.food_items.all()
   context['r'] = r
+  context['items'] = food_items
   return render(request, 'HungryApp/view_restaurant.html', context)
   
   

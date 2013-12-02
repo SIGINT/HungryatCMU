@@ -119,7 +119,7 @@ class RestaurantEmployee(models.Model):
         
 class FoodItem(models.Model):
     
-    restaurant_id = models.ForeignKey(Restaurant)
+    restaurant_id = models.ForeignKey(Restaurant, related_name='food_items')
     item_name = models.CharField(max_length=80)
     item_description = models.TextField()
     is_vegetarian = models.BooleanField(default=False)
