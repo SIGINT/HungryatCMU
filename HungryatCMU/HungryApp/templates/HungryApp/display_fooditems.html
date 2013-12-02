@@ -27,7 +27,7 @@
 
 </p>  -->
 
-{% if user.isEmployee %}
+{% if r.isEmployee %}
 <li> <a href="{% url 'add_fooditem' pk %}">ADD A FOOD ITEM</a>
 {% endif %}          
 <p>
@@ -50,7 +50,7 @@ Restaurant Menu:
                 <img src="{% url 'fooditem_photo' food_item.id %}" class="img-thumbnail" height="160px" width="160px">
               {% endif %} -->
   
-  {% if user.isEmployee %}
+  {% if r.isEmployee %}
   <li> <a href="{% url 'edit_fooditem' food_item.id %}">{{food_item}}</a>  
   {% endif %}
 

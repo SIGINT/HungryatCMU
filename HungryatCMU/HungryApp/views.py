@@ -517,7 +517,7 @@ def view_fooditem(request, id):
 def display_fooditems(request,id):
 
     restaurant = Restaurant.objects.get(id=id)  
-    context = {'food_items':FoodItem.objects.filter(restaurant_id = id), 'pk':id }
+    context = {'food_items':FoodItem.objects.filter(restaurant_id = id), 'pk':id, 'r': restaurant }
     #return redirect(reverse('display_fooditems',context))
     return render(request, 'HungryApp/display_fooditems.html', context)        
 
