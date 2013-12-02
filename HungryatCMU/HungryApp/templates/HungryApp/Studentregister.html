@@ -77,6 +77,18 @@
                   {{ form.email }}
                 </div>
               </div>
+              <div class="form-group">
+                {{ form.password1.errors }}
+                <label class="col-md-2 control-label" for="inputPassword1">Password</label>
+                <div class="col-md-3">
+                  {{ form.password1 }}
+                </div>
+                {{ form.password2.errors }}
+                <label class="col-md-2 control-label" for="inputPassword2">Password Confirmation</label>
+                <div class="col-md-3">
+                  {{ form.password2 }}
+                </div>
+              </div>
               </br></br>
               <div class="indent" style="margin-left: 70px; margin-top: 30px;">
                   <button type="submit" class="btn btn-primary btn-lg">&nbsp;&nbsp;Register&nbsp;&nbsp; <span class="glyphicon glyphicon-list-alt"></span></button>

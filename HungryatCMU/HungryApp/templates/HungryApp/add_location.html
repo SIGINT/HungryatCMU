@@ -1,7 +1,7 @@
 {% extends "HungryApp/base.html" %}
 {% block title %}:: New Location{% endblock %}
 {% block head %}
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDP5sX9n0VBg49243_ntCnlj6vJDXchNzA&sensor=true">
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDP5sX9n0VBg49243_ntCnlj6vJDXchNzA&amp;sensor=true">
 </script>
 <script type="text/javascript">
   var cmu = new google.maps.LatLng(40.442832, -79.942585);
@@ -46,6 +46,9 @@
 {% block navigation %}
 {% include "HungryApp/admin_nav.html" %}
 {% endblock %}
+{% block navigation-right %}
+<li><a href="/logout">Logout</a></li>
+{% endblock %}
 {% block content %}
 <div class="container">
   <div class="row">
@@ -54,7 +57,7 @@
         <div class="col-md-2"></div>
         <div class="col-md-8">
           </br></br></br></br>
-          <div class="embossed">
+          <div class="outdent embossed">
             <h2>New Location&nbsp; <span class="glyphicon glyphicon-map-marker"></span></h2>
           </div>
           </br></br>
@@ -62,15 +65,15 @@
             <div id="map-canvas"></div>
           </div>
           <div class="row">
-            <form class="form-horizontal" method="post" action="/HungryApp/add-location">{% csrf_token %}
+            <form class="form-horizontal" role="form" method="post" action="{% url 'add-location' %}">
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="inputLat">Latitude</label>
                 <div class="col-sm-4">
-                  {{form.latitude}}
+                  <input class="form-control" id="id_latitude" name="latitude" type="text" value="40.442832" readonly>
                 </div>
                 <label class="col-sm-2 control-label" for="inputLng">Longitude</label>
                 <div class="col-sm-4">
-                  {{form.longitude}}
+                  <input class="form-control" id="id_longitude" name="longitude" type="text" value="40.442832" readonly>
                 </div>
               </div>
               </br>
@@ -97,12 +100,13 @@
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="inputLocDesc">Location Description</label>
                 <div class="col-sm-6">
-                  {{form.location_description}}
+                  {{ form.location_description }}
                 </div>
               </div>
               <div class="indent divider2"></div>
               </br>
               <button type="submit" class="btn btn-primary btn-lg pull-right">Submit</button>
+              {% csrf_token %}
             </form>
             </br></br>
           </div>

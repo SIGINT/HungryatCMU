@@ -66,7 +66,9 @@ ul.nav {
 }
 
 .nav > li > a {
+  font-weight: 200;
   font-size: 12.5pt;
+  letter-spacing: 1px;
 }
 
 .cmu-red {
