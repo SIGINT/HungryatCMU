@@ -129,9 +129,7 @@ def register_employee(request, username, token):
     
     if not form.is_valid():
         return render(request, 'HungryApp/employee_register.html', context)
-    
-    employee_perm = Permission.objects.get(codename='is_employee')
-    user.user_permissions.add(employee_perm)    
+     
     user.is_active = True
     user.first_name = form.cleaned_data['first_name']
     user.last_name=form.cleaned_data['last_name']
