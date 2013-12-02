@@ -21,6 +21,8 @@
       <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-3">
+          <!-- TODO: CSS styling for cleaner spacing -->
+          </br></br></br></br>
           {% if r.restaurant_picture %}
             <img src="{% url 'restaurant-picture' r.id %}" alt="{{ r.restaurant_name }}" class="img-thumbnail" height="320px" width="320px">
           {% else %}
@@ -31,10 +33,14 @@
           <div class="embossed">
             <h2>{{ r.restaurant_name }}</h2>
           </div>
-          </br></br>
           <div class="content-well">
-            <!-- TODO -->
-            <p>PUT RESTAURANT INFO HERE</p>
+            {% if r.has_vegetarian %}
+            <p><strong>Vegetarian Friendly:</strong>&nbsp; <span style="color: green;" class="glyphicon glyphicon-ok"></span></p>
+            {% else %}
+            <p><strong>Vegetarian Friendly:</strong>&nbsp; <span style="color: red;" class="glyphicon glyphicon-remove"></span></p>
+            {% endif %}
+            </br>
+            {% include 'HungryApp/restaurant_hours.html' %}
           </div>
         </div>
         <div class="col-md-2"></div>
@@ -42,9 +48,15 @@
       <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
-          {% for i in items %}
-          
-          {% endfor %}
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Menu</h3>
+            </div>
+            <div class="panel-body">
+              <p>TODO: FOOD ITEMS HERE</p>
+              {% for i in items %}
+              {% endfor %}
+            </div>
         </div>
         <div class="col-md-2"></div>
       </div>  
