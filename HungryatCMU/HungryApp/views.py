@@ -378,22 +378,35 @@ def view_account(request):
 def add_restaurant(request):
   context = {}
   
+  # ------------------------------------
+  # form:       normal restaurant fields (other than hours)
+  # hours_form: operating hours fields
+  # ------------------------------------
+  
   if request.method == 'GET':
     context['form'] = RestaurantForm()
+    context['hours_form'] = OperatingHoursForm()
     return render(request, 'HungryApp/add_restaurant.html', context)
     
   form = RestaurantForm(request.POST, request.FILES)
+  hours_form = OperatingHoursForm(request.POST)
   context['form'] = form
+  context['hours_form'] = hours_form
   
-  if not form.is_valid():
-    return render(request, 'HungryApp/add_restaurant.html', context)
+  if form.is_valid():
+      # ------------------------
+      # TODO: Convert/format/store operating hours from hours_form appropriately
+      # ------------------------
+      new_restaurant = Restaurant(location=form.cleaned_data['location'],
+                                  restaurant_name=form.cleaned_data['restaurant_name'],
+                                  restaurant_picture=form.cleaned_data['restaurant_picture'],
+                                  has_vegetarian=form.cleaned_data['has_vegetarian'],
+                                  cuisine=form.cleaned_data['cuisine'])
+      new_restaurant.save()
+  else:
+      return render(request, 'HungryApp/add_restaurant.html', context)
     
-  new_restaurant = Restaurant(location=form.cleaned_data['location'],
-                              restaurant_name=form.cleaned_data['restaurant_name'],
-                              restaurant_picture=form.cleaned_data['restaurant_picture'],
-                              has_vegetarian=form.cleaned_data['has_vegetarian'],
-                              cuisine=form.cleaned_data['cuisine'])
-  new_restaurant.save()
+
   
   # --------------------
   # TODO: Render restaurants page
