@@ -4,6 +4,7 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDP5sX9n0VBg49243_ntCnlj6vJDXchNzA&amp;sensor=true">
 </script>
 <script type="text/javascript">
+  // Center map on CMU campus (hard coded coordinates)
   var cmu = new google.maps.LatLng(40.442832, -79.942585);
   var ctr = new google.maps.LatLng(40.442832, -79.942585);
   var map;
@@ -77,7 +78,7 @@
           {% for r in restaurants %}
           <div id="{{r.restaurant_name}}" class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title"><a href="{% url 'display_fooditems' r.id %}">{{r.restaurant_name}}</a></h3>
+              <h3 class="panel-title"><a href="{% url 'restaurant' r.id %}">{{r.restaurant_name}}</a></h3>
             </div>
             <div class="panel-body">
               </br>

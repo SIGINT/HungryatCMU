@@ -7,20 +7,27 @@
 <li><a href="/logout">Logout</a></li>
 {% endblock %}
 {% block content %}
-<br>
+{% load staticfiles %}
+</br></br>
 {% for error in form.non_field_errors %}
 <p style="color: red">
 {{ error }}
 </p>
 {% endfor %}
-</br>
+</br></br></br>
 <div class="container">
   <div class="row">
     <div class="col-md-12">
       <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-          </br></br>
+        <div class="col-md-2"></div>
+        <div class="col-md-3">
+          {% if r.restaurant_picture %}
+            <img src="{% url 'restaurant-picture' r.id %}" alt="{{ r.restaurant_name }}" class="img-thumbnail" height="320px" width="320px">
+          {% else %}
+            <img src="{% static 'pics/no-image.png' %}" class="img-thumbnail" height="220px" width="220px">
+          {% endif %}
+        </div>
+        <div class="col-md-5">
           <div class="embossed">
             <h2>{{ r.restaurant_name }}</h2>
           </div>
@@ -30,7 +37,7 @@
             <p>PUT RESTAURANT INFO HERE</p>
           </div>
         </div>
-        <div class="col-md-4"></div>
+        <div class="col-md-2"></div>
       </div>
     </div>
   </div><!-- /.row -->
