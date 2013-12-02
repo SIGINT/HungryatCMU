@@ -102,7 +102,7 @@ ul.nav {
 }
 
 h3.panel-title {
-  font-size: 16pt;
+  font-size: 17pt;
   font-weight: 600;  
 }
 
@@ -133,6 +133,10 @@ h3.panel-title {
 	padding: 22px;
 	margin-top: 30px;
 	margin-bottom: 60px;
+}
+
+.hours-body {
+  
 }
 
 #plate-pic {

@@ -22,3 +22,6 @@ https://docs.djangoproject.com/en/1.5/topics/serialization/#natural-keys
 3. Handling multiple forms in single Django template:
 http://stackoverflow.com/questions/1395807/proper-way-to-handle-multiple-forms-on-one-page-in-django
 http://stackoverflow.com/questions/5857363/using-multiple-forms-on-a-page-in-django
+
+4. 'No Image Available' image:
+http://www.wwubap.org/wp-content/uploads/2012/03/no-available-image.png

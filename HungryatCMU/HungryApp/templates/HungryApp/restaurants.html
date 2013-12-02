@@ -92,7 +92,28 @@
                 </div>
                 <div class="col-md-1"></div>
                 <div class="col-md-5">
-                  <p>RESTAURANT INFO HERE</p>
+                  {% if r.has_vegetarian %}
+                  <p><strong>Vegetarian Friendly:</strong>&nbsp; <span class="glyphicon glyphicon-ok"></span></p>
+                  {% else %}
+                  <p><strong>Vegetarian Friendly:</strong>&nbsp; <span class="glyphicon glyphicon-remove"></span></p>
+                  {% endif %}
+                  </br>
+                    <p><strong><u>Hours:</u></strong></p>
+                    <div class="hours-body indent">
+                      <strong>Sunday</strong>&nbsp;
+                      </br>
+                      <strong>Monday</strong>&nbsp;
+                      </br>
+                      <strong>Tuesday</strong>&nbsp;
+                      </br>
+                      <strong>Wednesday</strong>&nbsp;
+                      </br>
+                      <strong>Thursday</strong>&nbsp;
+                      </br>
+                      <strong>Friday</strong>&nbsp;
+                      </br>
+                      <strong>Saturday</strong>&nbsp;
+                    </div>
                 </div>
               </div>
             </div>
