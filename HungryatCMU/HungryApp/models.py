@@ -71,9 +71,6 @@ class Location(models.Model):
         
 class Restaurant(models.Model):
 
-    # --------------------
-    # TODO: Add add'l cuisine categories if necessary
-    # --------------------
     CUISINES = (('BR', 'Breakfast'), ('AM', 'American'), ('IN', 'Indian'), ('AS', 'Asian'), ('ME', 'Mexican'))
 
     location = models.ForeignKey(Location)

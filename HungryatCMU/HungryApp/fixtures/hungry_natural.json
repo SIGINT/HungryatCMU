@@ -260,7 +260,7 @@
         "cuisine": "AM", 
         "restaurant_picture": "", 
         "has_vegetarian": true, 
-        "phone": "", 
+        "phone": "214333999", 
         "location": 4, 
         "restaurant_name": "Carnegie Mellon Cafe"
     }
@@ -272,7 +272,7 @@
         "cuisine": "IN", 
         "restaurant_picture": "", 
         "has_vegetarian": true, 
-        "phone": "", 
+        "phone": "214333999", 
         "location": 4, 
         "restaurant_name": "Taste of India"
     }
@@ -284,7 +284,7 @@
         "cuisine": "BR", 
         "restaurant_picture": "", 
         "has_vegetarian": true, 
-        "phone": "", 
+        "phone": "214333999", 
         "location": 3, 
         "restaurant_name": "La Prima Espresso"
     }
@@ -296,7 +296,7 @@
         "cuisine": "AM", 
         "restaurant_picture": "", 
         "has_vegetarian": false, 
-        "phone": "", 
+        "phone": "214333999", 
         "location": 2, 
         "restaurant_name": "City Grill"
     }
@@ -308,7 +308,7 @@
         "cuisine": "AS", 
         "restaurant_picture": "restaurant-pictures/asiana.jpg", 
         "has_vegetarian": true, 
-        "phone": "", 
+        "phone": "214333999", 
         "location": 6, 
         "restaurant_name": "Asiana"
     }
@@ -320,7 +320,7 @@
         "cuisine": "ME", 
         "restaurant_picture": "restaurant-pictures/el-gallo-de-oro.jpg", 
         "has_vegetarian": true, 
-        "phone": "", 
+        "phone": "214333999", 
         "location": 4, 
         "restaurant_name": "El Gallo de Oro"
     }
@@ -332,7 +332,7 @@
         "cuisine": "AM", 
         "restaurant_picture": "restaurant-pictures/excahnge.jpg", 
         "has_vegetarian": true, 
-        "phone": "", 
+        "phone": "214333999", 
         "location": 1, 
         "restaurant_name": "The Exchange"
     }
@@ -344,7 +344,7 @@
         "cuisine": "BR", 
         "restaurant_picture": "restaurant-pictures/gingers-express.jpg", 
         "has_vegetarian": true, 
-        "phone": "", 
+        "phone": "214333999", 
         "location": 8, 
         "restaurant_name": "Ginger's Express"
     }
