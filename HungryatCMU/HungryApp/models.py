@@ -4,6 +4,14 @@ from django.contrib.auth.models import User
 from models import *
 
 
+# ========================================
+# 3 USERS (w/permissions):
+#
+# Student, is_student
+# Administrator, is_admin
+# RestaurantEmployee, is_employee
+# ========================================
+
 class Administrator(models.Model):
   
     GENDERS = (('M', 'Male'), ('F', 'Female'), ('N', 'N/A'))
