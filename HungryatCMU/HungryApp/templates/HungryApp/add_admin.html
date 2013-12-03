@@ -1,0 +1,113 @@
+{% extends "HungryApp/base.html" %}
+{% block title %}:: New Administrator{% endblock %}
+{% block navigation %}
+{% include "HungryApp/admin_nav.html" %}
+{% endblock %}
+{% block content %}
+</br>
+{% for error in form.non_field_errors %}
+<p style="color: red">
+{{ error }}
+</p>
+{% endfor %}
+</br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          </br></br></br></br>
+          <div class="outdent embossed">
+            <h2>New Administrator&nbsp; <span class="glyphicon glyphicon-user"></span></h2>
+          </div>
+          </br></br>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-10">
+          <div class="form-section">
+            <form class="form-horizontal" role="form" method="post" action="/register" class="indent btm-marg">
+              </br>
+              <div class="form-group">
+                {{ form.first_name.errors }}
+                <label class="col-md-2 control-label" for="inputFirstName">First Name</label>
+                <div class="col-md-3">
+                  {{ form.first_name }}
+                </div>
+                {{ form.last_name.errors }}
+                <label class="col-md-2 control-label" for="inputLastName">Last Name</label>
+                <div class="col-md-3">
+                  {{ form.last_name }}
+                </div>
+              </div>
+              </br>
+              <div class="form-group">  
+                {{ form.gender.errors }}
+                <label class="col-md-2 control-label" for="inputGender">Gender</label>
+                <div class="col-md-3">
+                  {{ form.gender }}
+                </div>
+                {{ form.date_of_birth.errors }}
+                <label class="col-md-2 control-label" for="inputBirthday">Date of Birth</label>
+                <div class="col-md-3">
+                  {{ form.date_of_birth }}
+                </div>
+                </br></br>
+              </div>
+              </br>
+              <div class="form-group">
+                {{ form.cell_phone.errors }}
+                <label class="col-md-2 control-label" for="inputCellPhone">Cell Phone</label>
+                <div class="col-md-3">
+                  {{ form.cell_phone }}
+                </div>
+                {{ form.home_phone.errors }}
+                <label class="col-md-2 control-label" for="inputHomePhone">Home Phone</label>
+                <div class="col-md-3">
+                  {{ form.home_phone }}
+                </div>
+              </div>
+              </br>
+              <div class="form-group">
+                {{ form.username.errors }}
+                <label class="col-md-2 control-label" for="inputUsername">Username</label>
+                <div class="col-md-3">
+                  {{ form.username }}
+                </div>
+                {{ form.email.errors }}
+                <label class="col-md-2 control-label" for="inputEmail">Email</label>
+                <div class="col-md-3">
+                  {{ form.email }}
+                </div>
+              </div>
+              <div class="form-group">
+                {{ form.password1.errors }}
+                <label class="col-md-2 control-label" for="inputPassword1">Password</label>
+                <div class="col-md-3">
+                  {{ form.password1 }}
+                </div>
+                {{ form.password2.errors }}
+                <label class="col-md-2 control-label" for="inputPassword2">Password Confirmation</label>
+                <div class="col-md-3">
+                  {{ form.password2 }}
+                </div>
+              </div>
+              </br></br>
+              <div class="indent" style="margin-left: 70px; margin-top: 30px;">
+                  <button type="submit" class="btn btn-primary btn-lg">&nbsp;&nbsp;Register&nbsp;&nbsp; <span class="glyphicon glyphicon-list-alt"></span></button>
+              </div>
+              </br>
+              {% csrf_token %}
+            </form>
+          </div>
+        </div>
+        <div class="col-md-1"></div>
+      </div>
+      </br></br>
+    </div>
+  </div>
+</div>
+{% endblock %}

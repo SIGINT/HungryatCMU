@@ -24,9 +24,6 @@ class StudentRegistrationForm(forms.Form):
     password2 = forms.CharField(max_length = 200, 
                                 label='Confirm password',  
                                 widget = forms.PasswordInput(attrs={'class':'form-control'}))
-    # -- TODO: cell_phone --> 3rd party lib or RegexField?
-    # cell_phone = forms.
-
 
     # Customizes form validation for properties that apply to more
     # than one field.  Overrides the forms.Form.clean function.
@@ -143,7 +140,11 @@ class RestaurantForm(forms.Form):
                                     widget = forms.TextInput(attrs={'class':'form-control'}))
   restaurant_picture = forms.ImageField(widget=forms.FileInput())
   has_vegetarian = forms.BooleanField()
-  #phone = forms.RegexField()
+  # ----------------
+  # TODO: PhoneField using 3rd party plugin or validation
+  # ----------------
+  phone = forms.CharField(max_length=10,
+                            widget=forms.TextInput(attrs={'class':'form-control'}))
   cuisine = forms.ChoiceField(widget = forms.RadioSelect,
                               choices = Restaurant.CUISINES)
                               
@@ -263,6 +264,43 @@ class EmployeeRegistrationForm(forms.Form):
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError("Your passwords did not match.")
             
+        return cleaned_data
+        
+        
+class AdminRegistrationForm(forms.Form):
+    first_name = forms.CharField(max_length=40,
+                                widget=forms.TextInput(attrs={'class':'form-control'}))
+    last_name = forms.CharField(max_length=40,
+                                widget=forms.TextInput(attrs={'class':'form-control'}))
+    gender = forms.ChoiceField(widget=forms.RadioSelect,
+                                choices=Administrator.GENDERS)
+    date_of_birth = forms.DateField(widget=forms.DateInput(attrs={'type':'date', 'class':'form-control'}))
+
+    # -------------------
+    # TODO: PhoneField using plugin or validation
+    # -------------------
+    cell_phone = forms.CharField(max_length=10,
+                                    widget=forms.TextInput(attrs={'class':'form-control'}))
+    home_phone = forms.CharField(max_length=10,
+                                    widget=forms.TextInput(attrs={'class':'form-control'}))
+    username = forms.CharField(max_length = 20,
+                              widget = forms.TextInput(attrs={'class':'form-control'}))
+    email = forms.EmailField(max_length=200,
+                            widget = forms.TextInput(attrs={'class':'form-control'}))
+    password1 = forms.CharField(max_length = 200, 
+                                    label='Password', 
+                                    widget = forms.PasswordInput(attrs={'class':'form-control'}))
+    password2 = forms.CharField(max_length = 200, 
+                                    label='Confirm Password',  
+                                    widget = forms.PasswordInput(attrs={'class':'form-control'}))
+    def clean(self):
+        cleaned_data = super(EmployeeRegistrationForm, self).clean()
+        password1 = cleaned_data.get('password1')
+        password2 = cleaned_data.get('password2')
+
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError("Your passwords did not match.")
+
         return cleaned_data
         
         

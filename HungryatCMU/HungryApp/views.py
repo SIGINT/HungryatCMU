@@ -164,6 +164,22 @@ def add_location(request):
     new_location.save()
     return redirect('/HungryApp/')
     
+@permission_required('HungryApp.is_admin', login_url='/HungryApp/')
+def add_admin(request):
+    context = {}
+
+    if request.method == 'GET':
+        context['form'] = AdminRegistrationForm()
+        return render(request, 'HungryApp/add_admin.html', context)
+
+    form = AdminRegistrationForm(request.POST)
+    context['form'] = form
+
+    if not form.is_valid():
+        return render(request, 'HungryApp/add_admin.html', context)
+        
+    return redirect('/HungryApp/')
+    
     
 @permission_required('HungryApp.is_admin', login_url='/HungryApp/')
 def employees(request):
