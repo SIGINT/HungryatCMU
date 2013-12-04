@@ -61,7 +61,7 @@ def home(request):
     # user.is_employee --> user is restaurant employee
     # 
     if user.has_perm('HungryApp.is_admin'):
-        users = User.objects.all()
+        users = User.objects.order_by('last_name', 'first_name')
         context['users'] = users
         return render(request, "HungryApp/admin.html", context)
     elif user.has_perm('HungryApp.is_employee'):
@@ -191,7 +191,7 @@ def add_admin(request):
 @permission_required('HungryApp.is_admin', login_url='/HungryApp/')
 def employees(request):
     context = {}
-    employees = RestaurantEmployee.objects.all()
+    employees = RestaurantEmployee.objects.order_by('user__last_name', 'user__first_name')
     context['employees'] = employees
     return render(request, 'HungryApp/employees.html', context)
     
@@ -199,7 +199,7 @@ def employees(request):
 @permission_required('HungryApp.is_admin', login_url='/HungryApp/')
 def students(request):
     context = {}
-    students = Student.objects.all()
+    students = Student.objects.order_by('user__last_name', 'user__first_name')
     context['students'] = students
     return render(request, 'HungryApp/students.html', context)
     
@@ -383,7 +383,7 @@ def restaurants(request):
     context = {}
     
     # Simple index --> list all entities in system
-    restaurants = Restaurant.objects.all()
+    restaurants = Restaurant.objects.order_by('restaurant_name')
     context['restaurants'] = restaurants
     return render(request, "HungryApp/restaurants.html", context)
     
