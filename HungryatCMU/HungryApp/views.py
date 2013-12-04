@@ -57,11 +57,18 @@ def home(request):
     #return render(request, 'HungryApp/index.html')
     user = request.user
     
-    # user.is_staff --> user is administrator
-    if user.is_staff:
+    # user.is_admin --> user is administrator
+    # user.is_employee --> user is restaurant employee
+    # 
+    if user.has_perm('HungryApp.is_admin'):
         users = User.objects.all()
         context['users'] = users
         return render(request, "HungryApp/admin.html", context)
+    elif user.has_perm('HungryApp.is_employee'):
+        employee = get_object_or_404(RestaurantEmployee, user=user)
+        r = employee.restaurant
+        context['r'] = r
+        return render(request, "HungryApp/view_restaurant.html", context)
     else:
         restaurants = Restaurant.objects.all()
         context['restaurants'] = restaurants

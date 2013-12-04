@@ -1021,7 +1021,13 @@
         "is_staff": false, 
         "last_login": "2013-12-02T03:45:16.058Z", 
         "groups": [], 
-        "user_permissions": [], 
+        "user_permissions": [
+          [
+              "is_employee", 
+              "HungryApp", 
+              "restaurantemployee"
+            ]
+        ], 
         "password": "pbkdf2_sha256$10000$xzcKtABUQzAb$ygu2trBqXfHBqyUvYZZM8hfKv92PmrkOBpi9EBo7Fmo=", 
         "email": "cafemanager01@cmu.fake.edu", 
         "date_joined": "2013-12-02T03:40:12.305Z"
@@ -1039,7 +1045,13 @@
         "is_staff": false, 
         "last_login": "2013-12-02T03:50:48.693Z", 
         "groups": [], 
-        "user_permissions": [], 
+        "user_permissions": [
+            [
+              "is_employee", 
+              "HungryApp", 
+              "restaurantemployee"
+            ]
+        ], 
         "password": "pbkdf2_sha256$10000$DCs9d1dxpVEI$8VZS2qYoM0lO5u1FDLdBJLAtABupYRaFUcnNbR9LWYI=", 
         "email": "toimanager01@cmu.fake.edu", 
         "date_joined": "2013-12-02T03:50:48.693Z"
@@ -1057,7 +1069,13 @@
         "is_staff": false, 
         "last_login": "2013-12-02T03:51:45.522Z", 
         "groups": [], 
-        "user_permissions": [], 
+        "user_permissions": [
+          [
+            "is_employee", 
+            "HungryApp", 
+            "restaurantemployee"
+          ]
+        ], 
         "password": "pbkdf2_sha256$10000$ywxzQ9iQdMAl$GKIRGxpVAgyHDlzGrhoBnw+fjx1bmd6MHsBmhlldvzY=", 
         "email": "citygrillmanager01@cmu.fake.edu", 
         "date_joined": "2013-12-02T03:51:45.522Z"
@@ -1075,7 +1093,13 @@
         "is_staff": false, 
         "last_login": "2013-12-02T04:25:29.722Z", 
         "groups": [], 
-        "user_permissions": [], 
+        "user_permissions": [
+          [
+            "is_employee", 
+            "HungryApp", 
+            "restaurantemployee"
+          ]
+        ], 
         "password": "pbkdf2_sha256$10000$aZ7v6wg237oI$PbOMLq00hCvcJ9c4xpbwtx6uC/hKYmSmTUpW9A4orIg=", 
         "email": "manager@cmu.fake.edu", 
         "date_joined": "2013-12-02T04:24:45.992Z"
