@@ -35,6 +35,6 @@ urlpatterns = patterns('',
     url(r'^search$', 'HungryApp.views.search'),
     url(r'^filterbypreptime$', 'HungryApp.views.filterbypreptime', name = 'filterbypreptime'),
     url(r'^add_order_to_cart/(?P<id>\d+)$', 'HungryApp.views.add_fooditem_to_order', name = 'add_order_to_cart'),
-    url(r'^place_order$', 'HungryApp.views.place_order', name = 'place_order'),
-    
-)
+    url(r'^place_order/(?P<id>\d+)$', 'HungryApp.views.place_order', name = 'place_order'),
+    url(r'^quick_order$', 'HungryApp.views.quick_order', name = 'quick_order'),
+    )

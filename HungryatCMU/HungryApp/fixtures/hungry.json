@@ -245,5 +245,22 @@
         "phone": "",
         "cuisine": "AM"
     }
-}
+},
+
+{
+    "pk": 1, 
+    "model": "HungryApp.foodItem", 
+    "fields": {
+          "restaurant_id":1,
+          "item_name":"Espresso",
+    "item_description": "The best espresso in Town",
+    "is_vegetarian": true,
+    "is_block": true,
+    "prep_time": 5,
+    "picture":"",
+    "price": 2
+     
+    }
+},
+
 ]

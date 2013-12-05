@@ -7,6 +7,7 @@
 <li><a href="#contact">Contact</a></li>
 <li><a href="/account">My Account</a></li>
 <li><a href="/logout">Logout</a></li>
+<li><a href="{% url 'quick_order' %}">Quick Order</a></li>
 {% endblock %}
 
 
@@ -27,10 +28,10 @@
 
 </p>  -->
 
-{% if r.isEmployee %}
+{% if  r.isEmployee %}
 <li> <a href="{% url 'add_fooditem' pk %}">ADD A FOOD ITEM</a>
 {% endif %}          
-<p>
+<p> 
 
 
 <br></br>
@@ -45,30 +46,23 @@
 Restaurant Menu: 
 <ul>
 {% for food_item in food_items %}
-   
-           <!--   {% if food_item.picture %}
-                <img src="{% url 'fooditem_photo' food_item.id %}" class="img-thumbnail" height="160px" width="160px">
-              {% endif %} -->
-  
+            
   {% if r.isEmployee %}
   <li> <a href="{% url 'edit_fooditem' food_item.id %}">{{food_item}}</a>  
   {% endif %}
 
-
-
-
-
   {% if not user.isEmployee %}
-  <a href="{% url 'view_fooditem' food_item.id %}">{{food_item}} </a>
+  <a href="{% url 'view_fooditem' food_item.id %}">{{food_item}} {{food_item.id}}</a>
   {% endif %}
-
+   
   <form action="{% url 'add_order_to_cart' food_item.id %}" method="post">
-        
+  
   <div class="form-group"> 
-                  <input class="btn-success" type="submit" value="Add to Order Cart" /><br>
-                  </li>
+                  <input class="btn-success" type="submit" value="Add to Order Cart" /><br> </div> </form>
+  </li>
 
-                </div>
+               
+            
 {% endfor %}
 </ul>
 </p>
@@ -76,22 +70,18 @@ Restaurant Menu:
 
 </form>
 
-
-{% for ordered_food_item in ordered_food_items %}
+{% for ordered_food_item in current_order.food_items_inorder.all %} 
         <div class="">
             <span class = "Remove_from_order"> <a href="{% url 'remove_food_item_from_order' ordered_food_item.id}}"> Delete </a></span>
             <span class = "Ordered_Food_Item"> {{ ordered_food_item }}</span>
-            <span class = "Ordered_Food_Item_Price"> {{ ordered_food_item.price }}  </span>   
+            <span class = "Ordered_Food_Item_Price"> {{ ordered_food_item.price }} {{current_order.id}} </span>   
         </div>
 {% endfor %}  
 
 
-{% if ordered_food_item %}
-<ul>
-<li>{{ ordered_food_item }} &nbsp;&nbsp;&nbsp;Price:${{ ordered_food_item.price }}</li>
-</ul>
 
-<a class="pull-left btn btn-primary" href="{% url 'place_order' %} "> Confirm Order </a><br>
+{% if current_order.food_items_inorder.all %}
+<a class="pull-left btn btn-primary" href="{% url 'place_order' current_order.id %} "> Confirm Order </a><br>
 {% endif %}
 
 

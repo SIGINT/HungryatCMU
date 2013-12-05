@@ -38,7 +38,7 @@ class Student(models.Model):
     STUDENT_YEARS = (('FR', 'Freshman'), ('SO', 'Sophomore'), ('JR', 'Junior'), ('SR', 'Senior'), ('GR', 'Graduate'))
     
     user = models.OneToOneField(User)
-    date_of_birth = models.DateField()
+    date_of_birth = models.DateField(null=True,blank=True)
     gender = models.CharField(max_length=1, choices=GENDERS)
     cell_phone = models.CharField(max_length=15)
     student_year = models.CharField(max_length=2, choices=STUDENT_YEARS)
@@ -139,12 +139,12 @@ class FoodItem(models.Model):
         
 class Order(models.Model):
     
-    ORDER_STATUSES = (('PL', 'Placed'), ('CP', 'Completed'), ('LT', 'Late'), ('CN', 'Cancelled'))
+    ORDER_STATUSES = (('NP','NotPlaced'),('PL', 'Placed'), ('CP', 'Completed'), ('LT', 'Late'), ('CN', 'Cancelled'))
     
     food_items_inorder = models.ManyToManyField(FoodItem)
     student_id = models.ForeignKey(Student)
-    time_placed = models.DateTimeField()
-    time_completed = models.DateTimeField()
+    time_placed = models.DateTimeField(blank=True,null=True)
+    time_completed = models.DateTimeField(blank=True,null=True)
     is_delivery = models.BooleanField(default=False)
-    status = models.CharField(max_length=2, choices=ORDER_STATUSES)
+    status = models.CharField(max_length=2, choices=ORDER_STATUSES, default='NP')
     

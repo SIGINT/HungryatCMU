@@ -642,35 +642,42 @@ def create_order(request):
 def add_fooditem_to_order(request,id):
   errors = []
   user = request.user
-  student = Student(user=request.user)
-  student.save()
-  current_order = Order(student_id=student)
-  current_order.save()
+  student = Student.objects.get(user=request.user)
+  #student.save()
+  try:
+    current_order = Order.objects.get(student_id=student, status = 'NP')
+  except Order.DoesNotExist:
+    current_order = Order(student_id=student)
+    current_order.save()
+  #current_order = Order(student_id=student,status='PL')
+  #current_order.save()
   #restaurant = Restaurant.objects.get(id=id)  
   #context = {'food_items':FoodItem.objects.filter(restaurant_id = id), 'pk':id }
   #return redirect(reverse('display_fooditems',context))
   #return render(request, 'HungryApp/display_fooditems.html', context)
   fooditem = get_object_or_404(FoodItem, id=id) 
   #food_item = FoodItem.objects.get(id=id)          
-  current_order = current_order.food_items_inorder.add(fooditem);
+  current_order.food_items_inorder.add(fooditem);
   current_order.save()
   #return current_order
   pk=fooditem.restaurant_id
   ordered_food_items = current_order.food_items_inorder
-  context = {'ordered_food_items': ordered_food_items,'pk':pk }
+  context = {'ordered_food_items': ordered_food_items,'current_order':current_order }
   return render(request, 'HungryApp/display_fooditems.html', context)
   
 
 @login_required
 @transaction.commit_on_success
-def place_order(request):
+def place_order(request,id):
     errors = []
-
+    order_confirm = Order.objects.get(id=id)
+    order_confirm.status = 'PL'
+    order_confirm.save()
     # Creates a new item if it is present as a parameter in the request
     #if not 'item' in request.POST or not request.POST['item']:
      # errors.append('You must enter an item to add.')
     #else:
-        
+    context = {'confirmed_order':order_confirm}    
     #new_item = Item(text=request.POST['item'], user=request.user)
     #new_item.save()
     #items = Item.objects.filter(user=request.user)
@@ -679,18 +686,18 @@ def place_order(request):
               message= "You have successfully placed your order. You will receive another email notification when your order is ready!",
               from_email="cmurugan@andrew.cmu.edu",
               recipient_list=[request.user.email])
-    return render(request, 'HungryApp/CompletedOrder.html')
+    return render(request, 'HungryApp/CompletedOrder.html',context)
 
 
 
-
-
-"""
 @login_required
 def quick_order(request):
-    user=request.user
-    context = { 'orders': Order.objects.filter(user=user) } 
-    return render(request, 'HungryApp/QuickOrder.html', context) """
+    user = request.user
+    student = Student.objects.get(user=request.user)
+    orders = Order.objects.all().filter(student_id = student)
+    quick_orders = orders.filter(status='PL')
+    context = { 'quick_orders': quick_orders } 
+    return render(request, 'HungryApp/quick_order.html', context) 
 
 
 

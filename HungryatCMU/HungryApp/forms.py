@@ -310,3 +310,4 @@ class FoodItemForm(forms.ModelForm):
         exclude = ('restaurant_id','is_block')
         widgets = {'food_item_pic' : forms.FileInput() }  
 
+
