@@ -39,7 +39,9 @@
           </ul>
         </div><!--/.nav-collapse -->
       </div>
+      {% if user.is_authenticated %}
       <p style="letter-spacing: 1px; color: #ddd; margin-right: 8px;" class="pull-right"><small>Logged in as:&nbsp;&nbsp;<u>{{user}}</u></small></p>
+      {% endif %}
       </br>
     </div>
     </br></br></br></br></br>
