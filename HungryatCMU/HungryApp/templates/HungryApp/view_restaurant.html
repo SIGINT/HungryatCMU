@@ -1,11 +1,11 @@
 {% extends "HungryApp/base.html" %}
 {% block title %}:: {{ r.restaurant_name }}{% endblock %}
 {% block navigation %}
-<li class="active"><a href="/restaurants">Restaurants</a></li>
-<li><a href="#contact">Contact</a></li>
-<li><a href="/account">My Account</a></li>
-<li><a href="{% url 'quick_order' %}">Quick Order</a></li>
-<li><a href="/logout">Logout</a></li>
+{% if is_admin %}
+{% include 'HungryApp/admin_nav.html' %}
+{% else %}
+{% include 'HungryApp/student_nav.html' %}
+{% endif %}
 {% endblock %}
 {% block content %}
 {% load staticfiles %}

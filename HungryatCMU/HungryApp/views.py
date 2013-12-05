@@ -381,10 +381,12 @@ def get_restaurants_json(request):
 @login_required
 def restaurants(request):
     context = {}
+    user = request.user
     
     # Simple index --> list all entities in system
     restaurants = Restaurant.objects.order_by('restaurant_name')
     context['restaurants'] = restaurants
+    context['is_admin'] = user.has_perm('HungryApp.is_admin')
     return render(request, "HungryApp/restaurants.html", context)
     
     
@@ -424,25 +426,20 @@ def add_restaurant(request):
                                   has_vegetarian=form.cleaned_data['has_vegetarian'],
                                   cuisine=form.cleaned_data['cuisine'])
       new_restaurant.save()
+      return HttpResponseRedirect(reverse("restaurant", args={new_restaurant.id}))
   else:
       return render(request, 'HungryApp/add_restaurant.html', context)
-    
-
-  
-  # --------------------
-  # TODO: Render restaurants page
-  # --------------------
-  #return render(request, "/restaurant", {})
-  return redirect("/HungryApp")
   
   
 @login_required
 def view_restaurant(request, id):
   context = {}
+  user = request.user
   r = get_object_or_404(Restaurant, pk=id)
   food_items = r.food_items.all()
   context['r'] = r
   context['items'] = food_items
+  context['is_admin'] = user.has_perm('HungryApp.is_admin')
   return render(request, 'HungryApp/view_restaurant.html', context)
   
   
