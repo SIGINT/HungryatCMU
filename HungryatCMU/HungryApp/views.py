@@ -168,6 +168,7 @@ def add_location(request):
     new_location.save()
     return redirect('/HungryApp/')
     
+    
 @permission_required('HungryApp.is_admin', login_url='/HungryApp/')
 def add_admin(request):
     context = {}
@@ -286,6 +287,7 @@ def confirm_registration(request, username, token):
     user.save()
     return render(request, 'HungryApp/EmailConfirmed.html', {})
     
+       
 def forgotpassword(request):
     context = {}
     
@@ -331,7 +333,8 @@ def forgotpassword(request):
 
     context['email'] = Password_forgot_user.email 
     return render(request, 'HungryApp/NeedsConfirmation.html', context)
-
+    
+    
 def resetpassword(request):
     context = {}
 
@@ -469,7 +472,6 @@ def edit_restaurant(request, id):
   
   # TODO !!!!!!!!!!!
   return redirect('/restaurants')
-    
   
   
 @login_required
@@ -509,7 +511,8 @@ def add_fooditem(request, id):
    
     form.save()
     return redirect('restaurant', id=restaurant.id)
-
+    
+    
 @login_required
 @transaction.commit_on_success
 #@permission_required('HungryApp.is_employee', login_url='/HungryApp/')
@@ -572,8 +575,7 @@ def get_fooditem_photo(request, id):
   #  Implement Search Functionality 
   # --------------------
   
-
-
+  
 def normalize_query(query_string,
                     findterms=re.compile(r'"([^"]+)"|(\S+)').findall,
                     normspace=re.compile(r'\s{2,}').sub):
@@ -586,7 +588,8 @@ def normalize_query(query_string,
     
     '''
     return [normspace(' ', (t[0] or t[1]).strip()) for t in findterms(query_string)] 
-
+    
+    
 def get_query(query_string, search_fields):
     ''' Returns a query, that is a combination of Q objects. That combination
         aims to search keywords within a model by testing the given search fields.
@@ -679,6 +682,7 @@ def add_fooditem_to_order(request,id):
   #return render(request, 'HungryApp/display_fooditems.html', context)
   return render(request, 'HungryApp/view_restaurant.html', context)
   
+  
 @csrf_exempt 
 @login_required
 @transaction.commit_on_success
@@ -722,9 +726,8 @@ def place_order(request,id):
               from_email="cmurugan@andrew.cmu.edu",
               recipient_list=[request.user.email])
     return render(request, 'HungryApp/CompletedOrder.html',context)
-
-
-
+    
+    
 @login_required
 def quick_order(request):
     user = request.user
@@ -733,8 +736,8 @@ def quick_order(request):
     quick_orders = orders.filter(status='CP')
     context = { 'quick_orders': quick_orders } 
     return render(request, 'HungryApp/quick_order.html', context) 
-
-
+    
+    
 @login_required
 @transaction.commit_on_success
 def restaurant_orders(request):
@@ -744,10 +747,8 @@ def restaurant_orders(request):
     orders_for_restaurant = Order.objects.filter(restaurant_id = restaurant,status = 'PL')
     context = {'orders':orders_for_restaurant}
     return render(request, 'HungryApp/RestaurantOrders.html',context)
-
-
-
-
+    
+    
 @login_required
 @transaction.commit_on_success
 def accept_order(request,id):
@@ -769,8 +770,8 @@ def accept_order(request,id):
               from_email="cmurugan@andrew.cmu.edu",
               recipient_list=[request.user.email])
     return render(request, 'HungryApp/CompletedOrder.html',context)
-
-
+    
+    
 @login_required
 @transaction.commit_on_success
 def cancel_order(request,id):
