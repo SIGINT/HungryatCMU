@@ -49,10 +49,10 @@ Restaurant Menu:
 <ul>
 {% for food_item in food_items %}
             
-  {% if r.isEmployee %}
-  <li> <a href="{% url 'edit_fooditem' food_item.id %}">{{food_item}}</a>  
-  {% endif %}
-
+  
+  <li> <a href="{% url 'edit_fooditem' food_item.id %}">{{food_item}}</a> 
+   <a href="{% url 'remove_fooditem' food_item.id %}">Delete</a> </li>
+  
      
   <form action="{% url 'add_order_to_cart' food_item.id %}" method="post">
   
@@ -71,7 +71,7 @@ Restaurant Menu:
 
 {% for ordered_food_item in current_order.food_items_inorder.all %} 
         <div class="">
-            <span class = "Remove_from_order"> <a href="{% url 'remove_food_item_from_order' ordered_food_item.id}}"> Delete </a></span>
+            <span class = "Remove_from_order"> <a href="{% url 'remove_from_order' ordered_food_item.id %}"> Remove </a></span>
             <span class = "Ordered_Food_Item"> {{ ordered_food_item }}</span>
             <span class = "Ordered_Food_Item_Price"> {{ ordered_food_item.price }} {{current_order.id}} </span>   
         </div>

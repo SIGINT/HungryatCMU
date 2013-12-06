@@ -57,7 +57,7 @@
 {% else %}
 {% include 'HungryApp/student_nav.html' %}
 {% endif %}
-
+<a href="{% url 'restaurant_orders' %}">View Orders</a></li>
 {% endblock %}
 {% block content %}
 {% load staticfiles %}

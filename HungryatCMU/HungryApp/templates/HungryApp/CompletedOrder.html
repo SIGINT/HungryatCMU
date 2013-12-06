@@ -12,7 +12,8 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
           </br></br></br>
-
+          
+          <span class = "Confirmed Order"> {{ confirmed_order.restaurant_id.restaurant_name }}</span>
           {% for ordered_food_item in confirmed_order.food_items_inorder.all %} 
         <div class="">
             
@@ -30,7 +31,7 @@
             </br>
             <div class="indent">
               <p>
-              You have successfully placed your order and an email confirmation and receipt has been sent to your email address.Thank you!!
+              You have successfully placed your order at {{ confirmed_order.restaurant_id.restaurant_name }} and an email confirmation and receipt has been sent to your email address.Thank you!!
               Click to continue browsing through other restaurants <strong><a href="{% url 'restaurants' %}">Back to Restaurants</a></strong>
               </p>
             </div>

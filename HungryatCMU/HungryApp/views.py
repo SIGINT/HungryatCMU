@@ -527,6 +527,28 @@ def edit_fooditem(request, id):
     #return redirect(reverse('display_fooditems'))
 
 @login_required
+@transaction.commit_on_success
+#@permission_required('HungryApp.is_employee', login_url='/HungryApp/')
+def delete_fooditem(request, id):
+    fooditem_to_delete = get_object_or_404(FoodItem, id=id)
+    fooditem_to_delete.delete()
+    restaurant = fooditem_to_delete.restaurant_id  
+    context = {'food_items':FoodItem.objects.filter(restaurant_id = restaurant.id), 'pk':id, 'r': restaurant }
+    #return redirect(reverse('display_fooditems',context))
+    return render(request, 'HungryApp/display_fooditems.html', context)        
+       
+    #return redirect(reverse('display_fooditems'))
+
+
+
+
+
+
+
+
+
+
+@login_required
 def view_fooditem(request, id):
   fooditem_to_view = get_object_or_404(FoodItem, id=id)
   form = FoodItemForm(instance=fooditem_to_view)
@@ -668,6 +690,25 @@ def add_fooditem_to_order(request,id):
  
 
   return render(request, 'HungryApp/display_fooditems.html', context)
+
+@csrf_exempt 
+@login_required
+@transaction.commit_on_success
+def remove_from_order(request,id):
+    user = request.user
+    student = Student.objects.get(user=request.user)
+    current_order = Order.objects.get(student_id=student, status = 'NP') 
+    fooditem = get_object_or_404(FoodItem, id=id)
+    current_order.food_items_inorder.remove(fooditem);
+    current_order.save()
+    pk=fooditem.restaurant_id.id
+    restaurant = Restaurant.objects.get(id=pk)  
+    ordered_food_items = current_order.food_items_inorder
+    context = {'ordered_food_items': ordered_food_items,'current_order':current_order,'food_items':FoodItem.objects.filter(restaurant_id = pk),'pk':pk, 'r': restaurant }
+    return render(request,'HungryApp/display_fooditems.html', context)
+    
+
+
   
 
 @login_required
@@ -699,14 +740,70 @@ def quick_order(request):
     user = request.user
     student = Student.objects.get(user=request.user)
     orders = Order.objects.all().filter(student_id = student)
-    quick_orders = orders.filter(status='PL')
+    quick_orders = orders.filter(status='CP')
     context = { 'quick_orders': quick_orders } 
     return render(request, 'HungryApp/quick_order.html', context) 
 
 
+@login_required
+@transaction.commit_on_success
+def restaurant_orders(request):
+    errors = []
+    restaurant_employee = RestaurantEmployee.objects.get(user=request.user)
+    restaurant = restaurant_employee.restaurant
+    orders_for_restaurant = Order.objects.filter(restaurant_id = restaurant,status = 'PL')
+    context = {'orders':orders_for_restaurant}    
+      
+    return render(request, 'HungryApp/RestaurantOrders.html',context)
 
 
 
+
+@login_required
+@transaction.commit_on_success
+def accept_order(request,id):
+    errors = []
+    order_confirm = Order.objects.get(id=id)
+    order_confirm.status = 'CP'
+    order_confirm.save()
+    # Creates a new item if it is present as a parameter in the request
+    #if not 'item' in request.POST or not request.POST['item']:
+     # errors.append('You must enter an item to add.')
+    #else:
+    context = {'confirmed_order':order_confirm}    
+    #new_item = Item(text=request.POST['item'], user=request.user)
+    #new_item.save()
+    #items = Item.objects.filter(user=request.user)
+    #context = {'items' : items, 'errors' : errors , 'users' : request.user }
+    send_mail(subject="Hungry App Order Details ",
+              message= "Your order is ready!!Come and collect it!",
+              from_email="cmurugan@andrew.cmu.edu",
+              recipient_list=[request.user.email])
+    return render(request, 'HungryApp/CompletedOrder.html',context)
+
+
+@login_required
+@transaction.commit_on_success
+def cancel_order(request,id):
+    errors = []
+    order_confirm = Order.objects.get(id=id)
+    order_confirm.status = 'CN'
+    order_confirm.save()
+    # Creates a new item if it is present as a parameter in the request
+    #if not 'item' in request.POST or not request.POST['item']:
+     # errors.append('You must enter an item to add.')
+    #else:
+    context = {'confirmed_order':order_confirm}    
+    #new_item = Item(text=request.POST['item'], user=request.user)
+    #new_item.save()
+    #items = Item.objects.filter(user=request.user)
+    #context = {'items' : items, 'errors' : errors , 'users' : request.user }
+    message = ""
+    send_mail(subject="Hungry App Order Details ",
+              message= "Your order has been cancelled!Sorry for the inconvenience!",
+              from_email="cmurugan@andrew.cmu.edu",
+              recipient_list=[request.user.email])
+    return render(request, 'HungryApp/CompletedOrder.html',context)
 
 
 
