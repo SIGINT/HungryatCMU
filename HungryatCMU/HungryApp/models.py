@@ -124,7 +124,7 @@ class RestaurantEmployee(models.Model):
         
 class FoodItem(models.Model):
     
-    restaurant_id = models.ForeignKey(Restaurant, related_name='food_items')
+    restaurant = models.ForeignKey(Restaurant, related_name='food_items')
     item_name = models.CharField(max_length=80)
     item_description = models.TextField()
     is_vegetarian = models.BooleanField(default=False)
@@ -143,7 +143,7 @@ class Order(models.Model):
     
     food_items_inorder = models.ManyToManyField(FoodItem)
     student_id = models.ForeignKey(Student)
-    time_placed = models.DateTimeField(blank=True,null=True)
+    time_placed = models.DateTimeField(blank=True,null=True, auto_now_add=True)
     time_completed = models.DateTimeField(blank=True,null=True)
     is_delivery = models.BooleanField(default=False)
     status = models.CharField(max_length=2, choices=ORDER_STATUSES, default='NP')

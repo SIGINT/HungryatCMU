@@ -307,7 +307,7 @@ class AdminRegistrationForm(forms.Form):
 class FoodItemForm(forms.ModelForm):
     class Meta:
         model = FoodItem
-        exclude = ('restaurant_id','is_block')
+        exclude = ('restaurant','is_block')
         widgets = {'food_item_pic' : forms.FileInput() }  
 
 

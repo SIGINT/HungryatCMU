@@ -1,19 +1,13 @@
 {% extends "HungryApp/base.html" %}
 {% block title %}:: Add a Food Item {% endblock %}
-
-
 {% block navigation %}
 <li class="active"><a href="/restaurants">Restaurants</a></li>
 <li><a href="#contact">Contact</a></li>
 <li><a href="/account">My Account</a></li>
 <li><a href="/logout">Logout</a></li>
-<li><a href="{% url 'quick_order' %}">Quick Order</a></li>
 {% endblock %}
-
-
 {% block content %}
 </br></br>
-<body>
 <p>
 <!--
 <div class="embossed">
@@ -27,63 +21,40 @@
 
 
 </p>  -->
-
-
-{% if not r.isEmployee %}
-
-<li> <a href="{% url 'add_fooditem' pk %}">ADD A FOOD ITEM</a>
+{% if perms.HungryApp.is_employee %}
+<li><a href="{% url 'add_fooditem' pk %}">ADD A FOOD ITEM</a></li>
 {% endif %}          
-<p> 
-
-
+<p>
 <br></br>
 <br></br>
-
 {% if user %}
   <li>{{user.id}}</a>  
-  {% endif %}
-
+{% endif %}
 <br></br>
 <br></br>
 Restaurant Menu: 
 <ul>
 {% for food_item in food_items %}
-            
-  
   <li> <a href="{% url 'edit_fooditem' food_item.id %}">{{food_item}}</a> 
    <a href="{% url 'remove_fooditem' food_item.id %}">Delete</a> </li>
-  
-     
   <form action="{% url 'add_order_to_cart' food_item.id %}" method="post">
-  
-  <div class="form-group"> 
-                  <input class="btn-success" type="submit" value="Add to Order Cart" /><br> </div> </form>
+    <div class="form-group"> 
+      <input class="btn-success" type="submit" value="Add to Order Cart" />
+      </br>
+    </div>
+  </form>
   </li>
-
-               
-            
 {% endfor %}
 </ul>
 </p>
-
-
-</form>
-
-{% for ordered_food_item in current_order.food_items_inorder.all %} 
+{% for ordered_food_item in ordered_food_items %}
         <div class="">
             <span class = "Remove_from_order"> <a href="{% url 'remove_from_order' ordered_food_item.id %}"> Remove </a></span>
             <span class = "Ordered_Food_Item"> {{ ordered_food_item }}</span>
-            <span class = "Ordered_Food_Item_Price"> {{ ordered_food_item.price }} {{current_order.id}} </span>   
+            <span class = "Ordered_Food_Item_Price"> {{ ordered_food_item.price }}  </span>   
         </div>
-{% endfor %}  
-
-
-
-{% if current_order.food_items_inorder.all %}
-<a class="pull-left btn btn-primary" href="{% url 'place_order' current_order.id %} "> Confirm Order </a><br>
+{% endfor %}
+{% if current_order.foot_items_inorder.all %}
+<a class="pull-left btn btn-primary" href="{% url 'place_order' %} "> Confirm Order </a><br>
 {% endif %}
-
-
 {%endblock%}
-</body>
-</html>

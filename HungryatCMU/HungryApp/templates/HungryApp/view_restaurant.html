@@ -1,13 +1,11 @@
 {% extends "HungryApp/base.html" %}
 {% block title %}:: {{ r.restaurant_name }}{% endblock %}
 {% block navigation %}
-
 {% if is_admin %}
 {% include 'HungryApp/admin_nav.html' %}
 {% else %}
 {% include 'HungryApp/student_nav.html' %}
 {% endif %}
-
 {% endblock %}
 {% block content %}
 {% load staticfiles %}
@@ -55,13 +53,81 @@
         <div class="col-md-8">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title"> <a href="{% url 'display_fooditems' r.id %}"> Menu </h3>
+              <h3 class="panel-title">Menu</h3>
             </div>
             <div class="panel-body">
-              <p>TODO: FOOD ITEMS HERE</p>
-              {% for i in items %}
-              {% endfor %}
+              {% if perms.HungryApp.is_employee %}
+              <div class="pull-right"><a class="btn btn-primary btn-md" href="{% url 'add_fooditem' r.id %}">New Food Item <span class="glyphicon glyphicon-plus"></a></div>
+              {% endif %}
+              </br></br></br>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Description</th>
+                    <th>Vegetarian</th>
+                    <th>Prep Time</th>
+                    <th>Price</th>
+                    {% if perms.HungryApp.is_student %}
+                    <th></th>
+                    {% endif %}
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for i in r.food_items.all %}
+                  <tr>
+                    <td>{{i.item_name}}</td>
+                    <td>{{i.item_description}}</td>
+                    <td>
+                      {% if i.is_vegetarian %}
+                      <span style="color: green;" class="glyphicon glyphicon-ok"></span>
+                      {% else %}
+                      <span style="color: red;" class="glyphicon glyphicon-remove"></span>
+                      {% endif %}
+                    </td>
+                    <td>{{i.prep_time}}</td>
+                    <td>${{i.price}}
+                    {% if perms.HungryApp.is_student %}
+                    <td>
+                      <form action="{% url 'add_order_to_cart' i.id %}" method="post">
+                        <div class="form-group">
+                          <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span>Add to Order</button>
+                        </div>
+                      </form>
+                    </td>
+                    {% endif %}
+                  {% endfor %}
+                </tbody>
+              </table>
             </div>
+          </div>
+          {% if perms.HungryApp.is_student %}
+            <div class="content-well">
+              <h3>Current Order</h3>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for ordered_food_item in ordered_food_items %}
+                  <tr>
+                    <td>{{ ordered_food_item }}</td>
+                    <td>${{ ordered_food_item.price }}</td>
+                    <td><a class="btn btn-default btn-md" href="{% url 'remove_food_item_from_order' ordered_food_item.id}}">Delete&nbsp; <span class="glyphicon glyphicon-remove"></span></a></td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+              {% if current_order.food_items_inorder.all %}
+                <a class="pull-left btn btn-primary" href="{% url 'place_order' current_order.id %} "> Confirm Order </a>
+                </br>
+              {% endif %}
+            </div>
+          {% endif %}
         </div>
         <div class="col-md-2"></div>
       </div>  

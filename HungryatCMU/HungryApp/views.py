@@ -52,14 +52,11 @@ from HungryApp.forms import *
 @login_required
 def home(request):
     context = {}
-    
-    # Sets up list of just the logged-in user's (request.user's) items
-    #return render(request, 'HungryApp/index.html')
     user = request.user
     
     # user.is_admin --> user is administrator
     # user.is_employee --> user is restaurant employee
-    # 
+    # user.is_student --> user is student
     if user.has_perm('HungryApp.is_admin'):
         users = User.objects.order_by('last_name', 'first_name')
         context['users'] = users
@@ -70,7 +67,7 @@ def home(request):
         context['r'] = r
         return render(request, "HungryApp/view_restaurant.html", context)
     else:
-        restaurants = Restaurant.objects.all()
+        restaurants = Restaurant.objects.order_by('restaurant_name')
         context['restaurants'] = restaurants
         return render(request, "HungryApp/restaurants.html", context)
         
@@ -433,14 +430,14 @@ def add_restaurant(request):
   
 @login_required
 def view_restaurant(request, id):
-  context = {}
-  user = request.user
-  r = get_object_or_404(Restaurant, pk=id)
-  food_items = r.food_items.all()
-  context['r'] = r
-  context['items'] = food_items
-  context['is_admin'] = user.has_perm('HungryApp.is_admin')
-  return render(request, 'HungryApp/view_restaurant.html', context)
+    context = {}
+    user = request.user
+    r = get_object_or_404(Restaurant, pk=id)
+    food_items = r.food_items.all()
+    context['r'] = r
+    context['items'] = food_items
+    context['is_admin'] = user.has_perm('HungryApp.is_admin')
+    return render(request, 'HungryApp/view_restaurant.html', context)
   
   
 @login_required
@@ -496,21 +493,22 @@ def add_fooditem(request, id):
     employee = get_object_or_404(RestaurantEmployee, user=user)
     restaurant = get_object_or_404(Restaurant, id=id)
     
-    if not employee.restaurant.id == id:
+    """
+    if not employee.restaurant == id:
         return redirect('/HungryApp')
-    
+    """
     if request.method == "GET":
         context = {'form':FoodItemForm(), 'id':id}
         return render(request, 'HungryApp/add_fooditem.html', context)
         
-    new_food_item = FoodItem(restaurant_id= Restaurant.objects.get(id=id))
+    new_food_item = FoodItem(restaurant=restaurant)
     form = FoodItemForm(request.POST, request.FILES, instance=new_food_item)
     if not form.is_valid():
         context = {'form':form, 'id':id}
         return render(request, 'HungryApp/add_fooditem.html', context)
    
     form.save()
-    return redirect(reverse('display_fooditems', args=[id]))
+    return redirect('restaurant', id=restaurant.id)
 
 @login_required
 @transaction.commit_on_success
@@ -532,8 +530,8 @@ def edit_fooditem(request, id):
 
     form.save()
     return render(request, 'HungryApp/edit_fooditem.html', context)
-    #return redirect(reverse('display_fooditems'))
-
+    
+    
 @login_required
 @transaction.commit_on_success
 #@permission_required('HungryApp.is_employee', login_url='/HungryApp/')
@@ -542,35 +540,24 @@ def delete_fooditem(request, id):
     fooditem_to_delete.delete()
     restaurant = fooditem_to_delete.restaurant_id  
     context = {'food_items':FoodItem.objects.filter(restaurant_id = restaurant.id), 'pk':id, 'r': restaurant }
-    #return redirect(reverse('display_fooditems',context))
-    return render(request, 'HungryApp/display_fooditems.html', context)        
-       
-    #return redirect(reverse('display_fooditems'))
-
-
-
-
-
-
-
-
-
-
+    return render(request, 'HungryApp/display_fooditems.html', context)
+    
+    
 @login_required
 def view_fooditem(request, id):
   fooditem_to_view = get_object_or_404(FoodItem, id=id)
   form = FoodItemForm(instance=fooditem_to_view)
   context = {'food_item': fooditem_to_view, 'id':id , 'form':form} 
   return render(request, 'HungryApp/view_food_item.html',context)    
-
+  
+  
 @login_required
 def display_fooditems(request,id):
-
     restaurant = Restaurant.objects.get(id=id)  
     context = {'food_items':FoodItem.objects.filter(restaurant_id = id), 'pk':id, 'r': restaurant }
-    #return redirect(reverse('display_fooditems',context))
-    return render(request, 'HungryApp/display_fooditems.html', context)        
-
+    return render(request, 'HungryApp/display_fooditems.html', context)
+    
+    
 @login_required
 def get_fooditem_photo(request, id):
   food_item = get_object_or_404(FoodItem, pk=id)
@@ -580,9 +567,7 @@ def get_fooditem_photo(request, id):
       
   content_type = guess_type(food_item.picture.name)
   return HttpResponse(food_item.picture, mimetype=content_type)
-
-
-
+  
   # --------------------
   #  Implement Search Functionality 
   # --------------------
@@ -685,16 +670,13 @@ def add_fooditem_to_order(request,id):
   fooditem = get_object_or_404(FoodItem, id=id) 
   #food_item = FoodItem.objects.get(id=id)          
   current_order.food_items_inorder.add(fooditem);
-
-  current_order.restaurant_id= fooditem.restaurant_id
-
+  current_order.restaurant = fooditem.restaurant
   current_order.save()
-  #return current_order
-  pk=fooditem.restaurant_id.id
+  pk=fooditem.restaurant.id
   restaurant = Restaurant.objects.get(id=pk)  
-  ordered_food_items = current_order.food_items_inorder
-
+  ordered_food_items = current_order.food_items_inorder.all()
   context = {'ordered_food_items': ordered_food_items,'current_order':current_order,'food_items':FoodItem.objects.filter(restaurant_id = pk),'pk':pk, 'r': restaurant }
+<<<<<<< HEAD
  
 
   return render(request, 'HungryApp/display_fooditems.html', context)
@@ -714,11 +696,13 @@ def remove_from_order(request,id):
     ordered_food_items = current_order.food_items_inorder
     context = {'ordered_food_items': ordered_food_items,'current_order':current_order,'food_items':FoodItem.objects.filter(restaurant_id = pk),'pk':pk, 'r': restaurant }
     return render(request,'HungryApp/display_fooditems.html', context)
+    """
+    context['r'] = restaurant
+    context['items'] = restaurant.food_items.all()
+    return render(request, "HungryApp/view_restaurant.html", context)
+    """
     
-
-
-  
-
+    
 @login_required
 @transaction.commit_on_success
 def place_order(request,id):
@@ -760,8 +744,7 @@ def restaurant_orders(request):
     restaurant_employee = RestaurantEmployee.objects.get(user=request.user)
     restaurant = restaurant_employee.restaurant
     orders_for_restaurant = Order.objects.filter(restaurant_id = restaurant,status = 'PL')
-    context = {'orders':orders_for_restaurant}    
-      
+    context = {'orders':orders_for_restaurant}
     return render(request, 'HungryApp/RestaurantOrders.html',context)
 
 
@@ -812,15 +795,4 @@ def cancel_order(request,id):
               from_email="cmurugan@andrew.cmu.edu",
               recipient_list=[request.user.email])
     return render(request, 'HungryApp/CompletedOrder.html',context)
-
-
-
-
-
-
-
-
-
-
-  
-  
+    
