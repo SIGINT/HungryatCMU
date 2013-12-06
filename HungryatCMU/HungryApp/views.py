@@ -488,8 +488,16 @@ def get_restaurant_picture(request, id):
 
 @login_required
 @transaction.commit_on_success
-#@permission_required('HungryApp.is_employee', login_url='/HungryApp/')
-def add_fooditem(request,id):
+@permission_required('HungryApp.is_employee', login_url='/HungryApp/')
+def add_fooditem(request, id):
+    
+    # Grab employee attempting to add new food item (assume user is RestaurantEmployee)
+    user = request.user
+    employee = get_object_or_404(RestaurantEmployee, user=user)
+    restaurant = get_object_or_404(Restaurant, id=id)
+    
+    if not employee.restaurant.id == id:
+        return redirect('/HungryApp')
     
     if request.method == "GET":
         context = {'form':FoodItemForm(), 'id':id}
