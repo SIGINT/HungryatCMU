@@ -655,11 +655,13 @@ def add_fooditem_to_order(request,id):
   fooditem = get_object_or_404(FoodItem, id=id) 
   #food_item = FoodItem.objects.get(id=id)          
   current_order.food_items_inorder.add(fooditem);
+  current_order.restaurant_id= fooditem.restaurant_id
   current_order.save()
   #return current_order
-  pk=fooditem.restaurant_id
+  pk=fooditem.restaurant_id.id
+  restaurant = Restaurant.objects.get(id=pk)  
   ordered_food_items = current_order.food_items_inorder
-  context = {'ordered_food_items': ordered_food_items,'current_order':current_order }
+  context = {'ordered_food_items': ordered_food_items,'current_order':current_order,'food_items':FoodItem.objects.filter(restaurant_id = pk),'pk':pk, 'r': restaurant }
   return render(request, 'HungryApp/display_fooditems.html', context)
   
 

@@ -28,7 +28,7 @@
 
 </p>  -->
 
-{% if  r.isEmployee %}
+{% if not r.isEmployee %}
 <li> <a href="{% url 'add_fooditem' pk %}">ADD A FOOD ITEM</a>
 {% endif %}          
 <p> 

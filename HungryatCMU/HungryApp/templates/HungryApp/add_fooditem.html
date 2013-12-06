@@ -15,17 +15,40 @@
 </br></br>
 
 
-<body>
-<p>
-<form enctype="multipart/form-data" action="{% url 'add_fooditem' id %}" method="post">
-<table>
-{{form}}
-</table>
-<input type="submit" value="Add food-item">
-{% csrf_token %}
-</form>
-<a href="{% url 'display_fooditems' id %}"><button>Cancel</button></a>
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <form class="form-horizontal" role="form" method="post" action="{% url 'add_fooditem' id %}" class="indent btm-marg" enctype="multipart/form-data">
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-10">
+          </br></br></br>
+          <div class="outdent embossed">
+            <h2>New Food-Item &nbsp; <span class="glyphicon glyphicon-cutlery"></span></h2>
+          </div>
+          </br></br>
+          <div class="row">        
+            <div class="col-md-3">
+              {% include 'HungryApp/form_loop.html' %}
+            </div>
+            <div class="col-md-1"></div>
+            
+          </div>
+          <div class="divider2"></div>
+          </br></br>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-lg">&nbsp;Submit&nbsp;</button>
+            <a href="{% url 'display_fooditems' id %}">&nbsp;Cancel&nbsp;</a>
+            </div>
+
+        </div>
+      </div>
+      </form>
+      
+      </br></br></br>
+    </div>
+  </div><!-- /.row -->
+</div><!-- /.container -->
 
 
 {%endblock%}

@@ -147,4 +147,4 @@ class Order(models.Model):
     time_completed = models.DateTimeField(blank=True,null=True)
     is_delivery = models.BooleanField(default=False)
     status = models.CharField(max_length=2, choices=ORDER_STATUSES, default='NP')
-    
+    restaurant_id = models.ForeignKey(Restaurant,blank=True,null=True)
