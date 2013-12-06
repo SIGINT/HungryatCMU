@@ -1,6 +1,156 @@
 [
 {
     "pk": 1, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "permission", 
+        "name": "permission", 
+        "app_label": "auth"
+    }
+},
+{
+    "pk": 2, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "group", 
+        "name": "group", 
+        "app_label": "auth"
+    }
+},
+{
+    "pk": 3, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "user", 
+        "name": "user", 
+        "app_label": "auth"
+    }
+},
+{
+    "pk": 4, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "contenttype", 
+        "name": "content type", 
+        "app_label": "contenttypes"
+    }
+},
+{
+    "pk": 5, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "session", 
+        "name": "session", 
+        "app_label": "sessions"
+    }
+},
+{
+    "pk": 6, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "site", 
+        "name": "site", 
+        "app_label": "sites"
+    }
+},
+{
+    "pk": 7, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "administrator", 
+        "name": "administrator", 
+        "app_label": "HungryApp"
+    }
+},
+{
+    "pk": 8, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "student", 
+        "name": "student", 
+        "app_label": "HungryApp"
+    }
+},
+{
+    "pk": 9, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "location", 
+        "name": "location", 
+        "app_label": "HungryApp"
+    }
+},
+{
+    "pk": 10, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "restaurant", 
+        "name": "restaurant", 
+        "app_label": "HungryApp"
+    }
+},
+{
+    "pk": 11, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "operatinghours", 
+        "name": "operating hours", 
+        "app_label": "HungryApp"
+    }
+},
+{
+    "pk": 12, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "restaurantemployee", 
+        "name": "restaurant employee", 
+        "app_label": "HungryApp"
+    }
+},
+{
+    "pk": 13, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "fooditem", 
+        "name": "food item", 
+        "app_label": "HungryApp"
+    }
+},
+{
+    "pk": 14, 
+    "model": "contenttypes.contenttype", 
+    "fields": {
+        "model": "order", 
+        "name": "order", 
+        "app_label": "HungryApp"
+    }
+},
+{
+    "pk": "g4oov68ugulvwbcz4c294laoos9q057u", 
+    "model": "sessions.session", 
+    "fields": {
+        "expire_date": "2013-12-16T03:40:56.900Z", 
+        "session_data": "MTFkMTNhYmMyNzNiMGUxYzUxMTVkZDg5NDk5Zjk2NTZkYWYxYzhjODqAAn1xAS4="
+    }
+},
+{
+    "pk": "xdv0jx8fco9oow4u8d7fpa6a5x7q505u", 
+    "model": "sessions.session", 
+    "fields": {
+        "expire_date": "2013-12-16T04:25:29.724Z", 
+        "session_data": "ODJjZmY4ZWQ3YjRhNDA3NGNmZTg0ZmU0MWU3OWVkNjk4Y2JlNzczZTqAAn1xAShVEl9hdXRoX3VzZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEDVQ1fYXV0aF91c2VyX2lkcQRLCnUu"
+    }
+},
+{
+    "pk": 1, 
+    "model": "sites.site", 
+    "fields": {
+        "domain": "example.com", 
+        "name": "example.com"
+    }
+},
+{
+    "pk": 1, 
     "model": "HungryApp.location", 
     "fields": {
         "room": "", 
@@ -108,9 +258,9 @@
     "model": "HungryApp.restaurant", 
     "fields": {
         "cuisine": "AM", 
-        "restaurant_picture": "", 
+        "restaurant_picture": "restaurant-pictures/catbox.jpg", 
         "has_vegetarian": true, 
-        "phone": "", 
+        "phone": "214333999", 
         "location": 4, 
         "restaurant_name": "Carnegie Mellon Cafe"
     }
@@ -122,7 +272,7 @@
         "cuisine": "IN", 
         "restaurant_picture": "", 
         "has_vegetarian": true, 
-        "phone": "", 
+        "phone": "214333999", 
         "location": 4, 
         "restaurant_name": "Taste of India"
     }
@@ -134,7 +284,7 @@
         "cuisine": "BR", 
         "restaurant_picture": "", 
         "has_vegetarian": true, 
-        "phone": "", 
+        "phone": "214333999", 
         "location": 3, 
         "restaurant_name": "La Prima Espresso"
     }
@@ -146,7 +296,7 @@
         "cuisine": "AM", 
         "restaurant_picture": "", 
         "has_vegetarian": false, 
-        "phone": "", 
+        "phone": "214333999", 
         "location": 2, 
         "restaurant_name": "City Grill"
     }
@@ -158,7 +308,7 @@
         "cuisine": "AS", 
         "restaurant_picture": "restaurant-pictures/asiana.jpg", 
         "has_vegetarian": true, 
-        "phone": "", 
+        "phone": "214333999", 
         "location": 6, 
         "restaurant_name": "Asiana"
     }
@@ -170,7 +320,7 @@
         "cuisine": "ME", 
         "restaurant_picture": "restaurant-pictures/el-gallo-de-oro.jpg", 
         "has_vegetarian": true, 
-        "phone": "", 
+        "phone": "214333999", 
         "location": 4, 
         "restaurant_name": "El Gallo de Oro"
     }
@@ -182,7 +332,7 @@
         "cuisine": "AM", 
         "restaurant_picture": "restaurant-pictures/excahnge.jpg", 
         "has_vegetarian": true, 
-        "phone": "", 
+        "phone": "214333999", 
         "location": 1, 
         "restaurant_name": "The Exchange"
     }
@@ -194,9 +344,549 @@
         "cuisine": "BR", 
         "restaurant_picture": "restaurant-pictures/gingers-express.jpg", 
         "has_vegetarian": true, 
-        "phone": "", 
+        "phone": "214333999", 
         "location": 8, 
         "restaurant_name": "Ginger's Express"
+    }
+},
+{
+    "pk": 1, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_permission", 
+        "name": "Can add permission", 
+        "content_type": [
+            "auth", 
+            "permission"
+        ]
+    }
+},
+{
+    "pk": 2, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_permission", 
+        "name": "Can change permission", 
+        "content_type": [
+            "auth", 
+            "permission"
+        ]
+    }
+},
+{
+    "pk": 3, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_permission", 
+        "name": "Can delete permission", 
+        "content_type": [
+            "auth", 
+            "permission"
+        ]
+    }
+},
+{
+    "pk": 4, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_group", 
+        "name": "Can add group", 
+        "content_type": [
+            "auth", 
+            "group"
+        ]
+    }
+},
+{
+    "pk": 5, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_group", 
+        "name": "Can change group", 
+        "content_type": [
+            "auth", 
+            "group"
+        ]
+    }
+},
+{
+    "pk": 6, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_group", 
+        "name": "Can delete group", 
+        "content_type": [
+            "auth", 
+            "group"
+        ]
+    }
+},
+{
+    "pk": 7, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_user", 
+        "name": "Can add user", 
+        "content_type": [
+            "auth", 
+            "user"
+        ]
+    }
+},
+{
+    "pk": 8, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_user", 
+        "name": "Can change user", 
+        "content_type": [
+            "auth", 
+            "user"
+        ]
+    }
+},
+{
+    "pk": 9, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_user", 
+        "name": "Can delete user", 
+        "content_type": [
+            "auth", 
+            "user"
+        ]
+    }
+},
+{
+    "pk": 10, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_contenttype", 
+        "name": "Can add content type", 
+        "content_type": [
+            "contenttypes", 
+            "contenttype"
+        ]
+    }
+},
+{
+    "pk": 11, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_contenttype", 
+        "name": "Can change content type", 
+        "content_type": [
+            "contenttypes", 
+            "contenttype"
+        ]
+    }
+},
+{
+    "pk": 12, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_contenttype", 
+        "name": "Can delete content type", 
+        "content_type": [
+            "contenttypes", 
+            "contenttype"
+        ]
+    }
+},
+{
+    "pk": 13, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_session", 
+        "name": "Can add session", 
+        "content_type": [
+            "sessions", 
+            "session"
+        ]
+    }
+},
+{
+    "pk": 14, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_session", 
+        "name": "Can change session", 
+        "content_type": [
+            "sessions", 
+            "session"
+        ]
+    }
+},
+{
+    "pk": 15, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_session", 
+        "name": "Can delete session", 
+        "content_type": [
+            "sessions", 
+            "session"
+        ]
+    }
+},
+{
+    "pk": 16, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_site", 
+        "name": "Can add site", 
+        "content_type": [
+            "sites", 
+            "site"
+        ]
+    }
+},
+{
+    "pk": 17, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_site", 
+        "name": "Can change site", 
+        "content_type": [
+            "sites", 
+            "site"
+        ]
+    }
+},
+{
+    "pk": 18, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_site", 
+        "name": "Can delete site", 
+        "content_type": [
+            "sites", 
+            "site"
+        ]
+    }
+},
+{
+    "pk": 19, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_administrator", 
+        "name": "Can add administrator", 
+        "content_type": [
+            "HungryApp", 
+            "administrator"
+        ]
+    }
+},
+{
+    "pk": 20, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_administrator", 
+        "name": "Can change administrator", 
+        "content_type": [
+            "HungryApp", 
+            "administrator"
+        ]
+    }
+},
+{
+    "pk": 21, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_administrator", 
+        "name": "Can delete administrator", 
+        "content_type": [
+            "HungryApp", 
+            "administrator"
+        ]
+    }
+},
+{
+    "pk": 22, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "is_admin", 
+        "name": "Admin User", 
+        "content_type": [
+            "HungryApp", 
+            "administrator"
+        ]
+    }
+},
+{
+    "pk": 23, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_student", 
+        "name": "Can add student", 
+        "content_type": [
+            "HungryApp", 
+            "student"
+        ]
+    }
+},
+{
+    "pk": 24, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_student", 
+        "name": "Can change student", 
+        "content_type": [
+            "HungryApp", 
+            "student"
+        ]
+    }
+},
+{
+    "pk": 25, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_student", 
+        "name": "Can delete student", 
+        "content_type": [
+            "HungryApp", 
+            "student"
+        ]
+    }
+},
+{
+    "pk": 26, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "is_student", 
+        "name": "Student User", 
+        "content_type": [
+            "HungryApp", 
+            "student"
+        ]
+    }
+},
+{
+    "pk": 27, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_location", 
+        "name": "Can add location", 
+        "content_type": [
+            "HungryApp", 
+            "location"
+        ]
+    }
+},
+{
+    "pk": 28, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_location", 
+        "name": "Can change location", 
+        "content_type": [
+            "HungryApp", 
+            "location"
+        ]
+    }
+},
+{
+    "pk": 29, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_location", 
+        "name": "Can delete location", 
+        "content_type": [
+            "HungryApp", 
+            "location"
+        ]
+    }
+},
+{
+    "pk": 30, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_restaurant", 
+        "name": "Can add restaurant", 
+        "content_type": [
+            "HungryApp", 
+            "restaurant"
+        ]
+    }
+},
+{
+    "pk": 31, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_restaurant", 
+        "name": "Can change restaurant", 
+        "content_type": [
+            "HungryApp", 
+            "restaurant"
+        ]
+    }
+},
+{
+    "pk": 32, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_restaurant", 
+        "name": "Can delete restaurant", 
+        "content_type": [
+            "HungryApp", 
+            "restaurant"
+        ]
+    }
+},
+{
+    "pk": 33, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_operatinghours", 
+        "name": "Can add operating hours", 
+        "content_type": [
+            "HungryApp", 
+            "operatinghours"
+        ]
+    }
+},
+{
+    "pk": 34, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_operatinghours", 
+        "name": "Can change operating hours", 
+        "content_type": [
+            "HungryApp", 
+            "operatinghours"
+        ]
+    }
+},
+{
+    "pk": 35, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_operatinghours", 
+        "name": "Can delete operating hours", 
+        "content_type": [
+            "HungryApp", 
+            "operatinghours"
+        ]
+    }
+},
+{
+    "pk": 36, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_restaurantemployee", 
+        "name": "Can add restaurant employee", 
+        "content_type": [
+            "HungryApp", 
+            "restaurantemployee"
+        ]
+    }
+},
+{
+    "pk": 37, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_restaurantemployee", 
+        "name": "Can change restaurant employee", 
+        "content_type": [
+            "HungryApp", 
+            "restaurantemployee"
+        ]
+    }
+},
+{
+    "pk": 38, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_restaurantemployee", 
+        "name": "Can delete restaurant employee", 
+        "content_type": [
+            "HungryApp", 
+            "restaurantemployee"
+        ]
+    }
+},
+{
+    "pk": 39, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "is_employee", 
+        "name": "Employee User", 
+        "content_type": [
+            "HungryApp", 
+            "restaurantemployee"
+        ]
+    }
+},
+{
+    "pk": 40, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_fooditem", 
+        "name": "Can add food item", 
+        "content_type": [
+            "HungryApp", 
+            "fooditem"
+        ]
+    }
+},
+{
+    "pk": 41, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_fooditem", 
+        "name": "Can change food item", 
+        "content_type": [
+            "HungryApp", 
+            "fooditem"
+        ]
+    }
+},
+{
+    "pk": 42, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_fooditem", 
+        "name": "Can delete food item", 
+        "content_type": [
+            "HungryApp", 
+            "fooditem"
+        ]
+    }
+},
+{
+    "pk": 43, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "add_order", 
+        "name": "Can add order", 
+        "content_type": [
+            "HungryApp", 
+            "order"
+        ]
+    }
+},
+{
+    "pk": 44, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "change_order", 
+        "name": "Can change order", 
+        "content_type": [
+            "HungryApp", 
+            "order"
+        ]
+    }
+},
+{
+    "pk": 45, 
+    "model": "auth.permission", 
+    "fields": {
+        "codename": "delete_order", 
+        "name": "Can delete order", 
+        "content_type": [
+            "HungryApp", 
+            "order"
+        ]
     }
 },
 {
@@ -305,7 +995,7 @@
         "is_active": true, 
         "is_superuser": false, 
         "is_staff": true, 
-        "last_login": "2013-11-21T09:40:13.231Z", 
+        "last_login": "2013-12-02T03:52:20.761Z", 
         "groups": [], 
         "user_permissions": [
             [
@@ -317,6 +1007,115 @@
         "password": "pbkdf2_sha256$10000$HSyCvM8jyBuu$TbFI7IXl9HqxhDU4Tt4Lz8JV+blBnSwj0mxGAz31DuM=", 
         "email": "admin@hungry.com", 
         "date_joined": "2013-11-15T07:29:41.244Z"
+    }
+},
+{
+    "pk": 7, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "cafemanager01", 
+        "first_name": "Matthew", 
+        "last_name": "Manager", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2013-12-02T03:45:16.058Z", 
+        "groups": [], 
+        "user_permissions": [
+          [
+              "is_employee", 
+              "HungryApp", 
+              "restaurantemployee"
+            ]
+        ], 
+        "password": "pbkdf2_sha256$10000$xzcKtABUQzAb$ygu2trBqXfHBqyUvYZZM8hfKv92PmrkOBpi9EBo7Fmo=", 
+        "email": "cafemanager01@cmu.fake.edu", 
+        "date_joined": "2013-12-02T03:40:12.305Z"
+    }
+},
+{
+    "pk": 8, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "toimanager01", 
+        "first_name": "Vijay", 
+        "last_name": "Menon", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2013-12-02T03:50:48.693Z", 
+        "groups": [], 
+        "user_permissions": [
+            [
+              "is_employee", 
+              "HungryApp", 
+              "restaurantemployee"
+            ]
+        ], 
+        "password": "pbkdf2_sha256$10000$DCs9d1dxpVEI$8VZS2qYoM0lO5u1FDLdBJLAtABupYRaFUcnNbR9LWYI=", 
+        "email": "toimanager01@cmu.fake.edu", 
+        "date_joined": "2013-12-02T03:50:48.693Z"
+    }
+},
+{
+    "pk": 9, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "citygrilmanager01", 
+        "first_name": "Joe", 
+        "last_name": "Grill", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2013-12-02T03:51:45.522Z", 
+        "groups": [], 
+        "user_permissions": [
+          [
+            "is_employee", 
+            "HungryApp", 
+            "restaurantemployee"
+          ]
+        ], 
+        "password": "pbkdf2_sha256$10000$ywxzQ9iQdMAl$GKIRGxpVAgyHDlzGrhoBnw+fjx1bmd6MHsBmhlldvzY=", 
+        "email": "citygrillmanager01@cmu.fake.edu", 
+        "date_joined": "2013-12-02T03:51:45.522Z"
+    }
+},
+{
+    "pk": 10, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "manager", 
+        "first_name": "Manage", 
+        "last_name": "Earl", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2013-12-02T04:25:29.722Z", 
+        "groups": [], 
+        "user_permissions": [
+          [
+            "is_employee", 
+            "HungryApp", 
+            "restaurantemployee"
+          ]
+        ], 
+        "password": "pbkdf2_sha256$10000$aZ7v6wg237oI$PbOMLq00hCvcJ9c4xpbwtx6uC/hKYmSmTUpW9A4orIg=", 
+        "email": "manager@cmu.fake.edu", 
+        "date_joined": "2013-12-02T04:24:45.992Z"
+    }
+},
+{
+    "pk": 1, 
+    "model": "HungryApp.administrator", 
+    "fields": {
+        "gender": "N", 
+        "home_phone": "", 
+        "date_of_birth": "1980-01-01", 
+        "user": [
+            "admin"
+        ], 
+        "cell_phone": ""
     }
 },
 {
@@ -373,14 +1172,57 @@
 },
 {
     "pk": 1, 
-    "model": "HungryApp.administrator", 
+    "model": "HungryApp.restaurantemployee", 
     "fields": {
-        "gender": "N", 
-        "home_phone": "", 
-        "date_of_birth": "1980-01-01", 
+        "restaurant": 1, 
+        "is_manager": false, 
+        "date_of_birth": "1985-08-08", 
         "user": [
-            "admin"
+            "cafemanager01"
         ], 
+        "home_phone": "", 
+        "cell_phone": ""
+    }
+},
+{
+    "pk": 2, 
+    "model": "HungryApp.restaurantemployee", 
+    "fields": {
+        "restaurant": 2, 
+        "is_manager": false, 
+        "date_of_birth": "1985-08-08", 
+        "user": [
+            "toimanager01"
+        ], 
+        "home_phone": "", 
+        "cell_phone": ""
+    }
+},
+{
+    "pk": 3, 
+    "model": "HungryApp.restaurantemployee", 
+    "fields": {
+        "restaurant": 4, 
+        "is_manager": false, 
+        "date_of_birth": "1985-08-08", 
+        "user": [
+            "citygrilmanager01"
+        ], 
+        "home_phone": "", 
+        "cell_phone": ""
+    }
+},
+{
+    "pk": 4, 
+    "model": "HungryApp.restaurantemployee", 
+    "fields": {
+        "restaurant": 1, 
+        "is_manager": false, 
+        "date_of_birth": "1985-08-08", 
+        "user": [
+            "manager"
+        ], 
+        "home_phone": "", 
         "cell_phone": ""
     }
 }
