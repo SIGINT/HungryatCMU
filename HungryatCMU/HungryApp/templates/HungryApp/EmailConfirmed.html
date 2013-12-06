@@ -1,24 +1,30 @@
 {% extends "HungryApp/base.html" %}
+{% block navigation %}
+<li><a href="{% url 'django.contrib.auth.views.login' %}">Login</a></li>
+<li><a href="#contact">Contact</a></li>
+{% endblock %}
 {% block content %}
 </br></br>
 <div class="container">    
   <div class="row">
     <div class="col-md-12">
       <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-          </br>
-          <div class="embossed">
-            <h2>Congrats!</h2>
-          </div>
-          <div class="content-well">
-            <p>
-            Thank you for confirming your email address.
-            Please <a href="{% url 'django.contrib.auth.views.login' %}">login</a> to get started ordering food!!
-            </p>
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          </br></br></br>
+          <div class="alert alert-success">
+            <h3>Congrats!&nbsp; <span class="glyphicon glyphicon-star"></span></h3>
+            </br>
+            <div class="indent">
+              <p>
+              Thank you for confirming your email address.
+              Please <strong><a href="{% url 'django.contrib.auth.views.login' %}">login</a></strong> to get started ordering food!!
+              </p>
+            </div>
+            </br>
           </div>
         </div>
-        <div class="col-md-4"></div>
+        <div class="col-md-3"></div>
       </div>
     </div>
   </div><!-- /.row -->

@@ -1,0 +1,34 @@
+{% extends "HungryApp/base.html" %}
+{% block title %}:: Add a Food Item {% endblock %}
+
+
+{% block navigation %}
+<li class="active"><a href="/restaurants">Restaurants</a></li>
+<li><a href="#contact">Contact</a></li>
+<li><a href="/account">My Account</a></li>
+<li><a href="/logout">Logout</a></li>
+{% endblock %}
+
+
+{% block content %}
+
+</br></br>
+</br></br>
+</br></br>
+<p>
+
+{% if form.picture.value %}
+<img src="{% url 'fooditem_photo' id %}" alt="{{form.item_name.value}} " width="200px">
+{% endif %}
+
+
+        <div class="">
+            
+            <span class = "Fooditem"> {{ food_item }} <br></br>
+            <span class="itemdescription">{{ food_item.item_description }} <br></br>
+            <span class="itemprice">{{ food_item.price}}</span><br></br>
+            <span class="item_prep_time">{{ food_item.prep_time}}</span><br></br>
+            
+
+
+{%endblock%}

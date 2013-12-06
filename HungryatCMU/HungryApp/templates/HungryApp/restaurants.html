@@ -1,16 +1,66 @@
 {% extends "HungryApp/base.html" %}
+{% block title %}:: Restaurants{% endblock %}
+{% block head %}
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDP5sX9n0VBg49243_ntCnlj6vJDXchNzA&amp;sensor=true">
+</script>
+<script type="text/javascript">
+  // Center map on CMU campus (hard coded coordinates)
+  var cmu = new google.maps.LatLng(40.442832, -79.942585);
+  var ctr = new google.maps.LatLng(40.442832, -79.942585);
+  var map;
+  
+  function initialize() {
+    var mapOptions = {
+      zoom: 16,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      center: ctr
+    };
+    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    
+    $.getJSON(
+        '/get-restaurants-json', 
+        function(data) {
+          
+          for (i = 0; i < data.length; i++) {
+            var restName = data[i].fields.restaurant_name;
+            $.getJSON(
+                '/get-location-marker-json/' + data[i].fields.location,
+                
+                function(coords) {
+                  var contentString = "<div><a href='#" + restName + "'><strong>" + restName + "</strong></a></br>" + coords.markerTitle + "</div>";
+                  var infowindow = new google.maps.InfoWindow({
+                      content: contentString
+                  });
+                  var pos = new google.maps.LatLng(coords.latitude, coords.longitude);
+                  var marker = new google.maps.Marker({
+                    map:map,
+                    draggable:false,
+                    position:pos,
+                    title: coords.markerTitle
+                  });
+                  google.maps.event.addListener(marker, 'click', function() {
+                    infowindow.open(map,marker);
+                  });
+                }
+            );
+          }
+        }
+    );
+  }
+  google.maps.event.addDomListener(window, 'load', initialize);
+  </script>
+{% endblock %}
 {% block navigation %}
-<div class="collapse navbar-collapse">
-  <ul class="nav navbar-nav">
-    <li><a href="/">Home</a></li>
-    <li class="active"><a href="/restaurants">Restaurants</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="/account">My Account</a></li>
-    <li><a href="/logout">Logout</a></li>
-  </ul>
-</div><!--/.nav-collapse -->
+
+{% if is_admin %}
+{% include 'HungryApp/admin_nav.html' %}
+{% else %}
+{% include 'HungryApp/student_nav.html' %}
+{% endif %}
+<a href="{% url 'restaurant_orders' %}">View Orders</a></li>
 {% endblock %}
 {% block content %}
+{% load staticfiles %}
 </br></br>
 <div class="container">    
   <div class="row">
@@ -18,16 +68,49 @@
       <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10">
+          </br></br></br></br>
+          <form action="/HungryApp/search" method="get">
+            <label for="id_q">Search by Restaurant Name:</label>
+            <input id="id_q" name="q" type="text">
+            <input type="submit" value="Submit">
+          </form>
+          </br>
+          <div id="map-wrapper">
+            <div id="map-canvas"></div>
+          </div>
           {% for r in restaurants %}
-          <div class="content-well">
-              {% if r.restaurant_picture %}
-                <img src="{% url 'restaurant-picture' r.id %}" alt="{{ r.restaurant_name }}" class="img-thumbnail" height="320px" width="320px">
+          <div id="{{r.restaurant_name}}" class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title"><a href="{% url 'restaurant' r.id %}">{{r.restaurant_name}}</a></h3>
+            </div>
+            <div class="panel-body">
+              </br>
+              <div class="row">
+                <div class="col-md-4">
+                {% if r.restaurant_picture %}
+                  <img src="{% url 'restaurant-picture' r.id %}" alt="{{ r.restaurant_name }}" class="img-thumbnail" height="320px" width="320px">
+                {% else %}
+                  <img src="{% static 'pics/no-image.png' %}" class="img-thumbnail" height="220px" width="220px">
+                {% endif %}
                 </br>
-              {% endif %}
-              <span class="indent"><h3>{{r.restaurant_name}}</h3></span>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                  {% if r.has_vegetarian %}
+                  <p><strong>Vegetarian Friendly:</strong>&nbsp; <span style="color: green;" class="glyphicon glyphicon-ok"></span></p>
+                  {% else %}
+                  <p><strong>Vegetarian Friendly:</strong>&nbsp; <span style="color: red;" class="glyphicon glyphicon-remove"></span></p>
+                  {% endif %}
+                  <p><strong><span class="glyphicon glyphicon-phone-alt"></span></strong>&nbsp; {{ r.phone }}</p>
+                  <p><strong><span class="glyphicon glyphicon-map-marker"></span> Location:</strong>&nbsp; {{ r.location }}</p>
+                  </br>
+                  {% include 'HungryApp/restaurant_hours.html' %}
+                </div>
+              </div>
+            </div>
           </div>
           {% endfor %}
-        </div>
+          </div>
         <div class="col-md-1"></div>
       </div>
     </div>

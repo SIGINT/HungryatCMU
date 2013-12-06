@@ -1,0 +1,66 @@
+{% extends "HungryApp/base.html" %}
+{% block navigation %}
+<li class="active"><a href="/restaurants">Restaurants</a></li>
+<li><a href="#contact">Contact</a></li>
+<li><a href="/account">My Account</a></li>
+<li><a href="/logout">Logout</a></li>
+{% endblock %}
+{% block content %}
+</br></br>
+<div class="container">    
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          </br></br></br>
+            
+
+          {% for order in quick_orders %}
+          <div id="{{order.restaurant_id}}" class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title"><a href="{% url 'restaurant' order.restaurant_id.id %}">{{order.restaurant_id.restaurant_name}}</a></h3>
+            </div>
+            {% for food_item in order.food_items_inorder.all %}
+            <div class="panel-body">
+              </br>
+              <div class="row">
+                <div class="col-md-4">
+                <span class = "Ordered_Food_Items"> {{ food_item }}</span>
+                <span class = "Ordered_Food_Item_Price"> {{ food_item.price }} {{order.id}} </span>   
+                </div>
+              {% endfor %}
+                </br>
+                </div>
+                <a class="pull-left btn btn-primary" href="{% url 'place_order' order.id %} "> Place Order </a><br>
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+
+
+
+
+
+
+
+
+
+          {% for order in quick_orders %} 
+                {% for food_item in order.food_items_inorder.all %}
+         <div class="">
+            
+            <span class = "Ordered_Food_Items"> {{ food_item }}</span>
+            <span class = "Ordered_Food_Item_Price"> {{ food_item.price }} {{order.id}} </span>   
+        </div>
+           {% endfor %}
+
+           <a class="pull-left btn btn-primary" href="{% url 'place_order' order.id %} "> Place Order </a><br>
+
+           </br></br></br></br>
+        {% endfor %}
+{% endblock %}

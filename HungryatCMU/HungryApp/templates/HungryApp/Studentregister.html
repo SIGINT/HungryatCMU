@@ -1,13 +1,8 @@
 {% extends "HungryApp/base.html" %}
 {% block title %}:: Registration{% endblock %}
 {% block navigation %}
-<div class="collapse navbar-collapse">
-  <ul class="nav navbar-nav">
-    <li><a href="/">Home</a></li>
-    <li><a href="{% url 'django.contrib.auth.views.login' %}">Login</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</div><!--/.nav-collapse -->
+<li><a href="{% url 'django.contrib.auth.views.login' %}">Login</a></li>
+<li><a href="#contact">Contact</a></li>
 {% endblock %}
 {% block content %}
 <br>
@@ -21,94 +16,91 @@
   <div class="row">
     <div class="col-md-12">
       </br></br>
-      <div class="embossed">
-        <h2>Register to satisfy your hunger.&nbsp;&nbsp;&nbsp;<em>Its Free!!</em></h2></br></br>
-      </div>
-      <form role="form" method="post" action="/register" class="indent btm-marg">
-        <div class="row">
-          <div class="col-md-1"></div>
-          <div class="col-md-9 form-section">
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-9">
+          <div class="outdent embossed">
+            <h2><span class="glyphicon glyphicon-bookmark"></span> Student Registration</h2>
+          </div>
+          </br></br>
+          <div class="form-section">
             <div class="row">
-              <div class="col-md-4">
-                <div class="form-group">
-                  {{ form.first_name.errors }}
-                  <label for="inputFirstName">First Name</label>
-                  {{ form.first_name }}
-                </div>
-                <div class="form-group">
-                  {{ form.gender.errors }}
-                  <label for="inputGender">Gender</label>
-                  {{ form.gender }}
-                </div>
+              <div class="col-md-3"></div>
+              <div class="col-md-5 embossed pull-right">
+                <h4>Satisfy your hunger.&nbsp;&nbsp;&nbsp;<em>Its Free&nbsp;!!</em></h4>
               </div>
               <div class="col-md-1"></div>
-              <div class="col-md-4 indent">
-                <div class="form-group">
-                  {{ form.last_name.errors }}
-                  <label for="inputLastName">Last Name</label>
+            </div>
+            </br></br></br>
+            <form class="form-horizontal" role="form" method="post" action="/register" class="indent btm-marg">
+              <div class="form-group">
+                {{ form.first_name.errors }}
+                <label class="col-md-2 control-label" for="inputFirstName">First Name</label>
+                <div class="col-md-3">
+                  {{ form.first_name }}
+                </div>
+                {{ form.last_name.errors }}
+                <label class="col-md-2 control-label" for="inputLastName">Last Name</label>
+                <div class="col-md-3">
                   {{ form.last_name }}
                 </div>
-                <div class="form-group">
-                  {{ form.date_of_birth.errors }}
-                  <label for="inputBirthday">Date of Birth</label>
+              </div>
+              </br>
+              <div class="form-group">  
+                {{ form.gender.errors }}
+                <label class="col-md-2 control-label" for="inputGender">Gender</label>
+                <div class="col-md-3">
+                  {{ form.gender }}
+                </div>
+                {{ form.date_of_birth.errors }}
+                <label class="col-md-2 control-label" for="inputBirthday">Date of Birth</label>
+                <div class="col-md-3">
                   {{ form.date_of_birth }}
                 </div>
-                <div class="form-group">
-                  {{ form.student_year.errors }}
-                  <label for="inputStudentYear">Student Year</label>
+                </br></br></br>
+                {{ form.student_year.errors }}
+                <label class="col-md-2 control-label" for="inputStudentYear">Enrollment</label>
+                <div class="col-md-3">
                   {{ form.student_year }}
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="col-md-2"></div>
-        </div>
-        </br>
-        <div class="row">
-          <div class="col-md-1"></div>
-          <div class="col-md-9 form-section">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="form-group">
-                  {{ form.username.errors }}
-                  <label for="inputUsername">Username</label>
+              </br>
+              <div class="form-group">
+                {{ form.username.errors }}
+                <label class="col-md-2 control-label" for="inputUsername">Username</label>
+                <div class="col-md-3">
                   {{ form.username }}
                 </div>
-                <div class="form-group">
-                  {{ form.password1.errors }}
-                  <label for="inputPass1">Password</label>
-                  {{ form.password1 }}
-                </div>
-              </div>
-              <div class="col-md-1"></div>
-              <div class="col-md-4 indent">
-                <div class="form-group">
-                  {{ form.email.errors }}
-                  <label for="inputEmail">Email</label>
+                {{ form.email.errors }}
+                <label class="col-md-2 control-label" for="inputEmail">Email</label>
+                <div class="col-md-3">
                   {{ form.email }}
                 </div>
-                <div class="form-group">
-                  {{ form.password2.errors }}
-                  <label for="inputPass2">Password Confirmation</label>
+              </div>
+              <div class="form-group">
+                {{ form.password1.errors }}
+                <label class="col-md-2 control-label" for="inputPassword1">Password</label>
+                <div class="col-md-3">
+                  {{ form.password1 }}
+                </div>
+                {{ form.password2.errors }}
+                <label class="col-md-2 control-label" for="inputPassword2">Password Confirmation</label>
+                <div class="col-md-3">
                   {{ form.password2 }}
                 </div>
               </div>
-            </div>
+              </br></br>
+              <div class="indent" style="margin-left: 70px; margin-top: 30px;">
+                  <button type="submit" class="btn btn-primary btn-lg">&nbsp;&nbsp;Register&nbsp;&nbsp; <span class="glyphicon glyphicon-list-alt"></span></button>
+              </div>
+              </br>
+              {% csrf_token %}
+            </form>
           </div>
-          <div class="col-md-2"></div>
         </div>
-        </br>
-        <div class="row">
-          <div class="col-md-3"></div>
-          <div class="col-md-6">
-            <div class="form-group pull-right">
-              <button type="submit" class="btn btn-primary btn-lg">&nbsp;Register&nbsp;</button>
-            </div>
-          </div>
-          <div class="col-md-3"></div>
-        </div>
-        {% csrf_token %}
-      </form>
+        <div class="col-md-1"></div>
+      </div>
+      </br></br>
     </div>
   </div><!-- /.row -->
 </div><!-- /.container -->

@@ -1,15 +1,7 @@
 {% extends "HungryApp/base.html" %}
-{% block title %}:: Edit Restaurant{% endblock %}
+{% block title %}:: New Employee{% endblock %}
 {% block navigation %}
-<div class="collapse navbar-collapse">
-  <ul class="nav navbar-nav">
-    <li><a href="/">Home</a></li>
-    <li class="active"><a href="/restaurants">Restaurants</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="/account">My Account</a></li>
-    <li><a href="/logout">Logout</a></li>
-  </ul>
-</div><!--/.nav-collapse -->
+{% include "HungryApp/admin_nav.html" %}
 {% endblock %}
 {% block content %}
 <br>
@@ -27,13 +19,13 @@
         <div class="col-md-4">
           </br></br>
           <div class="embossed">
-            <h2>Edit Restaurant&nbsp; <span class="glyphicon glyphicon-cutlery"></span></h2>
+            <h2>New Restaurant Employee</h2>
           </div>
           </br></br>
-          <form role="form" method="post" action="/HungryApp/edit-restaurant" class="indent btm-marg" enctype="multipart/form-data">
+          <form role="form" method="post" action="/HungryApp/invite-employee" class="indent btm-marg">
             {% include 'HungryApp/form_loop.html' %}
             <div class="form-group pull-right">
-              <button type="submit" class="btn btn-primary btn-lg">&nbsp;Update&nbsp;</button>
+              <button type="submit" class="btn btn-primary btn-lg">&nbsp;Submit&nbsp;</button>
             </div>
           </form>
         </div>

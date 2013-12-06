@@ -11,7 +11,7 @@
         "is_staff": false, 
         "last_login": "2013-09-27T11:13:45.507Z", 
         "groups": [], 
-        "user_permissions": [], 
+        "user_permissions": [26], 
         "password": "pbkdf2_sha256$10000$j6qKlRABYrby$mLosetSvxoEE4XLb1oem8JqR3SM/Ex/BBEoNljqx4ec=", 
         "email": "ohdee@theoffice.net", 
         "date_joined": "2013-09-27T11:13:45.268Z"
@@ -29,7 +29,7 @@
         "is_staff": false, 
         "last_login": "2013-09-30T21:22:27.024Z", 
         "groups": [], 
-        "user_permissions": [], 
+        "user_permissions": [26], 
         "password": "pbkdf2_sha256$10000$3neZRSNHm103$3EMXMStJdsgYa6XRvZGpqBH3rl+79QjKSqaYDc1Hh1Q=", 
         "email": "mscott@theoffice.net", 
         "date_joined": "2013-09-27T11:14:46.384Z"
@@ -47,7 +47,7 @@
         "is_staff": false, 
         "last_login": "2013-09-27T11:16:38.173Z", 
         "groups": [], 
-        "user_permissions": [], 
+        "user_permissions": [26], 
         "password": "pbkdf2_sha256$10000$Ux6UkjYbbBOo$e3L3GzFU5yZUJsOh4FUww8ryqhMkonNZ92w/5blTyfo=", 
         "email": "amartin@theoffice.net", 
         "date_joined": "2013-09-27T11:16:37.941Z"
@@ -65,10 +65,37 @@
         "is_staff": false, 
         "last_login": "2013-09-30T12:55:14.944Z", 
         "groups": [], 
-        "user_permissions": [], 
+        "user_permissions": [26], 
         "password": "pbkdf2_sha256$10000$NEDHP81jaqjk$wuvL1BdtFz3r4JIKdYuo1TJ2dHyVS0Epb2P+ex7FBAQ=", 
         "email": "ltj@luke.com", 
         "date_joined": "2013-09-30T12:55:14.715Z"
+    }
+},
+{
+  "pk": 6, 
+  "model": "auth.user", 
+  "fields": {
+    "username": "admin", 
+    "first_name": "Hungry", 
+    "last_name": "Administrator", 
+    "is_active": true, 
+    "is_superuser": false, 
+    "is_staff": true, 
+    "last_login": "2013-11-15T07:30:02.215Z", 
+    "groups": [], 
+    "user_permissions": [22], 
+    "password": "pbkdf2_sha256$10000$HSyCvM8jyBuu$TbFI7IXl9HqxhDU4Tt4Lz8JV+blBnSwj0mxGAz31DuM=", 
+    "email": "admin@hungry.com", 
+    "date_joined": "2013-11-15T07:29:41.244Z"
+  }
+},
+{
+    "pk": 1, 
+    "model": "HungryApp.administrator", 
+    "fields": {
+        "date_of_birth": "1980-01-01",
+        "gender": "N",
+        "user": 6
     }
 },
 {
@@ -115,6 +142,8 @@
     "pk": 1, 
     "model": "HungryApp.location", 
     "fields": {
+        "latitude": 40.443206,
+        "longitude": -79.942238,
         "building_name": "University Center", 
         "location_description": "The UC is the heart of CMU's fine dining.  Conveniently located between Gesling Stadium and the cut, the UC is a great spot to grab some grub with your favorite people",
         "floor": 1,
@@ -125,6 +154,8 @@
     "pk": 2, 
     "model": "HungryApp.location", 
     "fields": {
+        "latitude": 40.442015,
+        "longitude": -79.946061,
         "building_name": "University Center", 
         "location_description": "The UC is the heart of CMU's fine dining.  Conveniently located between Gesling Stadium and the cut, the UC is a great spot to grab some grub with your favorite people",
         "floor": 2,
@@ -135,6 +166,8 @@
     "pk": 3, 
     "model": "HungryApp.location", 
     "fields": {
+        "latitude": 40.442631,
+        "longitude": -79.945929,
         "building_name": "Wean Hall", 
         "location_description": "So.. you're no fan of windows, eh? Wean is a great place to grab some coffee while your brain digests that Math",
         "floor": 5,
@@ -145,6 +178,8 @@
     "pk": 4, 
     "model": "HungryApp.location", 
     "fields": {
+        "latitude": 40.442443,
+        "longitude": -79.939714,
         "building_name": "Resnik", 
         "location_description": "The life of the party, oh yes",
         "floor": 1,
@@ -155,6 +190,8 @@
     "pk": 5, 
     "model": "HungryApp.location", 
     "fields": {
+        "latitude": 40.443567,
+        "longitude": -79.945267,
         "building_name": "Gates Center for Computer Science", 
         "location_description": "Segmentation fault",
         "floor": "",
@@ -208,5 +245,22 @@
         "phone": "",
         "cuisine": "AM"
     }
-}
+},
+
+{
+    "pk": 1, 
+    "model": "HungryApp.foodItem", 
+    "fields": {
+          "restaurant_id":1,
+          "item_name":"Espresso",
+    "item_description": "The best espresso in Town",
+    "is_vegetarian": true,
+    "is_block": true,
+    "prep_time": 5,
+    "picture":"",
+    "price": 2
+     
+    }
+},
+
 ]

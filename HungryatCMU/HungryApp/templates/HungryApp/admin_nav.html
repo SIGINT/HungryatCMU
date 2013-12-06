@@ -1,0 +1,22 @@
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Restaurants <b class="caret"></b></a>
+  <ul class="dropdown-menu">
+    <li><a href="{% url 'restaurants' %}">View All</a></li>
+    <li class="divider"></li>
+    <li><a href="/add-restaurant">Create New</a></li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Employees <b class="caret"></b></a>
+  <ul class="dropdown-menu">
+    <li><a href="{% url 'employees' %}">View All</a></li>
+    <li class="divider"></li>
+    <li><a href="/invite-employee">Add New</a></li>
+  </ul>
+</li>    
+<!-- TODO: create /students routing -->
+<li><a href="{% url 'students' %}">Students</a></li>
+
+<li><a href="#contact">Contact</a></li>
+<!-- li class="active"><a href="/account">My Account</a></li-->
+<li><a href="/logout">Logout</a></li>

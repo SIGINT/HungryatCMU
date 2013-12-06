@@ -24,9 +24,6 @@ class StudentRegistrationForm(forms.Form):
     password2 = forms.CharField(max_length = 200, 
                                 label='Confirm password',  
                                 widget = forms.PasswordInput(attrs={'class':'form-control'}))
-    # -- TODO: cell_phone --> 3rd party lib or RegexField?
-    # cell_phone = forms.
-
 
     # Customizes form validation for properties that apply to more
     # than one field.  Overrides the forms.Form.clean function.
@@ -43,7 +40,6 @@ class StudentRegistrationForm(forms.Form):
 
         # We must return the cleaned data we got from our parent.
         return cleaned_data
-
 
     # Customizes form validation for the username field.
     def clean_username(self):
@@ -139,14 +135,19 @@ class RestaurantForm(forms.Form):
   location = forms.ModelChoiceField(queryset = Location.objects.all(),
                                     empty_label = None,
                                     widget =  forms.Select(attrs={'class':'form-control'}))
+                                    
   restaurant_name = forms.CharField(max_length = 80,
                                     widget = forms.TextInput(attrs={'class':'form-control'}))
   restaurant_picture = forms.ImageField(widget=forms.FileInput())
   has_vegetarian = forms.BooleanField()
-  #phone = forms.RegexField()
+  # ----------------
+  # TODO: PhoneField using 3rd party plugin or validation
+  # ----------------
+  phone = forms.CharField(max_length=10,
+                            widget=forms.TextInput(attrs={'class':'form-control'}))
   cuisine = forms.ChoiceField(widget = forms.RadioSelect,
                               choices = Restaurant.CUISINES)
-  
+                              
   def clean(self):
       # Calls our parent (forms.Form) .clean function, gets a dictionary
       # of cleaned data as a result
@@ -156,9 +157,7 @@ class RestaurantForm(forms.Form):
       restaurant_picture = cleaned_data.get('restaurant_picture')
       has_vegetarian = cleaned_data.get('has_vegetarian')
       cuisine = cleaned_data.get('cuisine')
-      # ----------------------
-      # TODO: Ensure location exists in system
-      # ----------------------
+      
       try:
         location = Location.objects.get(id=loc.id)
       except Location.DoesNotExist:
@@ -166,10 +165,149 @@ class RestaurantForm(forms.Form):
         
       return cleaned_data
       
-  
+      
+class OperatingHoursForm(forms.Form):
+      
+    sun_open = forms.TimeField(label="Sun", widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'}))
+    sun_close = forms.TimeField(label="", widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'}))
+    mon_open = forms.TimeField(label="Mon", widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'}))
+    mon_close = forms.TimeField(label="", widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'}))
+    tue_open = forms.TimeField(label="Tue", widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'}))
+    tue_close = forms.TimeField(label="", widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'}))
+    wed_open = forms.TimeField(label="Wed", widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'}))
+    wed_close = forms.TimeField(label="", widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'}))
+    thur_open = forms.TimeField(label="Thur", widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'}))
+    thur_close = forms.TimeField(label="", widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'}))
+    fri_open = forms.TimeField(label="Fri", widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'}))
+    fri_close = forms.TimeField(label="", widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'}))
+    sat_open = forms.TimeField(label="Sat", widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'}))
+    sat_close = forms.TimeField(label="", widget=forms.TimeInput(attrs={'class':'form-control', 'type':'time'}))
+    
+    def clean(self):
+        cleaned_data = super(OperatingHoursForm, self).clean()
+        # -------------------
+        # TODO: Ensure valid times (make sense)
+        # -------------------
+        return cleaned_data
+      
+      
+class LocationForm(forms.Form):
+    latitude = forms.DecimalField(widget = forms.TextInput(attrs={'class':'form-control', 'readonly':'true'}))
+    longitude = forms.DecimalField(widget = forms.TextInput(attrs={'class':'form-control', 'readonly':'true'}))
+    building_name = forms.CharField(widget = forms.TextInput(attrs={'class':'form-control'}))
+    location_description = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control'}))
+    floor = forms.CharField(max_length=4,
+                            widget=forms.TextInput(attrs={'class':'form-control'}))
+    room = forms.CharField(max_length=8,
+                            widget=forms.TextInput(attrs={'class':'form-control'}))
+    wheelchair_accessible = forms.BooleanField()
+    
+    def clean(self):
+        cleaned_data = super(LocationForm, self).clean()
+        return cleaned_data
+      
+      
+class InviteEmployeeForm(forms.Form):
+    restaurant = forms.ModelChoiceField(queryset = Restaurant.objects.all(),
+                                      empty_label = None,
+                                      widget = forms.Select(attrs={'class':'form-control'}))
+    is_manager = forms.BooleanField()
+    username = forms.CharField(max_length = 20,
+                              widget = forms.TextInput(attrs={'class':'form-control'}))
+    email = forms.EmailField(max_length=200,
+                            widget = forms.TextInput(attrs={'class':'form-control'}))
+                      
+    def clean(self):
+        cleaned_data = super(InviteEmployeeForm, self).clean()
+        res = cleaned_data.get('restaurant')
+        username = cleaned_data.get('username')
+        email = cleaned_data.get('email')
+        is_manager = cleaned_data.get('is_manager')
 
+        try:
+            restaurant = Restaurant.objects.get(id=res.id)
+        except Restaurant.DoesNotExist:
+            raise forms.ValidationError("The restaurant specified does not exist in the system")
+        
+        return cleaned_data
+    
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if User.objects.filter(username__exact=username):
+            raise forms.ValidationError("Username is already taken.")
+            
+        return username
+        
+        
+class EmployeeRegistrationForm(forms.Form):
+    first_name = forms.CharField(max_length=40,
+                                widget=forms.TextInput(attrs={'class':'form-control'}))
+    last_name = forms.CharField(max_length=40,
+                                widget=forms.TextInput(attrs={'class':'form-control'}))
+    date_of_birth = forms.DateField(widget=forms.DateInput(attrs={'type':'date', 'class':'form-control'}))
+    
+    # -- TODO: cell_phone --> 3rd party lib or RegexField?
+    # cell_phone = forms.
+    # home_phone = forms.
+    
+    password1 = forms.CharField(max_length = 200, 
+                                    label='Password', 
+                                    widget = forms.PasswordInput(attrs={'class':'form-control'}))
+    password2 = forms.CharField(max_length = 200, 
+                                    label='Confirm Password',  
+                                    widget = forms.PasswordInput(attrs={'class':'form-control'}))
+    def clean(self):
+        cleaned_data = super(EmployeeRegistrationForm, self).clean()
+        password1 = cleaned_data.get('password1')
+        password2 = cleaned_data.get('password2')
+        
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError("Your passwords did not match.")
+            
+        return cleaned_data
+        
+        
+class AdminRegistrationForm(forms.Form):
+    first_name = forms.CharField(max_length=40,
+                                widget=forms.TextInput(attrs={'class':'form-control'}))
+    last_name = forms.CharField(max_length=40,
+                                widget=forms.TextInput(attrs={'class':'form-control'}))
+    gender = forms.ChoiceField(widget=forms.RadioSelect,
+                                choices=Administrator.GENDERS)
+    date_of_birth = forms.DateField(widget=forms.DateInput(attrs={'type':'date', 'class':'form-control'}))
+
+    # -------------------
+    # TODO: PhoneField using plugin or validation
+    # -------------------
+    cell_phone = forms.CharField(max_length=10,
+                                    widget=forms.TextInput(attrs={'class':'form-control'}))
+    home_phone = forms.CharField(max_length=10,
+                                    widget=forms.TextInput(attrs={'class':'form-control'}))
+    username = forms.CharField(max_length = 20,
+                              widget = forms.TextInput(attrs={'class':'form-control'}))
+    email = forms.EmailField(max_length=200,
+                            widget = forms.TextInput(attrs={'class':'form-control'}))
+    password1 = forms.CharField(max_length = 200, 
+                                    label='Password', 
+                                    widget = forms.PasswordInput(attrs={'class':'form-control'}))
+    password2 = forms.CharField(max_length = 200, 
+                                    label='Confirm Password',  
+                                    widget = forms.PasswordInput(attrs={'class':'form-control'}))
+    def clean(self):
+        cleaned_data = super(EmployeeRegistrationForm, self).clean()
+        password1 = cleaned_data.get('password1')
+        password2 = cleaned_data.get('password2')
+
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError("Your passwords did not match.")
+
+        return cleaned_data
+        
+        
 class FoodItemForm(forms.ModelForm):
     class Meta:
         model = FoodItem
-        exclude = ('restaurant_id',)
+        exclude = ('restaurant','is_block')
         widgets = {'food_item_pic' : forms.FileInput() }  
+
+

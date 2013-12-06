@@ -1,0 +1,46 @@
+{% extends "HungryApp/base.html" %}
+{% block navigation %}
+<li><a href="{% url 'django.contrib.auth.views.login' %}">Login</a></li>
+<li><a href="#contact">Contact</a></li>
+{% endblock %}
+{% block content %}
+</br></br>
+<div class="container">    
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          </br></br></br>
+          
+          <span class = "Confirmed Order"> {{ confirmed_order.restaurant_id.restaurant_name }}</span>
+          {% for ordered_food_item in confirmed_order.food_items_inorder.all %} 
+        <div class="">
+            
+            <span class = "Ordered_Food_Item"> {{ ordered_food_item }}</span>
+            <span class = "Ordered_Food_Item_Price"> {{ ordered_food_item.price }} {{current_order.id}} </span>   
+        </div>
+        {% endfor %}
+
+
+
+
+
+          <div class="alert alert-success">
+            <h3>Congrats!&nbsp; <span class="glyphicon glyphicon-star"></span></h3>
+            </br>
+            <div class="indent">
+              <p>
+              You have successfully placed your order at {{ confirmed_order.restaurant_id.restaurant_name }} and an email confirmation and receipt has been sent to your email address.Thank you!!
+              Click to continue browsing through other restaurants <strong><a href="{% url 'restaurants' %}">Back to Restaurants</a></strong>
+              </p>
+            </div>
+            </br>
+          </div>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+    </div>
+  </div><!-- /.row -->
+</div><!-- /.container -->
+{% endblock %}
