@@ -676,11 +676,9 @@ def add_fooditem_to_order(request,id):
   restaurant = Restaurant.objects.get(id=pk)  
   ordered_food_items = current_order.food_items_inorder.all()
   context = {'ordered_food_items': ordered_food_items,'current_order':current_order,'food_items':FoodItem.objects.filter(restaurant_id = pk),'pk':pk, 'r': restaurant }
-<<<<<<< HEAD
- 
-
   return render(request, 'HungryApp/display_fooditems.html', context)
-
+  
+  
 @csrf_exempt 
 @login_required
 @transaction.commit_on_success
