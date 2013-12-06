@@ -258,7 +258,7 @@
     "model": "HungryApp.restaurant", 
     "fields": {
         "cuisine": "AM", 
-        "restaurant_picture": "", 
+        "restaurant_picture": "restaurant-pictures/catbox.jpg", 
         "has_vegetarian": true, 
         "phone": "214333999", 
         "location": 4, 
