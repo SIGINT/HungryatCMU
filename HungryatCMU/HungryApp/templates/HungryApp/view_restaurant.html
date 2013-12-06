@@ -41,7 +41,7 @@
             <p><strong>Vegetarian Friendly:</strong>&nbsp; <span style="color: red;" class="glyphicon glyphicon-remove"></span></p>
             {% endif %}
             <p><strong><span class="glyphicon glyphicon-phone-alt"></span></strong>&nbsp; {{ r.phone }}</p>
-            <p><strong><span class="glyphicon glyphicon-map-marker"></span> Location:</strong>&nbsp; {{ r.location }}</p>
+            <p><strong><span class="glyphicon glyphicon-map-marker"></span> Location:</strong>&nbsp; <a href="/restaurants#map-wrapper" alt="see locations map">{{ r.location }}</a></p>
             </br>
             {% include 'HungryApp/restaurant_hours.html' %}
           </div>
