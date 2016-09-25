@@ -17,6 +17,8 @@
 local_settings.py
 *.py[cod]
 *.db
+HungryatCMU/HungryatCMU/HungryatCMU.db
+HungryatCMU/HungryatCMU/media/*
 
 # C extensions
 *.so
