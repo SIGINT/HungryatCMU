@@ -5,24 +5,6 @@
 #### Luke Jasko
 #### Karthik Murugan
 
-
-Heroku deployment may or may not be working: http://secret-beach-4490.herokuapp.com
-
-(Updated: 11-17-2013, 8:00am)
-
-#### Administrator
-##### Username: admin
-##### Password: pass
-
-#### Student
-##### Username: greatscott
-##### Password: pass
-
-#### Restaurant Employee
-##### Username:
-##### Password:
-
-
                         
                         
                   _      .                   //===========================\
